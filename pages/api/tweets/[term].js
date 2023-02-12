@@ -18,15 +18,30 @@ export default async function handler(req, res) {
   try {
     switch (req.method) {
       case "GET":
-        const readData = await fetch(`${baseUrl}/find`, {
+        const term = req.query.term;
+        const readData = await fetch(`${baseUrl}/aggregate`, {
           ...fetchOptions,
           body: JSON.stringify({
             ...fetchBody,
-            sort: { postedAt: -1 },
+            pipeline: [
+              {
+                $search: {
+                  index: "default",
+                  text: {
+                    query: term,
+                    path: {
+                      wildcard: "*",
+                    },
+                    fuzzy: {},
+                  },
+                },
+              },
+              { $sort: { postedAt: -1 } },
+            ],
           }),
         });
         const readDataJson = await readData.json();
-        res.status(200).json(readDataJson);
+        res.status(200).json(readDataJson.documents);
         break;
       default:
         res.status(405).end();
@@ -36,4 +51,4 @@ export default async function handler(req, res) {
     console.error(error);
     res.status(500).json({ error });
   }
-}
+};

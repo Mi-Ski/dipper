@@ -7,7 +7,7 @@ import Loading from "../../Loading";
 
 const Timeline = ({ postsLoading }) => {
   const { posts } = React.useContext(PostsContext);
-	console.log(posts)
+  console.log(posts);
   // _id, user[], body, postedAt, likes[]
   // userid, name, nickname, picture
 
@@ -16,19 +16,20 @@ const Timeline = ({ postsLoading }) => {
       <div className="w-[98%] md:w-2/3 lg:w-4/5 mx-auto">
         <AddPost />
         {postsLoading ? (
-          <Loading size="50" classes="py-40"/>
+          <Loading size="50" classes="py-40" />
         ) : (
           <div>
-            {posts.map((post) => (
+            {posts.length > 0 && posts.map((post) => (
               <Post
                 key={post._id}
                 postedAt={post.postedAt}
                 likes={post.likes}
                 user={post.user}
-								body={post.body}
-								_id={post._id}
+                body={post.body}
+                _id={post._id}
               />
             ))}
+						{Boolean(!posts) && <p className="text-center text-white text-xl py-20">Zaloguj się, aby szukać wpisów</p>}
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ import { useSetUser } from "../context/UserContext";
 import ThemeContext from "../context/ThemeContext";
 import PostsContext from "../context/PostContext";
 
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import Main from "../components/Main/Main";
 
 // import Navbar from "../components/Navbar/Navbar";
