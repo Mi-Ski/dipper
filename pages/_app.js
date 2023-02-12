@@ -2,23 +2,26 @@ import Head from "next/head";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { UserProvider as AtlasUserProvider } from "../context/UserContext";
 import { ThemeProvider } from "../context/ThemeContext";
-import '../styles/globals.css';
+import "../styles/globals.css";
+import { PostsProvider } from "../context/PostContext";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>SocialButterfly - MongoDB Atlas Data API Demo</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
+        <title>Dipper</title>
       </Head>
-		<ThemeProvider>
       <UserProvider>
-          <Component {...pageProps} />
+        <AtlasUserProvider>
+          <ThemeProvider>
+            <PostsProvider>
+              <UserProvider>
+                <Component {...pageProps} />
+              </UserProvider>
+            </PostsProvider>
+          </ThemeProvider>
+        </AtlasUserProvider>
       </UserProvider>
-			</ThemeProvider>
     </>
   );
 }

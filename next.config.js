@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
 	images: {
-    domains: ['random.imagecdn.app'],
+    domains: ["random.imagecdn.app", "s.gravatar.com", "lh3.googleusercontent.com", "i.pravatar.cc"],
   },
 }
 
