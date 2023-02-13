@@ -62,7 +62,7 @@ module.exports = {
 			"neon-accent2": "rgba(62, 252, 247, .1)",
 			"button-like": "#fff",
 			"post-input-bg": "#292C35",
-			"button-post": "#23905C",
+			"button-post": "#5d2ff6",
 		},
 		fontFamily: {
 			"sans": ["Montserrat", "ui-sans-serif"],
