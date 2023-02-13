@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
-import { setPosts } from "../../../context/PostContext";
 import Card from "../../Card";
+import Image from "next/image";
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
@@ -48,9 +48,27 @@ const AddPost = () => {
     // showSuccess();
   };
 
-  const handler = (event) => {
+  const addEmojiToInput = (event, emojiCode) => {
     event.preventDefault();
-    console.log("hello");
+    let emoji;
+
+    switch (emojiCode) {
+      case 1:
+        emoji = "🔥";
+        break;
+      case 2:
+        emoji = "👍";
+        break;
+      case 3:
+        emoji = "😄";
+        break;
+      case 4:
+        emoji = "💖";
+        break;
+      default:
+        emoji = "";
+    }
+    setInputValue(inputValue + emoji);
   };
 
   return (
@@ -58,22 +76,52 @@ const AddPost = () => {
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col">
           <div className="flex">
-            <div>Picture</div>
+            <div className="rounded-full overflow-hidden h-full">
+              <Image
+                placeholder="blur"
+                blurDataURL="https://via.placeholder.com/150"
+                src={user.picture ? user.picture : "/profilepic-placeholder.png"}
+                alt="User Avatar"
+                title={user.name}
+                width={50}
+                height={50}
+                className="rounded-full"
+              />
+            </div>
             <input
               type="text"
               value={inputValue}
-              placeholder="your tweet here"
+              disabled={!loggedIn}
+              placeholder={
+                loggedIn
+                  ? "Twoja wiadomość"
+                  : "Zaloguj się aby pisać posty"
+              }
               onChange={(e) => setInputValue(e.target.value)}
+              className="w-full mx-7 rounded-full px-10 text-white font-semiold placeholder:text-text-chill placeholder:font-normal bg-post-input-bg"
             ></input>
           </div>
           <div className="flex justify-between">
             <div className="flex">
-              <div>emoji</div>
-              <div>emoji</div>
-              <div>emoji</div>
-              <div>emoji</div>
+              <button onClick={() => addEmojiToInput(event, 1)}>
+                &#x1F525;
+              </button>
+              <button onClick={() => addEmojiToInput(event, 2)}>
+                &#x1F44D;
+              </button>
+              <button onClick={() => addEmojiToInput(event, 3)}>
+                &#x1F604;
+              </button>
+              <button onClick={() => addEmojiToInput(event, 4)}>
+                &#x1F496;
+              </button>
             </div>
-            <button type="submit">Tweet</button>
+            <button
+              type="submit"
+              className="bg-button-post px-5 py-2 rounded-full font-bold hover:scale-[1.02] ease-in duration-100"
+            >
+              Opublikuj{" "}
+            </button>
           </div>
         </div>
       </form>

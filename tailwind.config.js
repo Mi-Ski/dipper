@@ -61,6 +61,8 @@ module.exports = {
 			"neon-accent": "rgba(103, 60, 255, .3)",
 			"neon-accent2": "rgba(62, 252, 247, .1)",
 			"button-like": "#fff",
+			"post-input-bg": "#292C35",
+			"button-post": "#23905C",
 		},
 		fontFamily: {
 			"sans": ["Montserrat", "ui-sans-serif"],
