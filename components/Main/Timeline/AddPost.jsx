@@ -74,7 +74,7 @@ const AddPost = () => {
   return (
     <Card classes={["p-10"]}>
       <form onSubmit={onSubmitTweet} className="w-full">
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-7">
           <div className="flex">
             <div className="rounded-full overflow-hidden h-full">
               <Image
@@ -98,27 +98,27 @@ const AddPost = () => {
                   : "Zaloguj się aby pisać posty"
               }
               onChange={(e) => setInputValue(e.target.value)}
-              className="w-full mx-7 rounded-full px-10 text-white font-semiold placeholder:text-text-chill placeholder:font-normal bg-post-input-bg"
+              className="w-full ml-5 rounded-full px-10 text-white font-semiold placeholder:text-text-chill placeholder:font-normal bg-post-input-bg"
             ></input>
           </div>
           <div className="flex justify-between">
-            <div className="flex">
-              <button onClick={() => addEmojiToInput(event, 1)}>
+            <div className="flex space-x-[1px] text-2xl ease-in duration-100">
+              <button className="hover:scale-[1.07]  ease-in duration-100" onClick={() => addEmojiToInput(event, 1)}>
                 &#x1F525;
               </button>
-              <button onClick={() => addEmojiToInput(event, 2)}>
+              <button className="hover:scale-[1.07]  ease-in duration-100" onClick={() => addEmojiToInput(event, 2)}>
                 &#x1F44D;
               </button>
-              <button onClick={() => addEmojiToInput(event, 3)}>
+              <button className="hover:scale-[1.07]  ease-in duration-100" onClick={() => addEmojiToInput(event, 3)}>
                 &#x1F604;
               </button>
-              <button onClick={() => addEmojiToInput(event, 4)}>
+              <button className="hover:scale-[1.07]  ease-in duration-100" onClick={() => addEmojiToInput(event, 4)}>
                 &#x1F496;
               </button>
             </div>
             <button
               type="submit"
-              className="bg-button-post px-5 py-2 rounded-full font-bold hover:scale-[1.02] ease-in duration-100"
+              className="bg-button-post px-5 py-2  rounded-full font-semibold hover:bg-button-post/[.85] ease-in duration-100"
             >
               Opublikuj{" "}
             </button>
