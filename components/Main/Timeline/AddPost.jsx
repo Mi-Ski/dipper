@@ -72,11 +72,11 @@ const AddPost = () => {
   };
 
   return (
-    <Card classes={["p-10"]}>
+    <Card classes={["p-10 shadow-lg shadow-black/[.55]"]}>
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-7">
           <div className="flex">
-            <div className="rounded-full overflow-hidden h-full">
+            <div className="rounded-full overflow-hidden w-[50px]">
               <Image
                 placeholder="blur"
                 blurDataURL="https://via.placeholder.com/150"
@@ -98,11 +98,11 @@ const AddPost = () => {
                   : "Zaloguj się aby pisać posty"
               }
               onChange={(e) => setInputValue(e.target.value)}
-              className="w-full ml-5 rounded-full px-10 text-white font-semiold placeholder:text-text-chill placeholder:font-normal bg-post-input-bg"
+              className="w-full ml-5 rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal bg-contrast-posts  active:ring-2 active:ring-contrast-posts"
             ></input>
           </div>
           <div className="flex justify-between">
-            <div className="flex space-x-[1px] text-2xl ease-in duration-100">
+            <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-post-input-bg rounded-md px-4">
               <button className="hover:scale-[1.07]  ease-in duration-100" onClick={() => addEmojiToInput(event, 1)}>
                 &#x1F525;
               </button>
@@ -118,7 +118,7 @@ const AddPost = () => {
             </div>
             <button
               type="submit"
-              className="bg-button-post px-5 py-2  rounded-full font-semibold hover:bg-button-post/[.85] ease-in duration-100"
+              className="bg-button-post px-5 py-2  rounded-md font-semibold hover:bg-button-post/[.85] ease-in duration-100"
             >
               Opublikuj{" "}
             </button>
