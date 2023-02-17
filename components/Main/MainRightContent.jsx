@@ -20,7 +20,7 @@ const MainRightContent = () => {
             alt="User Avatar"
             layout="fill"
             width={50}
-            className=" object-cover"
+            className=" object-cover opacity-25"
           />
         </div>
         <h2>W trakcie: podstrona 2</h2>

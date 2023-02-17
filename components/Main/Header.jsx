@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { MdHomeFilled } from "react-icons/md";
 import { IconContext } from "react-icons";
 import Image from "next/image";
@@ -11,6 +11,7 @@ const Header = () => {
   const router = useRouter();
   const user = useUser();
   const loggedIn = Boolean(user.id);
+	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   const logIn = async () => {
     router.push("/api/auth/login");
@@ -18,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="hidden fixed md:block w-4/5 top-0 z-[2]">
-      <div className="flex items-center px-6 py-4 2xl:py-6 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
+      <div className="flex items-center px-6 py-2 2xl:py-6 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
         <div className="flex items-center">
           <div className="w-8 2xl:w-11">
             <IconContext.Provider
@@ -31,7 +32,7 @@ const Header = () => {
             Home
           </h1>
         </div>
-        <div className="flex mr-16">
+        <div className="relative mr-16">
           {!loggedIn && (
             <button
               onClick={() => logIn()}
@@ -41,7 +42,8 @@ const Header = () => {
             </button>
           )}
           {loggedIn && (
-            <>
+						<>
+            <div onClick={() => setProfileMenuOpen(old => !old)} className="flex hover:bg-black py-2 px-4 rounded-xl cursor-pointer">
               <div className="rounded-full overflow-hidden	w-12 h-12">
                 <Image
                   placeholder="blur"
@@ -58,7 +60,10 @@ const Header = () => {
                 <p className="font-medium">{user.name}</p>
                 <p className="font-light text-sm">{user.nickname}</p>
               </div>
-            </>
+            </div>
+						{profileMenuOpen && <h1 className="absolute top-full bg-black">Menu użytkownika</h1>}
+						</>
+						
           )}
         </div>
       </div>
