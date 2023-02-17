@@ -12,7 +12,7 @@ import Search from "./Search";
 
 const Sidebar = () => {
   const router = useRouter();
-  const { darkContext, toggleDarkContext } = useContext(ThemeContext);
+  const { toggleDarkContext } = useContext(ThemeContext);
 
   const logoutHandler = () => {
     router.push("/api/auth/logout");
