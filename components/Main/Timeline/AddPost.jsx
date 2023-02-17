@@ -22,7 +22,9 @@ const AddPost = () => {
 
     if (!loggedIn) {
       logIn();
-    } else {
+    } else if (inputValue.trim().length < 1) {
+			return;
+		} else {
       console.log(user);
 
       const newTweet = {
@@ -118,7 +120,7 @@ const AddPost = () => {
                   : "Zaloguj się, aby pisać posty."
               }
               onChange={(e) => setInputValue(e.target.value)}
-              className="w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal   hover:cursor-pointer focus:outline-none focus:border-brand-accent"
+              className={`${loggedIn ? "cursor-pointer" : "cursor-default"} w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
             ></input>
           </div>
           <div className="flex justify-between">
@@ -152,7 +154,7 @@ const AddPost = () => {
               type="submit"
               className="bg-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
-              Opublikuj{" "}
+							{loggedIn ? "Opublikuj" : "Zaloguj się"}
             </button>
           </div>
         </div>

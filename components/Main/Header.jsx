@@ -27,15 +27,17 @@ const Header = () => {
               <MdHomeFilled />
             </IconContext.Provider>
           </div>
-          <h1 className="font-semibold text-xl 2xl:text-2xl ml-3">Home</h1>
+          <h1 className="font-semibold text-xl 2xl:text-2xl ml-3">
+            Home
+          </h1>
         </div>
         <div className="flex mr-16">
           {!loggedIn && (
             <button
               onClick={() => logIn()}
-              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+              className="bg-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
-              Log In
+              Zaloguj się 
             </button>
           )}
           {loggedIn && (

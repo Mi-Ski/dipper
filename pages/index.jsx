@@ -19,19 +19,6 @@ export default function Home(props) {
   const { darkContext } = useContext(ThemeContext);
   const setUser = useSetUser();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const getUser = await fetch("/api/user");
-  //     const getUserJson = await getUser.json();
-  //     setUser(getUserJson);
-
-  //     const getFlutters = await fetch("/api/flutter");
-  //     const getFluttersJson = await getFlutters.json();
-  //     setFlutters(getFluttersJson);
-
-  //     setIsLoading(false);
-  //   })();
-  // }, []);
   const { setPosts } = useContext(PostsContext);
 
   useEffect(() => {
@@ -45,14 +32,24 @@ export default function Home(props) {
       setPosts(tweetsjson.documents);
 
       setLoading(false);
-			console.log("useeffect");
+      console.log("useeffect");
     })();
   }, [setPosts, setUser]);
 
   return (
     <>
-      <div className={`h-screen ${darkContext ? "dark" : ""}`}>
-        <div className="flex min-h-full bg-white w-100  dark:bg-bgcol-main-dark dark:text-textcol-main-dark">
+      <div className={`h-screen ${darkContext ? "dark" : ""} `}>
+        <div className="flex min-h-full relative  dark:text-textcol-main-dark">
+          <div
+            style={{
+              background: "rgb(7,7,10)",
+              background:
+                "linear-gradient(45deg, rgba(7,7,10,1) 0%, rgba(7,7,10,1) 44%, rgba(6,8,15,1) 61%, rgba(7,7,10,1) 76%, rgba(7,7,10,1) 100%);",
+            }}
+            className=" w-full h-full fixed z-0 "
+          >
+            .
+          </div>
           <Sidebar />
           <div className="hidden md:block md:w-1/5"></div>
           <Main isLoading={loading} />
