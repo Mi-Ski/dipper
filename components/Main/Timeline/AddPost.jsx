@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
-import Card from "../../Card";
 import Image from "next/image";
 
 import { useRouter } from "next/router";
@@ -23,8 +22,8 @@ const AddPost = () => {
     if (!loggedIn) {
       logIn();
     } else if (inputValue.trim().length < 1) {
-			return;
-		} else {
+      return;
+    } else {
       console.log(user);
 
       const newTweet = {
@@ -85,12 +84,12 @@ const AddPost = () => {
   };
 
   return (
-    <Card classes={["px-10 pt-10 pb-5 shadow-lg shadow-black/[.55]"]}>
+    <div className="w-full flex flex-col mb-10 pt-10 pb-5 md:p-10 bg-slate-300  dark:bg-bgcol-ui-dark rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark ">
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-10">
           <div className="flex items-center h-14">
             <div
-              className={`rounded-full relative  overflow-hidden w-14 h-12  ${
+              className={`rounded-full relative  overflow-hidden w-14 min-w-[50px] h-12  ${
                 user.picture ? "" : "border-2 border-border-dark"
               }`}
             >
@@ -120,7 +119,9 @@ const AddPost = () => {
                   : "Zaloguj się, aby pisać posty."
               }
               onChange={(e) => setInputValue(e.target.value)}
-              className={`${loggedIn ? "cursor-pointer" : "cursor-default"} w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
+              className={`${
+                loggedIn ? "cursor-pointer" : "cursor-default"
+              } w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
             ></input>
           </div>
           <div className="flex justify-between">
@@ -154,12 +155,12 @@ const AddPost = () => {
               type="submit"
               className="bg-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
-							{loggedIn ? "Opublikuj" : "Zaloguj się"}
+              {loggedIn ? "Opublikuj" : "Zaloguj się"}
             </button>
           </div>
         </div>
       </form>
-    </Card>
+    </div>
   );
 };
 

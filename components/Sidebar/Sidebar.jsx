@@ -23,7 +23,7 @@ const Sidebar = () => {
 	};
 
   return (
-    <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5  bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
+    <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5   bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
       <div>
         <div className="flex flex-col xl:flex-row py-[10vh]  items-center justify-center mr-7">
           <div className="w-24 2xl:w-fit h-fit ">

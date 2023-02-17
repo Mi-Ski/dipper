@@ -13,12 +13,12 @@ const Timeline = ({ postsLoading }) => {
 
   return (
     <div className="w-screen lg:w-3/4 overflow-y-auto">
-      <div className="w-[98%] md:w-2/3 lg:w-4/5 mx-auto">
+      <div className="w-full md:w-2/3 lg:w-4/5 mx-auto ">
         <AddPost />
         {postsLoading ? (
           <Loading size="50" classes="py-40" />
         ) : (
-          <div>
+          <div className="w-[98%] lg:w-full mx-auto">
             {posts.length > 0 && posts.map((post) => (
               <Post
                 key={post._id}

@@ -92,7 +92,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
   return (
     <>
-      <Card classes={["flex flex-col shadow-lg shadow-black/[.55]"]}>
+      <Card classes={["flex flex-col shadow-lg shadow-black/[.55] border-2 "]}>
         <div className="flex  border-2 px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
           <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
             <Image
