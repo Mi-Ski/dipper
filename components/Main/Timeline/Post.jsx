@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import { IconContext } from "react-icons";
 import {
@@ -39,6 +40,7 @@ const osobaVariation = (liczba) => {
 const Post = ({ _id, body, postedAt, likes, user }) => {
   // userid, name, nickname, picture
   const userContext = useUser();
+  const router = useRouter();
   const [modal, setModal] = useState(false);
   // like
   const [likesState, setLikesState] = useState(likes);
@@ -47,6 +49,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
   const currentUserLiked = likesState.includes(userContext.id);
   const currentUser = userContext.id === user.id;
+  const userLoggedIn = Boolean(userContext.id);
 
   const shareHandler = () => {
     if (navigator.share) {
@@ -54,7 +57,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
         .share({
           title: `${user.name} na Dipper:`,
           text: `${body}`,
-          url: `http://localhost:3000/ `,
+          url: `${user.name} na Dipper.pl: ${body}. Zobacz więcej na https://dipper.pl`,
         })
         .catch((error) => console.log("Error sharing", error));
     } else {
@@ -63,6 +66,10 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
   };
 
   const likeHandler = async () => {
+    if (!userLoggedIn) {
+      return router.push("/api/auth/login");
+    }
+
     setLoading(true);
 
     const action = currentUserLiked ? "$pull" : "$addToSet";
@@ -92,8 +99,12 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
   return (
     <>
-      <Card classes={["flex flex-col shadow-lg shadow-black/[.55] border-2 "]}>
-        <div className="flex  border-2 px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
+      <Card
+        classes={[
+          "flex flex-col shadow-lg shadow-black/[.55] border lg:border-2 ",
+        ]}
+      >
+        <div className="flex  border lg:border-2 px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
           <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
             <Image
               placeholder="blur"
@@ -119,38 +130,40 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
             <div className="mt-7 mb-5 text-lg ">{body}</div>
           </div>
         </div>
-        <div className="flex  justify-between w-full px-10 py-5">
-          <div className="flex flex-col lg:flex-row sm:items-center ">
-            <button
-              disabled={loading}
-              onClick={likeHandler}
-              className={`${
-                currentUserLiked
-                  ? "bg-gradient-to-r from-neon-accent2 to-neon-accent border-text-chill"
-                  : ""
-              } flex items-center justify-start  text-button-like font-semibold hover:text-white py-2 px-4 border-2   border-border-dark hover:border-button-like rounded hover:bg-gradient-to-r from-neon-accent2 to-neon-accent`}
-            >
-              <div className="w-5 ">
-                <IconContext.Provider
-                  value={{ color: "white", size: "100%" }}
-                >
-                  {currentUserLiked ? (
-                    <AiTwotoneLike />
-                  ) : (
-                    <AiOutlineLike />
-                  )}
-                </IconContext.Provider>
-              </div>
-              <p className="font-semibold text-xs min-w-[6ch] tracking-wide mt-[2px]">
-                {currentUserLiked ? "Liked" : "Like"}
+        <div className="flex items-end justify-between w-full px-10 py-5">
+          <div className="flex">
+            <div className="flex flex-col lg:flex-row sm:items-center">
+              <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill font-medium ">
+                {`${likesState.length} ${osobaVariation(
+                  likesState.length
+                )}`}{" "}
+                to.
               </p>
-            </button>
-            <p className="lg:ml-4 text-text-chill font-medium mt-2 lg:mt-0">
-              {`${likesState.length} ${osobaVariation(
-                likesState.length
-              )}`}{" "}
-              to.
-            </p>
+              <button
+                disabled={loading}
+                onClick={likeHandler}
+                className={`${
+                  currentUserLiked
+                    ? "bg-gradient-to-r from-neon-accent2 to-neon-accent border-text-chill"
+                    : ""
+                } flex items-center justify-start  text-button-like font-semibold hover:text-white py-2 px-4 border-2   border-border-dark hover:border-button-like rounded hover:bg-gradient-to-r from-neon-accent2 to-neon-accent`}
+              >
+                <div className="w-5 ">
+                  <IconContext.Provider
+                    value={{ color: "white", size: "100%" }}
+                  >
+                    {currentUserLiked ? (
+                      <AiTwotoneLike />
+                    ) : (
+                      <AiOutlineLike />
+                    )}
+                  </IconContext.Provider>
+                </div>
+                <p className="font-semibold text-xs min-w-[6ch] tracking-wide mt-[2px]">
+                  {currentUserLiked ? "Liked" : "Like"}
+                </p>
+              </button>
+            </div>
             {loading && <Loading size="20" classes="ml-4" />}
           </div>
           <div className=" flex items-center">
@@ -194,21 +207,6 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           </div>
         </div>
       </Card>
-      {/* <div className="p-10 bg-slate-300 dark:bg-black w-4/5 mb-10 mx-auto rounded">
-        <h1>
-          {props.name} | {props.nickname}
-        </h1>
-        <p>{props.body}</p>
-        <p>Posted at: {new Date(+props.postedAt).toLocaleString()}</p>
-        <Image
-          src={props.img}
-          alt="postimg"
-          width="300"
-          height="300"
-        />
-        <div>Likes: {props.likes.length}</div>
-        <button onClick={() => setModal(true)}>Show modal</button>
-      </div> */}
 
       {modal && (
         <Modal>
