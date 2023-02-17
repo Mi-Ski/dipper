@@ -52,17 +52,20 @@ module.exports = {
 			...colors,
 			"bgcol-main-dark": "#07070A",
 			"bgcol-ui-dark": "#0C0D11",
+			"contrast-posts": "#040406",
+			"post-input-bg": "#292C35",
+
 			"border-dark": "#33333A",
+			"border-neon": "rgba(60, 252, 249, .7)",
+
 			"textcol-main-dark": "#EFEFEF",
 			"text-chill": "#979797",
-			"contrast-posts": "#040406",
+
 			"shadow": "#000000",
-			"border-neon": "rgba(60, 252, 249, .7)",
 			"neon-accent": "rgba(103, 60, 255, .3)",
 			"neon-accent2": "rgba(62, 252, 247, .1)",
 			"button-like": "#fff",
-			"post-input-bg": "#292C35",
-			"button-post": "#5d2ff6",
+			"brand-accent": "#5d2ff6",
 		},
 		fontFamily: {
 			"sans": ["Montserrat", "ui-sans-serif"],
