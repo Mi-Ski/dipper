@@ -16,7 +16,7 @@ import Main from "../components/Main/Main";
 export default function Home(props) {
   const [loading, setLoading] = useState(true);
 
-  const { darkContext, toggleDarkContext } = useContext(ThemeContext);
+  const { darkContext } = useContext(ThemeContext);
   const setUser = useSetUser();
 
   // useEffect(() => {

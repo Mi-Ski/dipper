@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+import  ThemeContext from "../../context/ThemeContext";
 
 import { IconContext } from "react-icons";
 import { RiToggleFill, RiToggleLine } from "react-icons/ri";
@@ -8,6 +11,17 @@ import { MdOutlineLogout } from "react-icons/md";
 import Search from "./Search";
 
 const Sidebar = () => {
+  const router = useRouter();
+  const { darkContext, toggleDarkContext } = useContext(ThemeContext);
+
+  const logoutHandler = () => {
+    router.push("/api/auth/logout");
+  };
+
+	const themeHandler = () => {
+		toggleDarkContext();
+	};
+
   return (
     <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5  bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
       <div>
@@ -31,20 +45,24 @@ const Sidebar = () => {
       </div>
       <div className="w-full">
         <div className="w-full p-3 md:p-[5vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
-          <IconContext.Provider
-            value={{ color: "white", size: "20px" }}
-          >
-            <RiToggleFill />
-          </IconContext.Provider>
-          <p className="flex-1">Motyw</p>
+          <button className="flex" onClick={themeHandler}>
+            <IconContext.Provider
+              value={{ color: "white", size: "20px" }}
+            >
+              <RiToggleFill />
+            </IconContext.Provider>
+            <p className="flex-1">Motyw</p>
+          </button>
         </div>
         <div className="w-full md:p-[5vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
-          <IconContext.Provider
-            value={{ color: "white", size: "20px" }}
-          >
-            <MdOutlineLogout />
-          </IconContext.Provider>
-          <p className="flex-1">Wyloguj się</p>
+          <button className="flex" onClick={logoutHandler}>
+            <IconContext.Provider
+              value={{ color: "white", size: "20px" }}
+            >
+              <MdOutlineLogout />
+            </IconContext.Provider>
+            <p className="flex-1">Wyloguj się</p>
+          </button>
         </div>
       </div>
     </div>
