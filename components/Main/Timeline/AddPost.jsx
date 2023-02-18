@@ -84,7 +84,7 @@ const AddPost = () => {
   };
 
   return (
-    <div className="w-full flex flex-col mb-10 pt-10 pb-5 md:p-10 bg-slate-300  dark:bg-bgcol-ui-dark rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark ">
+    <div className="w-full flex flex-col px-4 mb-10 pt-10 pb-7 md:p-10 bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark ">
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-10">
           <div className="flex items-center h-14">
@@ -120,8 +120,8 @@ const AddPost = () => {
               }
               onChange={(e) => setInputValue(e.target.value)}
               className={`${
-                loggedIn ? "cursor-pointer" : "cursor-default"
-              } w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full px-10  text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
+                loggedIn ? "cursor-pointer px-10" : "cursor-default pl-6 pr-4 lg:pl-10 lg:pr-10"
+              } w-full h-full ml-4 bg-contrast-posts border-2  border-border-dark rounded-full   text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
             ></input>
           </div>
           <div className="flex justify-between">

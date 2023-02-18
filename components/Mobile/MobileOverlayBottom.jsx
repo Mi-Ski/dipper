@@ -12,7 +12,7 @@ const MobileOverlayBottom = () => {
 	const router = useRouter();
 
 	return (
-      <div className="flex flex-col bg-contrast-posts pointer-events-auto w-screen p-7 border border-t-border-dark border-x-transparent border-b-transparent ">
+      <div className="flex flex-col bg-contrast-posts pointer-events-auto w-screen p-7  ">
         {searchVisible ? (
           <div className="flex items-center">
             <Search />

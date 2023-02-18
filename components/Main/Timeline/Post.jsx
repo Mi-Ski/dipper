@@ -101,10 +101,10 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
     <>
       <Card
         classes={[
-          "flex flex-col shadow-lg shadow-black/[.55] border lg:border-2 ",
+          "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
         ]}
       >
-        <div className="flex  border lg:border-2 px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
+        <div className="flex  border md:border-2 px-4 md:px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
           <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
             <Image
               placeholder="blur"
@@ -130,10 +130,10 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
             <div className="mt-7 mb-5 text-lg ">{body}</div>
           </div>
         </div>
-        <div className="flex items-end justify-between w-full px-10 py-5">
-          <div className="flex">
-            <div className="flex flex-col lg:flex-row sm:items-center">
-              <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill font-medium ">
+        <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
+          <div className="flex items-end lg:items-center">
+            <div className="flex flex-col lg:flex-row-reverse sm:items-center">
+              <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
                 {`${likesState.length} ${osobaVariation(
                   likesState.length
                 )}`}{" "}
@@ -164,7 +164,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
                 </p>
               </button>
             </div>
-            {loading && <Loading size="20" classes="ml-4" />}
+            {loading && <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />}
           </div>
           <div className=" flex items-center">
             {currentUser && (
