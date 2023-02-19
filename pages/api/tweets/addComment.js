@@ -1,13 +1,11 @@
-import { getAccessToken, withApiAuthRequired } from "@auth0/nextjs-auth0";
 
-export default withApiAuthRequired(async function handler(req, res) {
-  const { accessToken } = await getAccessToken(req, res);
+export default async function handler(req, res) {
   const fetchOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Request-Headers": "*",
-      jwtTokenString: accessToken,
+			"api-key":  process.env.API_KEY_GETALL,
     },
   };
   const fetchBody = {
@@ -43,4 +41,4 @@ export default withApiAuthRequired(async function handler(req, res) {
     console.error(error);
     res.status(500).json({ error });
   }
-});
+};
