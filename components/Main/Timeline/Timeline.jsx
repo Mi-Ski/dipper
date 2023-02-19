@@ -19,7 +19,7 @@ const Timeline = ({ postsLoading }) => {
           <Loading size="50" classes="py-40" />
         ) : (
           <div className="w-[98%] lg:w-full mx-auto">
-            {posts.length > 0 && posts.map((post) => (
+            {posts?.length > 0 && posts.map((post) => (
               <Post
                 key={post._id}
                 postedAt={post.postedAt}
