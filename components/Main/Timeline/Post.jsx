@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
+import PostsContext from "../../../context/PostContext";
 
 import { IconContext } from "react-icons";
+
 import {
   AiOutlineLike,
   AiTwotoneLike,
@@ -256,7 +258,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           editHandler={editHandler}
         />
       )}
-      {deleteModalActive && <DeleteConfirmModal />}
+      {/* {deleteModalActive && <DeleteConfirmModal />} */}
     </>
   );
 };

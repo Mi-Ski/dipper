@@ -19,7 +19,7 @@ export default function Home(props) {
       const getUserJson = await getUser.json();
       setUser(getUserJson);
 
-      const tweets = await fetch("/api/tweets/getall");
+      const tweets = await fetch("/api/tweets/getAll");
       const tweetsjson = await tweets.json();
       setPosts(tweetsjson.documents);
 
