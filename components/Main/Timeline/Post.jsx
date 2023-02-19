@@ -42,7 +42,7 @@ const osobaVariation = (liczba) => {
 const Post = ({ _id, body, postedAt, likes, user }) => {
   // userid, name, nickname, picture
   const userContext = useUser();
-  const { posts, setPosts } = useContext(PostsContext);
+  // const { posts, setPosts } = useContext(PostsContext);
   const router = useRouter();
 
   const [editModalActive, setEditModalActive] = useState(false);
@@ -104,7 +104,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
     setLoading(false);
   };
 
-  const addCommentHandler = () => {};
+  // const addCommentHandler = () => {};
 
   const editHandler = async (updateObject) => {
     const response = await fetch("/api/tweets", {
@@ -124,18 +124,18 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
     setEditModalActive(false);
 
-    setPosts(
-      posts.map((post) => {
-        if (post._id === _id) {
-          return {
-            ...post,
-            body: updateObject,
-          };
-        }
+    // setPosts(
+    //   posts.map((post) => {
+    //     if (post._id === _id) {
+    //       return {
+    //         ...post,
+    //         body: updateObject,
+    //       };
+    //     }
 
-        return post;
-      })
-    );
+    //     return post;
+    //   })
+    // );
   };
 
   return (
