@@ -15,6 +15,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 
 import Card from "../../Card";
 import EditModal from "../../Modals/EditModal";
+import DeleteConfirmModal from "../../Modals/DeleteConfirmModal";
 
 import Loading from "../../Loading";
 import PostBody from "./PostBody";
@@ -44,7 +45,9 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
   const { posts, setPosts } = useContext(PostsContext);
   const router = useRouter();
 
-  const [modalActive, setModalActive] = useState(false);
+  const [editModalActive, setEditModalActive] = useState(false);
+  const [deleteModalActive, setDeleteModalActive] = useState(false);
+
   const [modalInputVal, setModalInputVal] = useState(body);
 
   const [likesState, setLikesState] = useState(likes);
@@ -119,7 +122,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
     console.log(responseJson);
 
-    setModalActive(false);
+    setEditModalActive(false);
 
     setPosts(
       posts.map((post) => {
@@ -183,7 +186,10 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           </div>
           <div className=" flex items-center">
             {currentUser && (
-              <button className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2">
+              <button
+                onClick={() => setDeleteModalActive(true)}
+                className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2"
+              >
                 <div className="w-5">
                   <IconContext.Provider
                     value={{ color: "white", size: "100%" }}
@@ -195,7 +201,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
             )}
             {currentUser && (
               <button
-                onClick={() => setModalActive(true)}
+                onClick={() => setEditModalActive(true)}
                 className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
               >
                 <div className="w-5">
@@ -223,13 +229,14 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
         </div>
       </Card>
 
-      {modalActive && (
+      {editModalActive && (
         <EditModal
           modalInputVal={modalInputVal}
-          setModalActive={setModalActive}
+          setModalActive={setEditModalActive}
           editHandler={editHandler}
         />
       )}
+      {deleteModalActive && <DeleteConfirmModal />}
     </>
   );
 };
