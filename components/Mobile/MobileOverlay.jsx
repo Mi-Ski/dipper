@@ -24,6 +24,8 @@ const MobileOverlay = () => {
 		};
 	}, [scrollPosition]);
 
+
+
   return (
     <div className="block pointer-events-none md:hidden fixed flex flex-col h-full justify-between z-[10]">
       {topBlobShown ? <MobileOverlayTop /> : <div></div>}

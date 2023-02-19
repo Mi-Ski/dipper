@@ -44,22 +44,22 @@ export default withApiAuthRequired(async function handler(req, res) {
         res.status(200).json(insertDataJson);
         break;
 
-      case "PUT":
-        const updateData = await fetch(`${baseUrl}/updateOne`, {
-          ...fetchOptions,
-          body: JSON.stringify({
-            ...fetchBody,
-            filter: { _id: { $oid: req.body._id } },
-            update: {
-              $set: {
-                body: req.body.body,
-              },
-            },
-          }),
-        });
-        const updateDataJson = await updateData.json();
-        res.status(200).json(updateDataJson);
-        break;
+      // case "PUT":
+      //   const updateData = await fetch(`${baseUrl}/updateOne`, {
+      //     ...fetchOptions,
+      //     body: JSON.stringify({
+      //       ...fetchBody,
+      //       filter: { _id: { $oid: req.body._id } },
+      //       update: {
+      //         $set: {
+      //           body: req.body.body,
+      //         },
+      //       },
+      //     }),
+      //   });
+      //   const updateDataJson = await updateData.json();
+      //   res.status(200).json(updateDataJson);
+      //   break;
       // case "DELETE":
       //   const deleteData = await fetch(`${baseUrl}/deleteOne`, {
       //     ...fetchOptions,
