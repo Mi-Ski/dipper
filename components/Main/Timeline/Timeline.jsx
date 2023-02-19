@@ -29,7 +29,7 @@ const Timeline = ({ postsLoading }) => {
                 _id={post._id}
               />
             ))}
-						{Boolean(!posts) && <p className="text-center text-white text-xl py-20">Zaloguj się, aby szukać wpisów</p>}
+						{Boolean(!posts) && <p className="text-center text-white text-xl py-20">Błąd w ładowaniu postów 😿</p>}
           </div>
         )}
       </div>
