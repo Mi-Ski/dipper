@@ -24,7 +24,7 @@ export default function Home(props) {
       setPosts(tweetsjson.documents);
 
       setLoading(false);
-      console.log("useeffect");
+      console.log(tweetsjson, "tweetsjson");
     })();
   }, [setPosts, setUser]);
 

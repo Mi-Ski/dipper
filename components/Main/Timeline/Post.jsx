@@ -50,7 +50,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
 
   const [modalInputVal, setModalInputVal] = useState(body);
 
-  const [likesState, setLikesState] = useState(likes);
+  const [likesState, setLikesState] = useState([2,2]);
 
   const [loading, setLoading] = useState(false);
 
