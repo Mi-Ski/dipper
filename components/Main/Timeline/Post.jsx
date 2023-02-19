@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
+
+import { useUser } from "../../../context/UserContext";
+import PostsContext from "../../../context/PostContext";
 
 import { IconContext } from "react-icons";
 import {
@@ -7,16 +10,14 @@ import {
   AiTwotoneLike,
   AiOutlineDelete,
 } from "react-icons/ai";
-
 import { MdModeEdit } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 
-import Image from "next/image";
 import Card from "../../Card";
-import Modal from "../../Modals/Modal";
-import Loading from "../../Loading";
+import EditModal from "../../Modals/EditModal";
 
-import { useUser } from "../../../context/UserContext";
+import Loading from "../../Loading";
+import PostBody from "./PostBody";
 
 // 0, 5-21 osób
 // 1 osoba
@@ -40,9 +41,12 @@ const osobaVariation = (liczba) => {
 const Post = ({ _id, body, postedAt, likes, user }) => {
   // userid, name, nickname, picture
   const userContext = useUser();
+  const { posts, setPosts } = useContext(PostsContext);
   const router = useRouter();
-  const [modal, setModal] = useState(false);
-  // like
+
+  const [modalActive, setModalActive] = useState(false);
+  const [modalInputVal, setModalInputVal] = useState(body);
+
   const [likesState, setLikesState] = useState(likes);
 
   const [loading, setLoading] = useState(false);
@@ -97,6 +101,40 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
     setLoading(false);
   };
 
+  const addCommentHandler = () => {};
+
+  const editHandler = async (updateObject) => {
+    const response = await fetch("/api/tweets", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id,
+        body: updateObject,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    console.log(responseJson);
+
+    setModalActive(false);
+
+    setPosts(
+      posts.map((post) => {
+        if (post._id === _id) {
+          return {
+            ...post,
+            body: updateObject,
+          };
+        }
+
+        return post;
+      })
+    );
+  };
+
   return (
     <>
       <Card
@@ -104,32 +142,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
         ]}
       >
-        <div className="flex  border md:border-2 px-4 md:px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
-          <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
-            <Image
-              placeholder="blur"
-              blurDataURL="https://via.placeholder.com/150"
-              src={user.picture}
-              alt="User Avatar"
-              title={user.name}
-              width={52}
-              height={52}
-              className="rounded-full "
-            />
-          </div>
-          <div className="flex flex-1 flex-col ml-3">
-            <div className="flex justify-between pt-1.5">
-              <div className="flex flex-col ">
-                <p className="font-medium">{user.nickname}</p>
-                <p className="text-text-chill text-xs">{user.name}</p>
-              </div>
-              <p className="text-text-chill text-xs font-medium">
-                {new Date(+postedAt).toLocaleString()}
-              </p>
-            </div>
-            <div className="mt-7 mb-5 text-lg ">{body}</div>
-          </div>
-        </div>
+        <PostBody body={body} user={user} postedAt={postedAt} />
         <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
           <div className="flex items-end lg:items-center">
             <div className="flex flex-col lg:flex-row-reverse sm:items-center">
@@ -164,7 +177,9 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
                 </p>
               </button>
             </div>
-            {loading && <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />}
+            {loading && (
+              <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />
+            )}
           </div>
           <div className=" flex items-center">
             {currentUser && (
@@ -180,7 +195,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
             )}
             {currentUser && (
               <button
-                onClick={() => setModal(true)}
+                onClick={() => setModalActive(true)}
                 className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
               >
                 <div className="w-5">
@@ -208,23 +223,12 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
         </div>
       </Card>
 
-      {modal && (
-        <Modal>
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-[2]"
-            onClick={() => setModal(false)}
-          >
-            <div
-              // stop event bubbling to the parent so only background hides the modal
-              onClick={(e) => e.stopPropagation()}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-white z-[3]"
-            >
-              <h1>Modal</h1>
-              <button onClick={() => setModal(false)}>Close</button>
-            </div>
-          </div>
-          , document.body
-        </Modal>
+      {modalActive && (
+        <EditModal
+          modalInputVal={modalInputVal}
+          setModalActive={setModalActive}
+          editHandler={editHandler}
+        />
       )}
     </>
   );
