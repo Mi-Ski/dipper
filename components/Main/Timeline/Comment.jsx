@@ -1,6 +1,6 @@
 import React from "react";
 
-const Comment = ({ key, comment, user, _id }) => {
+const Comment = ({ comment, user, _id }) => {
   return (
       <div>
         {user.name}: {comment}

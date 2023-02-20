@@ -19,7 +19,6 @@ const MainRightContent = () => {
             src={"/icon-pictureasset.png"}
             alt="User Avatar"
             layout="fill"
-            width={50}
             className=" object-cover opacity-25"
           />
         </div>

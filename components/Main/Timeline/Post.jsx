@@ -273,7 +273,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
           {comments &&
             comments.map((comment) => (
               <Comment
-                key={comment.id}
+                key={Math.random()}
                 comment={comment.body}
                 user={comment.user}
                 _id={comment.id}

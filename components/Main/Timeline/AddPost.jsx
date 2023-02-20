@@ -104,8 +104,6 @@ const AddPost = () => {
                 alt="User Avatar"
                 title={user.name}
                 layout="fill"
-                width={50}
-                height={50}
                 className="rounded-full object-contain"
               />
             </div>
