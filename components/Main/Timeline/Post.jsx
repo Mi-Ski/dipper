@@ -78,7 +78,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
     console.log("action", action);
 
     await fetch("/api/tweets/like", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -99,6 +99,10 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
   };
 
   const addCommentHandler = async (commentBody) => {
+    if (!userLoggedIn) {
+      return router.push("/api/auth/login");
+    }
+
     const body = {
       body: commentBody,
       user: {
@@ -114,19 +118,20 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
     } else if (commentBody.trim().length < 1) {
       return;
     } else {
-      const newComment = {
-        body,
-        postId: _id,
-      };
-      console.log(newComment);
-
       const response = await fetch("/api/tweets/addcomment", {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newComment),
+        body: JSON.stringify({
+					body,
+					postId: _id,
+				}),
       });
+			console.log(JSON.stringify({
+				body,
+				postId: _id,
+			}), "JSON STRINGIFY")
 
       const responseJson = await response.json();
       console.log(responseJson, "addComment responseJson");
