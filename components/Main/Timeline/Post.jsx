@@ -78,7 +78,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
     console.log("action", action);
 
     await fetch("/api/tweets/like", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
