@@ -1,25 +1,23 @@
 import { useState, useContext } from "react";
 import { useRouter } from "next/router";
+
+import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
 
 import { IconContext } from "react-icons";
-
 import {
   AiOutlineLike,
   AiTwotoneLike,
   AiOutlineDelete,
 } from "react-icons/ai";
-
 import { MdModeEdit } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 
-import Image from "next/image";
 import Card from "../../Card";
 import EditModal from "../../Modals/EditModal";
 
 import Loading from "../../Loading";
-
-import { useUser } from "../../../context/UserContext";
+import PostBody from "./PostBody";
 
 // 0, 5-21 osób
 // 1 osoba
@@ -28,18 +26,15 @@ const osobaVariation = (liczba) => {
   if (liczba === 1) return "osoba lubi";
   if (liczba > 1 && liczba < 5) return "osoby lubią";
   if (liczba > 4 && liczba < 22) return "osób lubi";
-
   if (liczba > 21) {
     const lastDigit = liczba % 10;
     if (lastDigit > 1 && lastDigit < 5) return "osoby lubią";
     if (lastDigit === 0 || lastDigit === 1 || lastDigit > 4)
       return "osób";
   }
-
   // 0 osób
   return "osób lubi";
 };
-
 const Post = ({ _id, body, postedAt, likes, user }) => {
   // userid, name, nickname, picture
   const userContext = useUser();
@@ -52,11 +47,9 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
   const [likesState, setLikesState] = useState(likes);
 
   const [loading, setLoading] = useState(false);
-
   const currentUserLiked = likesState.includes(userContext.id);
   const currentUser = userContext.id === user.id;
   const userLoggedIn = Boolean(userContext.id);
-
   const shareHandler = () => {
     if (navigator.share) {
       navigator
@@ -70,17 +63,13 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
       console.log("Not supported");
     }
   };
-
   const likeHandler = async () => {
     if (!userLoggedIn) {
       return router.push("/api/auth/login");
     }
-
     setLoading(true);
-
     const action = currentUserLiked ? "$pull" : "$addToSet";
     console.log("action", action);
-
     await fetch("/api/tweets/like", {
       method: "PUT",
       headers: {
@@ -92,14 +81,12 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
         action,
       }),
     });
-
     setLikesState((likes) => {
       if (currentUserLiked) {
         return likes.filter((like) => like !== userContext.id);
       }
       return [...likes, userContext.id];
     });
-
     setLoading(false);
   };
 
@@ -144,32 +131,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
         ]}
       >
-        <div className="flex  border md:border-2 px-4 md:px-10 py-7 border-r-transparent border-l-transparent border-t-transparent  border-b-border-dark border-solid">
-          <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
-            <Image
-              placeholder="blur"
-              blurDataURL="https://via.placeholder.com/150"
-              src={user.picture}
-              alt="User Avatar"
-              title={user.name}
-              width={52}
-              height={52}
-              className="rounded-full "
-            />
-          </div>
-          <div className="flex flex-1 flex-col ml-3">
-            <div className="flex justify-between pt-1.5">
-              <div className="flex flex-col ">
-                <p className="font-medium">{user.nickname}</p>
-                <p className="text-text-chill text-xs">{user.name}</p>
-              </div>
-              <p className="text-text-chill text-xs font-medium">
-                {new Date(+postedAt).toLocaleString()}
-              </p>
-            </div>
-            <div className="mt-7 mb-5 text-lg ">{body}</div>
-          </div>
-        </div>
+        <PostBody body={body} user={user} postedAt={postedAt} />
         <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
           <div className="flex items-end lg:items-center">
             <div className="flex flex-col lg:flex-row-reverse sm:items-center">
@@ -204,14 +166,13 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
                 </p>
               </button>
             </div>
-            {loading && <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />}
+            {loading && (
+              <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />
+            )}
           </div>
           <div className=" flex items-center">
             {currentUser && (
-              <button
-                onClick={() => setDeleteModalActive(true)}
-                className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2"
-              >
+              <button className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2">
                 <div className="w-5">
                   <IconContext.Provider
                     value={{ color: "white", size: "100%" }}
@@ -258,9 +219,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
           editHandler={editHandler}
         />
       )}
-      {/* {deleteModalActive && <DeleteConfirmModal />} */}
     </>
   );
 };
-
 export default Post;

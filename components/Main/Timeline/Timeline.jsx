@@ -7,7 +7,6 @@ import Loading from "../../Loading";
 
 const Timeline = ({ postsLoading }) => {
   const { posts } = React.useContext(PostsContext);
-  console.log(posts);
   // _id, user[], body, postedAt, likes[]
   // userid, name, nickname, picture
 
