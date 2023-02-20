@@ -24,10 +24,10 @@ export default withApiAuthRequired(async function handler(req, res) {
           ...fetchOptions,
           body: JSON.stringify({
             ...fetchBody,
-            filter: { _id: { $oid: req.body._id } },
+            filter: { _id: { $oid: req.body.postId } },
             update: {
               $push: {
-                comments: req.body,
+                comments: req.body.body,
               },
             },
           }),

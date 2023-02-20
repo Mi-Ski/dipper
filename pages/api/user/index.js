@@ -88,7 +88,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         const updateDataJson = await updateData.json();
         res.status(200).json(updateDataJson);
         break;
-      default: //Method Not Allowed
+      default: 
         res.status(405).end();
         break;
     }

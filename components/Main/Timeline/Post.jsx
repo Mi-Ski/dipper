@@ -15,6 +15,8 @@ import { IoShareSocialSharp } from "react-icons/io5";
 
 import Card from "../../Card";
 import EditModal from "../../Modals/EditModal";
+import Comment from "./Comment";
+import AddComment from "./AddComment";
 
 import Loading from "../../Loading";
 import PostBody from "./PostBody";
@@ -35,8 +37,9 @@ const osobaVariation = (liczba) => {
   // 0 osób
   return "osób lubi";
 };
-const Post = ({ _id, body, postedAt, likes, user }) => {
+const Post = ({ _id, body, postedAt, likes, comments, user }) => {
   // userid, name, nickname, picture
+  // comments[{user<object>, body<array>}}]
   const userContext = useUser();
   const { posts, setPosts } = useContext(PostsContext);
   const router = useRouter();
@@ -50,6 +53,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
   const currentUserLiked = likesState.includes(userContext.id);
   const currentUser = userContext.id === user.id;
   const userLoggedIn = Boolean(userContext.id);
+
   const shareHandler = () => {
     if (navigator.share) {
       navigator
@@ -63,13 +67,16 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
       console.log("Not supported");
     }
   };
+
   const likeHandler = async () => {
     if (!userLoggedIn) {
       return router.push("/api/auth/login");
     }
+
     setLoading(true);
     const action = currentUserLiked ? "$pull" : "$addToSet";
     console.log("action", action);
+
     await fetch("/api/tweets/like", {
       method: "PUT",
       headers: {
@@ -81,6 +88,7 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
         action,
       }),
     });
+
     setLikesState((likes) => {
       if (currentUserLiked) {
         return likes.filter((like) => like !== userContext.id);
@@ -90,7 +98,49 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
     setLoading(false);
   };
 
-  const addCommentHandler = () => {};
+  const addCommentHandler = async (commentBody) => {
+    const body = {
+      body: commentBody,
+      user: {
+        id: userContext.id,
+        name: userContext.name,
+        nickname: userContext.nickname,
+        picture: userContext.picture,
+      },
+    };
+
+    if (!userLoggedIn) {
+      return router.push("/api/auth/login");
+    } else if (commentBody.trim().length < 1) {
+      return;
+    } else {
+      const newComment = {
+        body,
+        postId: _id,
+      };
+      console.log(newComment);
+
+      const response = await fetch("/api/tweets/addcomment", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "addComment responseJson");
+
+      // setPosts((oldState) => [
+      //   {
+      //     _id: responseJson.insertedId,
+      //     ...newTweet,
+      //   },
+      //   ...oldState,
+      // ]);
+      // setInputValue("");
+    }
+  };
 
   const editHandler = async (updateObject) => {
     const response = await fetch("/api/tweets", {
@@ -209,6 +259,21 @@ const Post = ({ _id, body, postedAt, likes, user }) => {
               </div>
             </button>
           </div>
+        </div>
+        <AddComment
+          user={user}
+          addCommentHandler={addCommentHandler}
+        ></AddComment>
+        <div>
+          {comments &&
+            comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                comment={comment.body}
+                user={comment.user}
+                _id={comment.id}
+              />
+            ))}
         </div>
       </Card>
 
