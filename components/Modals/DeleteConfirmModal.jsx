@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "./Modal";
 
-const DeleteConfirmModal = () => {
+const DeleteConfirmModal = ({setModalActive, deleteHandler}) => {
   return (
     <Modal>
       <div
@@ -13,7 +13,10 @@ const DeleteConfirmModal = () => {
           onClick={(e) => e.stopPropagation()}
           className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-white"
         >
-					<h2>Delete post?</h2>
+
+					<h2>Czy na pewno chcesz usunąć tego posta?</h2>
+					<button onClick={() => deleteHandler()}>OK</button>
+					<button onClick={() => setModalActive(false)}>Anuluj</button>
         </div>
       </div>
       , document.body

@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import Modal from "./Modal";
 
-const EditModal = ({modalInputVal, setModalActive,  editHandler}) => {
-	const [modalInputVal2, setModalInputVal] = useState(modalInputVal)
+const EditModal = ({initialValue, setModalActive,  editHandler}) => {
+	const [modalInputVal, setModalInputVal] = useState(initialValue)
   return (
     <Modal>
       <div
@@ -16,11 +16,11 @@ const EditModal = ({modalInputVal, setModalActive,  editHandler}) => {
         >
           <h1>Modal</h1>
           <input
-            value={modalInputVal2}
+            value={modalInputVal}
             onChange={(e) => setModalInputVal(e.target.value)}
             type="text"
           ></input>
-          <button onClick={() => editHandler(modalInputVal2)}>OK</button>
+          <button onClick={() => editHandler(modalInputVal)}>OK</button>
           <button onClick={() => setModalActive(false)}>
             Anuluj
           </button>

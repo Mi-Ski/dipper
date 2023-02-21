@@ -15,6 +15,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 
 import Card from "../../Card";
 import EditModal from "../../Modals/EditModal";
+import DeleteConfirmModal from "../../Modals/DeleteConfirmModal";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
 
@@ -41,11 +42,12 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
   // userid, name, nickname, picture
   // comments[{user<object>, body<array>}}]
   const userContext = useUser();
-  const { posts, setPosts } = useContext(PostsContext);
   const router = useRouter();
+  const { posts, setPosts } = useContext(PostsContext);
 
-  const [modalActive, setModalActive] = useState(false);
-  const [modalInputVal, setModalInputVal] = useState(body);
+  const [editModalActive, setEditModalActive] = useState(false);
+  const [confirmModalActive, setConfirmModalActive] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   const [likesState, setLikesState] = useState(likes);
 
@@ -124,14 +126,17 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-					body,
-					postId: _id,
-				}),
+          body,
+          postId: _id,
+        }),
       });
-			console.log(JSON.stringify({
-				body,
-				postId: _id,
-			}), "JSON STRINGIFY")
+      console.log(
+        JSON.stringify({
+          body,
+          postId: _id,
+        }),
+        "JSON STRINGIFY"
+      );
 
       const responseJson = await response.json();
       console.log(responseJson, "addComment responseJson");
@@ -145,6 +150,20 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
       // ]);
       // setInputValue("");
     }
+  };
+
+  const deleteHandler = async () => {
+    const response = await fetch(`/api/tweets/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id,
+      }),
+    });
+    const responseJson = await response.json();
+    setDeleted(true);
   };
 
   const editHandler = async (updateObject) => {
@@ -163,7 +182,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
 
     console.log(responseJson);
 
-    setModalActive(false);
+    setEditModalActive(false);
 
     setPosts(
       posts.map((post) => {
@@ -181,113 +200,128 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
 
   return (
     <>
-      <Card
-        classes={[
-          "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
-        ]}
-      >
-        <PostBody body={body} user={user} postedAt={postedAt} />
-        <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
-          <div className="flex items-end lg:items-center">
-            <div className="flex flex-col lg:flex-row-reverse sm:items-center">
-              <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
-                {`${likesState.length} ${osobaVariation(
-                  likesState.length
-                )}`}{" "}
-                to.
-              </p>
-              <button
-                disabled={loading}
-                onClick={likeHandler}
-                className={`${
-                  currentUserLiked
-                    ? "bg-gradient-to-r from-neon-accent2 to-neon-accent border-text-chill"
-                    : ""
-                } flex items-center justify-start  text-button-like font-semibold hover:text-white py-2 px-4 border-2   border-border-dark hover:border-button-like rounded hover:bg-gradient-to-r from-neon-accent2 to-neon-accent`}
-              >
-                <div className="w-5 ">
-                  <IconContext.Provider
-                    value={{ color: "white", size: "100%" }}
-                  >
-                    {currentUserLiked ? (
-                      <AiTwotoneLike />
-                    ) : (
-                      <AiOutlineLike />
-                    )}
-                  </IconContext.Provider>
-                </div>
-                <p className="font-semibold text-xs min-w-[6ch] tracking-wide mt-[2px]">
-                  {currentUserLiked ? "Liked" : "Like"}
-                </p>
-              </button>
-            </div>
-            {loading && (
-              <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />
-            )}
-          </div>
-          <div className=" flex items-center">
-            {currentUser && (
-              <button className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2">
-                <div className="w-5">
-                  <IconContext.Provider
-                    value={{ color: "white", size: "100%" }}
-                  >
-                    <AiOutlineDelete />
-                  </IconContext.Provider>
-                </div>
-              </button>
-            )}
-            {currentUser && (
-              <button
-                onClick={() => setModalActive(true)}
-                className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
-              >
-                <div className="w-5">
-                  <IconContext.Provider
-                    value={{ color: "white", size: "100%" }}
-                  >
-                    <MdModeEdit />
-                  </IconContext.Provider>
-                </div>
-              </button>
-            )}
-            <button
-              onClick={shareHandler}
-              className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
-            >
-              <div className="w-5">
-                <IconContext.Provider
-                  value={{ color: "white", size: "100%" }}
-                >
-                  <IoShareSocialSharp />
-                </IconContext.Provider>
-              </div>
-            </button>
-          </div>
-        </div>
-        <AddComment
-          user={user}
-          addCommentHandler={addCommentHandler}
-        ></AddComment>
-        <div>
-          {comments &&
-            comments.map((comment) => (
-              <Comment
-                key={Math.random()}
-                comment={comment.body}
-                user={comment.user}
-                _id={comment.id}
-              />
-            ))}
-        </div>
-      </Card>
+      {!deleted && (
+        <>
+          <Card
+            classes={[
+              "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
+            ]}
+          >
+            <PostBody body={body} user={user} postedAt={postedAt} />
 
-      {modalActive && (
-        <EditModal
-          modalInputVal={modalInputVal}
-          setModalActive={setModalActive}
-          editHandler={editHandler}
-        />
+            <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
+              <div className="flex items-end lg:items-center">
+                <div className="flex flex-col lg:flex-row-reverse sm:items-center">
+                  <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
+                    {`${likesState.length} ${osobaVariation(
+                      likesState.length
+                    )}`}{" "}
+                    to.
+                  </p>
+                  <button
+                    disabled={loading}
+                    onClick={likeHandler}
+                    className={`${
+                      currentUserLiked
+                        ? "bg-gradient-to-r from-neon-accent2 to-neon-accent border-text-chill"
+                        : ""
+                    } flex items-center justify-start  text-button-like font-semibold hover:text-white py-2 px-4 border-2   border-border-dark hover:border-button-like rounded hover:bg-gradient-to-r from-neon-accent2 to-neon-accent`}
+                  >
+                    <div className="w-5 ">
+                      <IconContext.Provider
+                        value={{ color: "white", size: "100%" }}
+                      >
+                        {currentUserLiked ? (
+                          <AiTwotoneLike />
+                        ) : (
+                          <AiOutlineLike />
+                        )}
+                      </IconContext.Provider>
+                    </div>
+                    <p className="font-semibold text-xs min-w-[6ch] tracking-wide mt-[2px]">
+                      {currentUserLiked ? "Liked" : "Like"}
+                    </p>
+                  </button>
+                </div>
+                {loading && (
+                  <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />
+                )}
+              </div>
+              <div className=" flex items-center">
+                {currentUser && (
+                  <button
+                    onClick={() => setConfirmModalActive(true)}
+                    className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2"
+                  >
+                    <div className="w-5">
+                      <IconContext.Provider
+                        value={{ color: "white", size: "100%" }}
+                      >
+                        <AiOutlineDelete />
+                      </IconContext.Provider>
+                    </div>
+                  </button>
+                )}
+                {currentUser && (
+                  <button
+                    onClick={() => setEditModalActive(true)}
+                    className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
+                  >
+                    <div className="w-5">
+                      <IconContext.Provider
+                        value={{ color: "white", size: "100%" }}
+                      >
+                        <MdModeEdit />
+                      </IconContext.Provider>
+                    </div>
+                  </button>
+                )}
+                <button
+                  onClick={shareHandler}
+                  className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
+                >
+                  <div className="w-5">
+                    <IconContext.Provider
+                      value={{ color: "white", size: "100%" }}
+                    >
+                      <IoShareSocialSharp />
+                    </IconContext.Provider>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <AddComment
+              user={user}
+              addCommentHandler={addCommentHandler}
+            ></AddComment>
+            <div>
+              {comments &&
+                comments.map((comment) => (
+                  <Comment
+                    key={Math.random()}
+                    comment={comment.body}
+                    user={comment.user}
+                    _id={comment.id}
+                  />
+                ))}
+            </div>
+          </Card>
+
+          {editModalActive && (
+            <EditModal
+              initialValue={body}
+              setModalActive={setEditModalActive}
+              editHandler={editHandler}
+            />
+          )}
+          {confirmModalActive && (
+            <DeleteConfirmModal
+              setModalActive={setConfirmModalActive}
+							deleteHandler={deleteHandler}
+            />
+          )}
+        </>
       )}
     </>
   );
