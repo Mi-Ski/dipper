@@ -4,7 +4,7 @@ import Comment from "./Comment";
 
 const CommentsSection = ({comments, user, addCommentHandler}) => {
   return (
-    <div>
+    <div className="px-10 pb-4">
       <div>
         {comments &&
           comments.map((comment) => (

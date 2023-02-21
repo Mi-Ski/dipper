@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { MdHomeFilled } from "react-icons/md";
 import { IconContext } from "react-icons";
 import Image from "next/image";
@@ -6,12 +6,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { useUser } from "../../context/UserContext";
+import UserProfileMenu from "./UserProfileMenu";
 
 const Header = () => {
   const router = useRouter();
   const user = useUser();
   const loggedIn = Boolean(user.id);
-	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   const logIn = async () => {
     router.push("/api/auth/login");
@@ -32,38 +33,46 @@ const Header = () => {
             Home
           </h1>
         </div>
+
+
         <div className="relative mr-16">
           {!loggedIn && (
             <button
               onClick={() => logIn()}
               className="bg-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
-              Zaloguj się 
+              Zaloguj się
             </button>
           )}
+
+					{/* pozycja absolute i profilemenuopen jest w srodku pierwszego diva, po otwarciu wychodzi poza dolna krawedz headera */}
           {loggedIn && (
-						<>
-            <div onClick={() => setProfileMenuOpen(old => !old)} className="flex hover:bg-black py-2 px-4 rounded-xl cursor-pointer">
-              <div className="rounded-full overflow-hidden	w-12 h-12">
-                <Image
-                  placeholder="blur"
-                  blurDataURL="https://via.placeholder.com/150"
-                  src={user.picture}
-                  alt="User Avatar"
-                  title={user.name}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
+            <>
+              <div
+                onClick={() => setProfileMenuOpen((old) => !old)}
+                className="flex hover:bg-border-dark py-2 px-4 rounded-xl cursor-pointer"
+              >
+                <div className="rounded-full overflow-hidden	w-12 h-12">
+                  <Image
+                    placeholder="blur"
+                    blurDataURL="https://via.placeholder.com/150"
+                    src={user.picture}
+                    alt="User Avatar"
+                    title={user.name}
+                    width={50}
+                    height={50}
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="ml-3">
+                  <p className="font-medium">{user.name}</p>
+                  <p className="font-light text-sm">
+                    {user.nickname}
+                  </p>
+                </div>
               </div>
-              <div className="ml-3">
-                <p className="font-medium">{user.name}</p>
-                <p className="font-light text-sm">{user.nickname}</p>
-              </div>
-            </div>
-						{profileMenuOpen && <h1 className="absolute top-full bg-black">Menu użytkownika</h1>}
-						</>
-						
+              {profileMenuOpen && <UserProfileMenu user={user}/>}
+            </>
           )}
         </div>
       </div>
