@@ -3,19 +3,20 @@ import PostsContext from "../../../context/PostContext";
 
 import AddPost from "./AddPost";
 import Post from "./Post";
-import Loading from "../../Loading";
+import SkeletonLoad from "../../SkeletonLoad";
 
 const Timeline = ({ postsLoading }) => {
   const { posts } = React.useContext(PostsContext);
   // _id, user[], body, postedAt, likes[]
   // userid, name, nickname, picture
+	// postsLoading = true;
 
   return (
     <div className="w-screen lg:w-3/4 overflow-y-auto">
       <div className="w-full md:w-2/3 lg:w-4/5 mx-auto ">
         <AddPost />
         {postsLoading ? (
-          <Loading size="50" classes="py-40" />
+					<SkeletonLoad />
         ) : (
           <div className="w-[98%] lg:w-full mx-auto">
             {posts?.length > 0 && posts.map((post) => (

@@ -16,8 +16,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import Card from "../../Card";
 import EditModal from "../../Modals/EditModal";
 import DeleteConfirmModal from "../../Modals/DeleteConfirmModal";
-import Comment from "./Comment";
-import AddComment from "./AddComment";
+import CommentsSection from "./Comments/CommentsSection";
 
 import Loading from "../../Loading";
 import PostBody from "./PostBody";
@@ -290,22 +289,11 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
                 </button>
               </div>
             </div>
-
-            <AddComment
+            <CommentsSection
+              comments={comments}
               user={user}
               addCommentHandler={addCommentHandler}
-            ></AddComment>
-            <div>
-              {comments &&
-                comments.map((comment) => (
-                  <Comment
-                    key={Math.random()}
-                    comment={comment.body}
-                    user={comment.user}
-                    _id={comment.id}
-                  />
-                ))}
-            </div>
+            />
           </Card>
 
           {editModalActive && (
@@ -318,7 +306,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
           {confirmModalActive && (
             <DeleteConfirmModal
               setModalActive={setConfirmModalActive}
-							deleteHandler={deleteHandler}
+              deleteHandler={deleteHandler}
             />
           )}
         </>
