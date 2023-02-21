@@ -2,7 +2,7 @@ import React from "react";
 
 const SkeletonLoad = () => {
   return (
-    <div className="border md:border-2 border-border-dark shadow rounded  py-8  w-full mx-auto bg-bgcol-ui-dark mb-8">
+    <div className="border md:border-2 border-border-dark shadow rounded-2xl md:rounded-sm  py-8  w-[98%] lg:w-full  mx-auto bg-bgcol-ui-dark mb-8">
       <div className="animate-pulse flex space-x-4 px-8 pb-8 mb-8 border md:border-b-2 border border-border-dark border-t-0 border-x-0">
         <div
           className="rounded-full bg-border-dark
