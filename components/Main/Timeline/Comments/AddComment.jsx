@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Loading from "../../../Loading";
 
 const AddComment = ({ user, addCommentHandler, loading }) => {
   const [inputValue, setInputValue] = useState("");
-  // loading = true;
+  loading = true;
 
   const inputHandler = (e) => {
     setInputValue(e.target.value);
     e.target.style.height = "1px"; // Reset the height to minimum value
     e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the calculated scroll height
   };
+	// useEffect(() => {
+	// 	inputHandler("");
+	// })
 
   return (
     <div className="mt-6 flex flex-col gap-x-4">
       <div className="flex">
         <div>[foto]</div>
         <textarea
-          className=" resize-none bg-contrast-posts h-[1.5em]"
-          id="comment-area"
+          className="  bg-contrast-posts "
           placeholder="Twój komentarz"
           onInput={inputHandler}
           value={inputValue}
