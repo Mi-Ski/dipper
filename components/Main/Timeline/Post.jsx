@@ -292,6 +292,7 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
             <CommentsSection
               comments={comments}
               user={userContext}
+							currentUser={currentUser}
               addCommentHandler={addCommentHandler}
 							loading={loading}
             />
