@@ -44,7 +44,7 @@ const AddComment = ({
         <textarea
           className="  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem]"
           placeholder={
-            currentUser
+            user.name
               ? "Twój komentarz"
               : "Zaloguj się, aby komentować"
           }
