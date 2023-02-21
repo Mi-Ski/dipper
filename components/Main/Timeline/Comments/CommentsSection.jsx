@@ -2,10 +2,10 @@ import React from "react";
 import AddComment from "./AddComment";
 import Comment from "./Comment";
 
-const CommentsSection = ({comments, user, addCommentHandler}) => {
+const CommentsSection = ({comments, user, addCommentHandler, loading}) => {
   return (
-    <div className="px-10 pb-4">
-      <div>
+    <div className=" pb-4">
+      <div className="px-10">
         {comments &&
           comments.map((comment) => (
             <Comment
@@ -19,6 +19,7 @@ const CommentsSection = ({comments, user, addCommentHandler}) => {
       <AddComment
         user={user}
         addCommentHandler={addCommentHandler}
+				loading={loading}
       ></AddComment>
     </div>
   );

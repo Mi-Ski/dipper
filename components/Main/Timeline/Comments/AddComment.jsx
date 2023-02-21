@@ -18,8 +18,8 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
   // })
 
   return (
-    <div className="mt-6 flex flex-col gap-x-4">
-      <div className="flex gap-x-3">
+    <div className="mt-6 px-4 flex flex-col gap-x-4">
+      <div className="flex gap-x-3 items-center">
         <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
           <Image
             placeholder="blur"
@@ -33,7 +33,7 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
           />
         </div>
         <textarea
-          className="  bg-contrast-posts p-3 rounded-md flex-1 "
+          className="  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem]"
           placeholder="Twój komentarz"
           onInput={inputHandler}
           value={inputValue}

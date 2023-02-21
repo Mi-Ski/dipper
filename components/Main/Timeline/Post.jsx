@@ -291,8 +291,9 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
             </div>
             <CommentsSection
               comments={comments}
-              user={user}
+              user={userContext}
               addCommentHandler={addCommentHandler}
+							loading={loading}
             />
           </Card>
 
