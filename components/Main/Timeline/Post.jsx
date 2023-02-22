@@ -37,7 +37,15 @@ const osobaVariation = (liczba) => {
   // 0 osób
   return "osób lubi";
 };
-const Post = ({ _id, body, postedAt, likes, comments, user }) => {
+const Post = ({
+  postObj,
+  _id,
+  body,
+  postedAt,
+  likes,
+  comments,
+  user,
+}) => {
   // userid, name, nickname, picture
   // comments[{user<object>, body<array>}}]
   const userContext = useUser();
@@ -47,10 +55,10 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
   const [editModalActive, setEditModalActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
   const [deleted, setDeleted] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [addCommentLoading, setAddCommentLoading] = useState(false);
   const [likesState, setLikesState] = useState(likes);
 
-  const [loading, setLoading] = useState(false);
   const currentUserLiked = likesState.includes(userContext.id);
   const currentUser = userContext.id === user.id;
   const userLoggedIn = Boolean(userContext.id);
@@ -100,9 +108,12 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
   };
 
   const addCommentHandler = async (commentBody) => {
+    console.log(posts, "posts");
+    console.log(comments, "comments");
     if (!userLoggedIn) {
       return router.push("/api/auth/login");
     }
+    setAddCommentLoading(true);
 
     const body = {
       body: commentBody,
@@ -129,25 +140,23 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
           postId: _id,
         }),
       });
-      console.log(
-        JSON.stringify({
-          body,
-          postId: _id,
-        }),
-        "JSON STRINGIFY"
-      );
 
       const responseJson = await response.json();
       console.log(responseJson, "addComment responseJson");
 
-      // setPosts((oldState) => [
-      //   {
-      //     _id: responseJson.insertedId,
-      //     ...newTweet,
-      //   },
-      //   ...oldState,
-      // ]);
-      // setInputValue("");
+      setPosts(
+        posts.map((post) => {
+          if (post._id === _id) {
+            return {
+              ...post,
+              comments: [...post.comments, body]
+            };
+          }
+
+          return post;
+        })
+      );
+      setAddCommentLoading(false);
     }
   };
 
@@ -182,6 +191,8 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
     console.log(responseJson);
 
     setEditModalActive(false);
+
+    console.log();
 
     setPosts(
       posts.map((post) => {
@@ -292,9 +303,9 @@ const Post = ({ _id, body, postedAt, likes, comments, user }) => {
             <CommentsSection
               comments={comments}
               user={userContext}
-							currentUser={currentUser}
+              currentUser={currentUser}
               addCommentHandler={addCommentHandler}
-							loading={loading}
+              loading={addCommentLoading}
             />
           </Card>
 

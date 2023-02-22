@@ -28,6 +28,7 @@ const Timeline = ({ postsLoading }) => {
                 body={post.body}
                 _id={post._id}
 								comments={post.comments}
+								postObj={post}
               />
             ))}
 						{Boolean(!posts) && <p className="text-center text-white text-xl py-20">Błąd w ładowaniu postów 😿</p>}
