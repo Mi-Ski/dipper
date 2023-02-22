@@ -5,7 +5,7 @@ const Comment = ({ comment, user, _id }) => {
   return (
     <div className="flex gap-x-2 py-3 px-4 hover:bg-white/[.02] rounded-xl">
       <div
-        className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${
+        className={`rounded-full relative  overflow-hidden w-14 min-w-[2.3rem] max-w-[2.3rem] h-9  ${
           user.picture ? "" : "border-2 border-border-dark"
         }`}
       >
