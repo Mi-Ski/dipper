@@ -13,6 +13,11 @@ const AddComment = ({
   const [inputValue, setInputValue] = useState("");
   // loading = true;
 
+	const submitCommentHanlder = () => {
+		setInputValue("");
+		addCommentHandler(inputValue);
+	};
+
   const inputHandler = (e) => {
     setInputValue(e.target.value);
     e.target.style.height = "1px"; // Reset the height to minimum value
@@ -53,24 +58,24 @@ const AddComment = ({
           // 1.5rem = line height p-1 = 0.25rem
           style={{ height: "3rem" }}
         ></textarea>
-        {loading ? (
-          <Loading classes=" w-5 h-5" />
-        ) : (
-          <button
-            className={`${
-              inputValue.length > 1
-                ? "bg-brand-accent"
-                : "bg-border-dark"
-            }  px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100  inline-block`}
-            onClick={() => addCommentHandler(inputValue)}
-          >
+        <button
+          className={`${
+            inputValue.length > 0
+              ? "bg-brand-accent"
+              : "bg-border-dark"
+          }  px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100  inline-block`}
+          onClick={() => submitCommentHanlder()}
+        >
+          {loading ? (
+            <Loading size={20} />
+          ) : (
             <IconContext.Provider
               value={{ color: "white", size: `20px` }}
             >
               <IoIosSend />
             </IconContext.Provider>
-          </button>
-        )}
+          )}
+        </button>
       </div>
     </div>
   );
