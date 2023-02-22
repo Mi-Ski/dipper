@@ -26,7 +26,7 @@ const PostBody = ({user, body, postedAt}) => {
             {new Date(+postedAt).toLocaleString()}
           </p>
         </div>
-        <div className="mt-7 mb-5 text-lg ">{body}</div>
+        <div className="mt-7 mb-5 text-lg leading-8">{body}</div>
       </div>
     </div>
   );
