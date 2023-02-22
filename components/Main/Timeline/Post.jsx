@@ -69,7 +69,7 @@ const Post = ({
         .share({
           title: `${user.name} na Dipper:`,
           text: `${body}`,
-          url: `${user.name} na Dipper.pl: ${body}. Zobacz więcej na https://dipper.pl`,
+          url: `https://dipper.pl#${_id}`,
         })
         .catch((error) => console.log("Error sharing", error));
     } else {
@@ -217,7 +217,7 @@ const Post = ({
   return (
     <>
       {!deleted && (
-        <>
+        <div id={_id}>
           <Card
             classes={[
               "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
@@ -328,7 +328,7 @@ const Post = ({
               deleteHandler={deleteHandler}
             />
           )}
-        </>
+        </div>
       )}
     </>
   );
