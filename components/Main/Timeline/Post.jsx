@@ -146,12 +146,18 @@ const Post = ({
 
       setPosts(
         posts.map((post) => {
-          if (post._id === _id) {
+          if (post._id === _id && post.comments) {
             return {
               ...post,
               comments: [...post.comments, body]
             };
           }
+					else if (post._id === _id && !post.comments) {
+						return {
+							...post,
+							comments: [body]
+						}
+					}
 
           return post;
         })

@@ -14,6 +14,7 @@ const AddComment = ({
   // loading = true;
 
 	const submitCommentHanlder = () => {
+		if (inputValue.length === 0) return;
 		setInputValue("");
 		addCommentHandler(inputValue);
 	};
@@ -25,7 +26,7 @@ const AddComment = ({
   };
 
   return (
-    <div className="mt-6 px-4 flex flex-col gap-x-4">
+    <div className="mt-4 px-4 flex flex-col gap-x-4">
       <div className="flex gap-x-3 items-center">
         <div
           className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${
