@@ -21,7 +21,7 @@ const CommentsSection = ({
 
   return (
     <div className=" py-4 border  border-transparent  border-x-0 border-b-0">
-      <div className="px-10">
+      <div className="pr-10 pl-14">
         {allCommentsShown && (
           <div>
             {comments.map((comment, idx) => {
@@ -42,7 +42,7 @@ const CommentsSection = ({
         {comments && comments.length > 2 && (
           <div className="flex justify-center">
             <button
-              className=" flex text-primary font-bold text-sm bg-border-dark/[.5] rounded-md px-2 py-1 mb-2"
+              className=" flex text-primary font-medium text-sm bg-border-dark/[.5] rounded-md px-2 py-1 mb-2"
               onClick={() => setAllCommentsShown(!allCommentsShown)}
             >
               {allCommentsShown && `Ukryj komentarze`}

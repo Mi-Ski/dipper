@@ -8,7 +8,6 @@ const MainRightContent = () => {
   const { posts } = useContext(PostsContext);
   const router = useRouter();
 
-
   const redirectHandler = () => {
     router.push("/techstack");
   };
@@ -57,9 +56,9 @@ const MainRightContent = () => {
         </div>
         <div className="w-full bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded py-3">
           {featuredUsers.length > 0 && (
-              <h2 className="uppercase text-xs text-center w-[75%] mx-auto  mt-2 mb-3 ">
-                Top użytkownicy miesiąca
-              </h2>
+            <h2 className="uppercase text-xs text-center w-[75%] mx-auto  mt-2 mb-3 ">
+              Top użytkownicy miesiąca
+            </h2>
           )}
           {featuredUsers.length === 0 && (
             <Loading size="20" classes="py-10" />
@@ -99,11 +98,15 @@ const MainRightContent = () => {
                 </div>
               </div>
             ))}
-          <h5 className="text-xs text-center w-[85%] mx-auto  mb-1 mt-3 text-text-chill">
-            liczone na podstawie ilości postów
-          </h5>
+          {featuredUsers.length > 0 && (
+            <h5 className="text-xs text-center w-[85%] mx-auto  mb-1 mt-3 text-text-chill">
+              liczone na podstawie ilości postów
+            </h5>
+          )}
         </div>
-        <div className="text-text-chill">[github, wersja, &copy;copyright]</div>
+        <div className="text-text-chill">
+          [github, wersja, &copy;copyright]
+        </div>
       </div>
     </>
   );
