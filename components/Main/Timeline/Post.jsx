@@ -226,13 +226,7 @@ const Post = ({
 
             <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark">
               <div className="flex items-end lg:items-center">
-                <div className="flex flex-col lg:flex-row-reverse sm:items-center ">
-                  <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
-                    {`${likesState.length} ${osobaVariation(
-                      likesState.length
-                    )}`}{" "}
-                    to
-                  </p>
+                <div className="flex   items-center ">
                   <button
                     disabled={loading}
                     onClick={likeHandler}
@@ -242,7 +236,7 @@ const Post = ({
                     } ${
                       !currentUserLiked &&
                       "bg-white/[.1] hover:bg-button-like/[.1] hover:text-button-like"
-                    } flex items-center justify-start   font-semibold hover:text-white p-2    bg-button-like/[.1]  rounded-full `}
+                    } flex items-center justify-start   font-semibold hover:text-white p-2    bg-button-like/[.1]  rounded-full max-w-max`}
                   >
                     <div className="">
                       <IconContext.Provider
@@ -259,6 +253,12 @@ const Post = ({
                       </IconContext.Provider>
                     </div>
                   </button>
+                  <p className="ml-2 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
+                    {`${likesState.length} ${osobaVariation(
+                      likesState.length
+                    )}`}{" "}
+                    to
+                  </p>
                 </div>
                 {loading && (
                   <Loading size="20" classes="ml-4 mb-2 lg:mb-0" />
