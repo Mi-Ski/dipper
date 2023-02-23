@@ -24,8 +24,10 @@ const Comment = ({ comment, user, _id }) => {
         />
       </div>
       <div className="flex flex-col gap-y-2">
-        <div className="text-text-chill font-medium">{user.nickname}</div>
-        <p>{comment}</p>
+        <div className="text-text-chill text-sm font-semibold">
+          {user.nickname}
+        </div>
+        <p className="leading-7">{comment}</p>
       </div>
     </div>
   );

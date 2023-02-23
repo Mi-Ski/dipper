@@ -42,7 +42,7 @@ const CommentsSection = ({
         {comments && comments.length > 2 && (
           <div className="flex justify-center">
             <button
-              className="text-primary font-bold text-sm"
+              className=" flex text-primary font-bold text-sm bg-brand-accent rounded-md px-2 py-1"
               onClick={() => setAllCommentsShown(!allCommentsShown)}
             >
               {allCommentsShown && `Ukryj komentarze`}
