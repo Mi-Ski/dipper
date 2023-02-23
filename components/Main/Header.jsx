@@ -18,6 +18,9 @@ const Header = () => {
     router.push("/api/auth/login");
   };
 
+	// TODO: navigationContext to change Home > TechStack or Home > Timeline
+	// Home = route to the top of page
+
   return (
     <div className="hidden fixed md:block w-4/5 top-0 z-[2]">
       <div className="flex items-center px-6 py-2 2xl:py-6 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">

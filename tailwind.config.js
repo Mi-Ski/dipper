@@ -64,7 +64,7 @@ module.exports = {
 			"shadow": "#000000",
 			"neon-accent": "rgba(103, 60, 255, .3)",
 			"neon-accent2": "rgba(62, 252, 247, .1)",
-			"button-like": "#fff",
+			"button-like": "#e24d5d",
 			"brand-accent": "#5d2ff6",
 		},
 		fontFamily: {

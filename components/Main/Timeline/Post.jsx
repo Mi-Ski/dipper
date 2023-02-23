@@ -6,8 +6,8 @@ import PostsContext from "../../../context/PostContext";
 
 import { IconContext } from "react-icons";
 import {
-  AiOutlineLike,
-  AiTwotoneLike,
+  AiOutlineHeart,
+  AiFillHeart,
   AiOutlineDelete,
 } from "react-icons/ai";
 import { MdModeEdit } from "react-icons/md";
@@ -149,15 +149,14 @@ const Post = ({
           if (post._id === _id && post.comments) {
             return {
               ...post,
-              comments: [...post.comments, body]
+              comments: [...post.comments, body],
+            };
+          } else if (post._id === _id && !post.comments) {
+            return {
+              ...post,
+              comments: [body],
             };
           }
-					else if (post._id === _id && !post.comments) {
-						return {
-							...post,
-							comments: [body]
-						}
-					}
 
           return post;
         })
@@ -225,38 +224,40 @@ const Post = ({
           >
             <PostBody body={body} user={user} postedAt={postedAt} />
 
-            <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5">
+            <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark">
               <div className="flex items-end lg:items-center">
-                <div className="flex flex-col lg:flex-row-reverse sm:items-center">
+                <div className="flex flex-col lg:flex-row-reverse sm:items-center ">
                   <p className="mb-2 lg:mb-0 lg:ml-4 text-text-chill text-sm lg:text-base font-medium ">
                     {`${likesState.length} ${osobaVariation(
                       likesState.length
                     )}`}{" "}
-                    to.
+                    to
                   </p>
                   <button
                     disabled={loading}
                     onClick={likeHandler}
                     className={`${
-                      currentUserLiked
-                        ? "bg-gradient-to-r from-neon-accent2 to-neon-accent border-text-chill"
-                        : ""
-                    } flex items-center justify-start  text-button-like font-semibold hover:text-white py-2 px-4 border-2   border-border-dark hover:border-button-like rounded hover:bg-gradient-to-r from-neon-accent2 to-neon-accent`}
+                      currentUserLiked &&
+                      " bg-button-like/[.1] text-button-like"
+                    } ${
+                      !currentUserLiked &&
+                      "bg-white/[.1] hover:bg-button-like/[.1] hover:text-button-like"
+                    } flex items-center justify-start   font-semibold hover:text-white p-2    bg-button-like/[.1]  rounded-full `}
                   >
-                    <div className="w-5 ">
+                    <div className="">
                       <IconContext.Provider
-                        value={{ color: "white", size: "100%" }}
+                        value={{
+                          color: "currentColor",
+                          size: "24px",
+                        }}
                       >
                         {currentUserLiked ? (
-                          <AiTwotoneLike />
+                          <AiFillHeart />
                         ) : (
-                          <AiOutlineLike />
+                          <AiOutlineHeart />
                         )}
                       </IconContext.Provider>
                     </div>
-                    <p className="font-semibold text-xs min-w-[6ch] tracking-wide mt-[2px]">
-                      {currentUserLiked ? "Liked" : "Like"}
-                    </p>
                   </button>
                 </div>
                 {loading && (
@@ -267,7 +268,7 @@ const Post = ({
                 {currentUser && (
                   <button
                     onClick={() => setConfirmModalActive(true)}
-                    className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2"
+                    className="bg-brand-accent rounded-full p-2"
                   >
                     <div className="w-5">
                       <IconContext.Provider
@@ -281,7 +282,7 @@ const Post = ({
                 {currentUser && (
                   <button
                     onClick={() => setEditModalActive(true)}
-                    className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
+                    className="bg-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
                   >
                     <div className="w-5">
                       <IconContext.Provider
@@ -294,7 +295,7 @@ const Post = ({
                 )}
                 <button
                   onClick={shareHandler}
-                  className="border-[3px] border-border-dark hover:border-text-chill rounded-full p-2 ml-1.5"
+                  className="bg-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
                 >
                   <div className="w-5">
                     <IconContext.Provider

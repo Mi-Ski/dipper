@@ -57,11 +57,9 @@ const MainRightContent = () => {
         </div>
         <div className="w-full bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded py-3">
           {featuredUsers.length > 0 && (
-            <>
-              <h2 className="uppercase text-xs text-center w-[85%] mx-auto  mb-3">
+              <h2 className="uppercase text-xs text-center w-[75%] mx-auto  mt-2 mb-3 ">
                 Top użytkownicy miesiąca
               </h2>
-            </>
           )}
           {featuredUsers.length === 0 && (
             <Loading size="20" classes="py-10" />
@@ -105,7 +103,7 @@ const MainRightContent = () => {
             liczone na podstawie ilości postów
           </h5>
         </div>
-        <div>sadfadf</div>
+        <div className="text-text-chill">[github, wersja, &copy;copyright]</div>
       </div>
     </>
   );
