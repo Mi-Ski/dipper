@@ -32,7 +32,7 @@ const MainRightContent = () => {
   const featuredUsers = getFeaturedUsers();
 
   return (
-    <div className="hidden lg:block w-1/5 mr-10">
+    <div id="databox" className="hidden lg:block w-1/5 mr-10 sticky top-0 max-h-[100vh] overflow-y-auto">
       <div
         onClick={redirectHandler}
         className="cursor-pointer bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded"
@@ -49,7 +49,7 @@ const MainRightContent = () => {
         </div>
         <h2>W trakcie: podstrona 2</h2>
       </div>
-      <div className="py-20 w-full bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded">
+      <div className="w-full bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded">
           {featuredUsers.length > 0 && <h2>Top użytkownicy miesiąca</h2>}
           {featuredUsers.length === 0 &&
             <h2>Brak aktywnych użytkowników</h2>}

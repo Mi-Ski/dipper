@@ -8,7 +8,7 @@ const Main = ({isLoading}) => {
 		<div className="w-full md:w-4/5 z-10	">
 			<MobileOverlay />
 			<Header />
-			<div className="flex mt-0 md:mt-32">
+			<div className="flex mt-0 md:mt-32 relative">
 				<Timeline postsLoading={isLoading}/>
 				<MainRightContent	/>
 			</div>
