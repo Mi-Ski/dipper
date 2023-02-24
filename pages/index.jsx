@@ -11,7 +11,7 @@ export default function Home(props) {
 
   const setUser = useSetUser();
 
-  const { setPosts } = useContext(PostsContext);
+  const { posts, setPosts } = useContext(PostsContext);
 
   useEffect(() => {
     (async () => {
@@ -19,18 +19,23 @@ export default function Home(props) {
       const getUserJson = await getUser.json();
       setUser(getUserJson);
 
-      const tweets = await fetch("/api/tweets/getall");
-      const tweetsjson = await tweets.json();
-      setPosts(tweetsjson.documents);
+			// dont't fetch posts between page changes
+      if (posts.length === 0) {
+        const tweets = await fetch("/api/tweets/getall");
+        const tweetsjson = await tweets.json();
+        setPosts(tweetsjson.documents);
 
-      setLoading(false);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     })();
   }, [setPosts, setUser]);
 
   return (
-		<Layout >
-        <Main isLoading={loading} />
-		</Layout>
+    <Layout>
+      <Main isLoading={loading} />
+    </Layout>
   );
 }
 

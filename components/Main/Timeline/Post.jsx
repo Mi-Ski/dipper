@@ -224,7 +224,7 @@ const Post = ({
           >
             <PostBody body={body} user={user} postedAt={postedAt} />
 
-            <div className="flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark">
+            <div className=" flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark">
               <div className="flex items-end lg:items-center">
                 <div className="flex   items-center ">
                   <button
@@ -268,7 +268,7 @@ const Post = ({
                 {currentUser && (
                   <button
                     onClick={() => setConfirmModalActive(true)}
-                    className="bg-brand-accent rounded-full p-2"
+                    className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent rounded-full p-2"
                   >
                     <div className="w-5">
                       <IconContext.Provider
@@ -282,7 +282,7 @@ const Post = ({
                 {currentUser && (
                   <button
                     onClick={() => setEditModalActive(true)}
-                    className="bg-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
+                    className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
                   >
                     <div className="w-5">
                       <IconContext.Provider
@@ -295,7 +295,7 @@ const Post = ({
                 )}
                 <button
                   onClick={shareHandler}
-                  className="bg-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
+                  className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent rounded-full p-2 rounded-full p-2 ml-1.5"
                 >
                   <div className="w-5">
                     <IconContext.Provider

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import MobileOverlayTop from "./MobileOverlayTop";
 import MobileOverlayBottom from "./MobileOverlayBottom";
 
-const MobileOverlay = () => {
+const MobileOverlay = ({ techStackPageActive }) => {
   const [topBlobShown, setTopBlobShown] = useState(false);
   const [expandMenus, setExpandMenus] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -32,14 +32,19 @@ const MobileOverlay = () => {
   }, [scrollPosition]);
 
   return (
-    <div className="block pointer-events-none md:hidden fixed flex flex-col h-full justify-between w-screen items-end z-[10]">
+    <div className="pointer-events-none md:hidden fixed flex flex-col h-full justify-between w-screen items-end z-[90]">
       {topBlobShown || expandMenus ? (
         <MobileOverlayTop
           clickHandler={clickHanlder}
           expanded={expandMenus}
         />
-      ) : <div></div>}
-      <MobileOverlayBottom expanded={expandMenus}/>
+      ) : (
+        <div></div>
+      )}
+      <MobileOverlayBottom
+        expanded={expandMenus || techStackPageActive}
+        techStackPageActive={techStackPageActive}
+      />
     </div>
   );
 };
