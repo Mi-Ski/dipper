@@ -8,7 +8,7 @@ const MobileOverlayTop = ({ clickHandler, expanded }) => {
   return (
     <div
       onClick={clickHandler}
-      className="pointer-events-auto p-2 m-4 outline outline-brand-accent  bg-contrast-posts  inline w-min rounded-full active:scale-[0.9] transition-all"
+      className="pointer-events-auto p-2 m-4  border-2 border-brand-accent  bg-contrast-posts  inline w-min rounded-full active:scale-[0.9] transition-all"
     >
       <div
         className={`rounded-full relative  overflow-hidden w-14 min-w-[50px] h-14 ${
