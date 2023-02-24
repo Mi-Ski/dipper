@@ -7,7 +7,7 @@ import ThemeContext from "../../context/ThemeContext";
 
 import BottomDrawerIcon from "./BottomDrawerIcon";
 import Search from "../Sidebar/Search";
-import { MdLightMode, MdDarkMode, MdOutlineLogout } from "react-icons/md";
+import { MdLightMode, MdDarkMode, MdOutlineLogout, MdOutlineLogin } from "react-icons/md";
 import { BsStack, BsSearch } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
 
@@ -17,7 +17,7 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
   const user = useUser();
   const router = useRouter();
 
-	console.log(user, "USER")
+	const loggedIn = Boolean(user.id);
 
   return (
     <div
@@ -61,10 +61,10 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
           </BottomDrawerIcon>
 
           <BottomDrawerIcon
-            onClickAction={() => router.push("/api/auth/logout")}
-            description="Wyloguj się"
+            onClickAction={() => router.push(`${loggedIn ? "/api/auth/logout" : "/api/auth/login"}`)}
+            description={loggedIn ? "Wyloguj się" : "Zaloguj się"}
           >
-						<BsSearch />
+						{loggedIn ? <MdOutlineLogout /> : <MdOutlineLogin />}
           </BottomDrawerIcon>
         </div>
       )}
