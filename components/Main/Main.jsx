@@ -4,6 +4,8 @@ import Header from "./Header";
 import MobileOverlay from "../Mobile/MobileOverlay";
 
 const Main = ({isLoading}) => {
+	
+
 	return (
 		<div className="w-full md:w-4/5 z-10	">
 			<MobileOverlay />

@@ -4,30 +4,42 @@ import MobileOverlayBottom from "./MobileOverlayBottom";
 
 const MobileOverlay = () => {
   const [topBlobShown, setTopBlobShown] = useState(false);
-	const [scrollPosition, setScrollPosition] = useState(0);
+  const [expandMenus, setExpandMenus] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			const position = window.pageYOffset;
-			setScrollPosition(position);
-			if (position > 200) {
-				setTopBlobShown(true);
-			} else {
-				setTopBlobShown(false);
-			}
-		};
+  const clickHanlder = () => {
+    setExpandMenus(!expandMenus);
+  };
 
-		window.addEventListener("scroll", handleScroll, { passive: true });
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+      if (position > 200) {
+        setTopBlobShown(true);
+      } else {
+        setTopBlobShown(false);
+      }
+    };
 
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, [scrollPosition]);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollPosition]);
 
   return (
-    <div className="block pointer-events-none md:hidden fixed flex flex-col h-full justify-between z-[10]">
-      {topBlobShown ? <MobileOverlayTop /> : <div></div>}
-      <MobileOverlayBottom />
+    <div className="block pointer-events-none md:hidden fixed flex flex-col h-full justify-between w-screen items-end z-[10]">
+      {topBlobShown || expandMenus ? (
+        <MobileOverlayTop
+          clickHandler={clickHanlder}
+          expanded={expandMenus}
+        />
+      ) : <div></div>}
+      <MobileOverlayBottom expanded={expandMenus}/>
     </div>
   );
 };

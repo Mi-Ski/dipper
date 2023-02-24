@@ -5,14 +5,14 @@ import { useUser } from "../../context/UserContext";
 import { useRouter } from "next/router";
 import ThemeContext from '../../context/ThemeContext';
 
-const MobileOverlayBottom = () => {
+const MobileOverlayBottom = ({expanded}) => {
   const [searchVisible, setSearchVisible] = useState(false);
 	const {toggleDarkContext} = useContext(ThemeContext)
   const user = useUser();
 	const router = useRouter();
 
 	return (
-      <div className="flex flex-col bg-contrast-posts pointer-events-auto w-screen p-7  ">
+      <div className={`relative transition-[top] flex flex-col bg-contrast-posts pointer-events-auto w-screen p-7  ${expanded ? "top-0" : "top-full"}`}>
         {searchVisible ? (
           <div className="flex items-center">
             <Search />
