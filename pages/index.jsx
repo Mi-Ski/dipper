@@ -14,10 +14,11 @@ export default function Home() {
   const setUser = useSetUser();
 
   const { posts, setPosts } = useContext(PostsContext);
-	const { setSocket } = useContext(WebsocketContext);
+  const { setSocket } = useContext(WebsocketContext);
 
-  // fetch user and posts
   useEffect(() => {
+    let socketNotification = null;
+    // fetch user and posts
     const fetchPosts = async () => {
       const getUser = await fetch("/api/user");
       const getUserJson = await getUser.json();
@@ -35,25 +36,32 @@ export default function Home() {
       }
     };
 
-    const socket = webSocket("wss://hammerhead-app-deaax.ondigitalocean.app");
-		setSocket(socket);
+    // connect to websocket
+    const socket = webSocket(
+      "wss://hammerhead-app-deaax.ondigitalocean.app"
+    );
+    setSocket(socket);
 
     socket.subscribe((message) => {
       // handle new post message
       // setPosts((prevPosts) => [message, ...prevPosts]);
-			console.log(message);
+      console.log(message);
+      socketNotification = message;
     });
 
     fetchPosts();
 
-		return () => {
-			socket.unsubscribe();
-		}
+    return () => {
+      socket.unsubscribe();
+    };
   }, [setPosts, setUser]);
 
   return (
     <Layout>
-      <Main isLoading={loading} />
+      <Main
+        socketNotification={socketNotification}
+        isLoading={loading}
+      />
     </Layout>
   );
 }

@@ -5,7 +5,7 @@ import AddPost from "./AddPost";
 import Post from "./Post";
 import SkeletonLoad from "../../SkeletonLoad";
 
-const Timeline = ({ postsLoading }) => {
+const Timeline = ({ postsLoading, notification }) => {
   const { posts } = React.useContext(PostsContext);
   // _id, user[], body, postedAt, likes[]
   // userid, name, nickname, picture
@@ -19,6 +19,7 @@ const Timeline = ({ postsLoading }) => {
 					<SkeletonLoad />
         ) : (
           <div className="w-[98%] lg:w-full mx-auto">
+						{notification && <p className="text-center text-white text-xl py-20">{notification}</p>}
             {posts?.length > 0 && posts.map((post) => (
               <Post
                 key={post._id}
