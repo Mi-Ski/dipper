@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
 import Image from "next/image";
+import WebsocketContext from "../../../context/WebsocketContext";
 
 import { useRouter } from "next/router";
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
   const { setPosts } = useContext(PostsContext);
+  const { socket, setNotifications } = useContext(WebsocketContext);
   const user = useUser();
   const loggedIn = Boolean(user.id);
   const router = useRouter();
@@ -25,6 +27,13 @@ const AddPost = () => {
       return;
     } else {
       console.log(user);
+
+      socket.next({
+        message: "pojawił się nowy post",
+        color: "neon-accent2-opaque",
+        time: 5000,
+        key: Math.random(),
+      });
 
       const newTweet = {
         postedAt: Date.now(),
@@ -85,7 +94,7 @@ const AddPost = () => {
 
   return (
     <div className="w-full flex flex-col px-2 mb-10 pt-10 pb-4 md:px-4 2xl:px-10 bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark relative overflow-hidden">
-			<div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
+      <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-10">
           <div className="flex items-center h-14">
@@ -108,7 +117,7 @@ const AddPost = () => {
                 className="rounded-full object-contain"
               />
             </div>
-						{/* TODO: change input to textarea component from addComment */}
+            {/* TODO: change input to textarea component from addComment */}
             <input
               type="text"
               value={inputValue}
@@ -120,7 +129,9 @@ const AddPost = () => {
               }
               onChange={(e) => setInputValue(e.target.value)}
               className={`${
-                loggedIn ? "cursor-pointer px-10" : "cursor-default pl-6 pr-4 lg:pl-10 lg:pr-10"
+                loggedIn
+                  ? "cursor-pointer px-10"
+                  : "cursor-default pl-6 pr-4 lg:pl-10 lg:pr-10"
               } w-full h-full ml-2  bg-contrast-posts border-2  border-border-dark rounded-full   text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
             ></input>
           </div>

@@ -14,7 +14,7 @@ export default function Home() {
   const setUser = useSetUser();
 
   const { posts, setPosts } = useContext(PostsContext);
-  const { setSocket, setNotificationMsg } = useContext(WebsocketContext);
+  const { setSocket, setNotifications } = useContext(WebsocketContext);
 
   useEffect(() => {
     // fetch user and posts
@@ -41,11 +41,11 @@ export default function Home() {
     );
     setSocket(socket);
 
-    socket.subscribe((message) => {
-      // handle new post message
-      // setPosts((prevPosts) => [message, ...prevPosts]);
-      console.log(message);
-			setNotificationMsg(message);
+    socket.subscribe((notificationObject) => {
+      // handle new post notificationObject 
+      // setPosts((prevPosts) => [notificationObject, ...prevPosts]);
+      console.log(notificationObject);
+			setNotifications((prev) => [notificationObject, ...prev]);
     });
 
     fetchPosts();
