@@ -47,14 +47,17 @@ const Notification = ({ notification }) => {
       break;
     case "LIKE_POST":
       notification.color = "bg-purple-500";
-      return (
-        <NotificationBody
-          notification={notification}
-          notificationMsg="polubił(a) Twój wpis"
-          sameUser={false}
-          notificationClickHandler={notificationClickHandler}
-        />
-      );
+      if (notification.post._id === currentUser.id) {
+        return (
+          <NotificationBody
+            notification={notification}
+            notificationMsg="polubił(a) Twój wpis"
+            sameUser={false}
+            notificationClickHandler={notificationClickHandler}
+          />
+        );
+      }
+      break;
     case "NEW_COMMENT":
       notification.color = "bg-purple-500";
       break;
@@ -67,8 +70,8 @@ export default Notification;
 
 export const NotificationBody = ({
   notification,
-	notificationMsg,
-	selfNofiticationMsg,
+  notificationMsg,
+  selfNofiticationMsg,
   sameUser,
   notificationClickHandler,
 }) => {
