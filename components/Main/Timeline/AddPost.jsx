@@ -40,27 +40,17 @@ const AddPost = () => {
         },
       };
 
-      // socket type : NEW_POST, SELF-NEW_POST
-      let socketType =
-        newTweet.user.id === user.id ? "SELF-NEW_POST" : "NEW_POST";
-
-      if (socketType === "NEW_POST") {
-        socket.next({
-          type: "NEW_POST",
-          actionOwner: {
-            name: user.nickname,
-            picture: user.picture,
-          },
-          color: "neon-accent2-opaque",
-          time: 5000,
-          key: Math.random(),
-        });
-      } else {
-        socket.next({
-          type: "SELF-NEW_POST",
-          key: Math.random(),
-        });
-      }
+      socket.next({
+        type: "NEW_POST",
+        actionOwner: {
+          name: user.nickname,
+          picture: user.picture,
+					id: user.id
+        },
+        color: "neon-accent2-opaque",
+        time: 5000,
+        key: Math.random(),
+      });
 
       const response = await fetch("/api/tweets", {
         method: "POST",
