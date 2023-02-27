@@ -47,9 +47,17 @@ const Notification = ({ notification }) => {
           </p>
         </div>
       );
-    case "POST_REMOVED":
-      notification.color = "bg-blue-500";
-      break;
+    case "SELF-NEW_POST":
+      return (
+        <div>
+          <p
+            className={`text-center text-xl px-5 py-2 mb-4 rounded-xl bg-green-500`}
+            onClick={() => notificationClickHandler(notification.key)}
+          >
+            Wpis wysłany!
+          </p>
+        </div>
+      );
     case "NEW_LIKE":
       notification.color = "bg-yellow-500";
       break;
