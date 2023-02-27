@@ -11,7 +11,7 @@ const Main = ({isLoading, socketNotification}) => {
 			<MobileOverlay />
 			<Header />
 			<div className="flex mt-0 md:mt-32 relative">
-				<Timeline postsLoading={isLoading} socketNotification={notification}/>
+				<Timeline postsLoading={isLoading} notification={socketNotification}/>
 				<MainRightContent	/>
 			</div>
 		</div>
