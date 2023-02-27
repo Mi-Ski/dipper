@@ -1,25 +1,29 @@
 import { useState, useContext, useEffect } from "react";
 import { useSetUser } from "../context/UserContext";
+import WebsocketContext from "../context/WebsocketContext";
+import { webSocket } from "rxjs/webSocket";
 
 import PostsContext from "../context/PostContext";
 
 import Main from "../components/Main/Main";
 import Layout from "../components/Layout/Layout";
 
-export default function Home(props) {
+export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const setUser = useSetUser();
 
   const { posts, setPosts } = useContext(PostsContext);
+	const { setSocket } = useContext(WebsocketContext);
 
+  // fetch user and posts
   useEffect(() => {
-    (async () => {
+    const fetchPosts = async () => {
       const getUser = await fetch("/api/user");
       const getUserJson = await getUser.json();
       setUser(getUserJson);
 
-			// dont't fetch posts between page changes
+      // dont't fetch posts between page changes
       if (posts.length === 0) {
         const tweets = await fetch("/api/tweets/getall");
         const tweetsjson = await tweets.json();
@@ -29,7 +33,21 @@ export default function Home(props) {
       } else {
         setLoading(false);
       }
-    })();
+    };
+
+    const socket = webSocket("wss://hammerhead-app-deaax.ondigitalocean.app");
+		setSocket(socket);
+
+    socket.subscribe((message) => {
+      // handle new post message
+      setPosts((prevPosts) => [message, ...prevPosts]);
+    });
+
+    fetchPosts();
+
+		return () => {
+			socket.unsubscribe();
+		}
   }, [setPosts, setUser]);
 
   return (

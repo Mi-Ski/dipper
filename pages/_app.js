@@ -2,6 +2,7 @@ import Head from "next/head";
 import { UserProvider } from "@auth0/nextjs-auth0";
 import { UserProvider as AtlasUserProvider } from "../context/UserContext";
 import { ThemeProvider } from "../context/ThemeContext";
+import { WebsocketProvider } from "../context/WebsocketContext";
 import "../styles/globals.css";
 import { PostsProvider } from "../context/PostContext";
 
@@ -16,7 +17,9 @@ export default function App({ Component, pageProps }) {
           <ThemeProvider>
             <PostsProvider>
               <UserProvider>
-                <Component {...pageProps} />
+                <WebsocketProvider>
+                  <Component {...pageProps} />
+                </WebsocketProvider>
               </UserProvider>
             </PostsProvider>
           </ThemeProvider>

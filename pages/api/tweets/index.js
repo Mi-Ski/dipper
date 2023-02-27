@@ -32,12 +32,12 @@ export default withApiAuthRequired(async function handler(req, res) {
         break;
 
       case "POST":
-        const flutter = req.body;
+        const reqBody = req.body;
         const insertData = await fetch(`${baseUrl}/insertOne`, {
           ...fetchOptions,
           body: JSON.stringify({
             ...fetchBody,
-            document: flutter,
+            document: reqBody,
           }),
         });
         const insertDataJson = await insertData.json();
