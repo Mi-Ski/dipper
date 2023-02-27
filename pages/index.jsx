@@ -16,8 +16,8 @@ export default function Home() {
   const { posts, setPosts } = useContext(PostsContext);
   const { setSocket } = useContext(WebsocketContext);
 
+  let socketNotification = null;
   useEffect(() => {
-    let socketNotification = null;
     // fetch user and posts
     const fetchPosts = async () => {
       const getUser = await fetch("/api/user");
