@@ -49,7 +49,7 @@ const Notification = ({ notification }) => {
       notification.color = "bg-purple-500";
 			console.log(notification.post._id, currentUser.id)
 			// only show notification if current user has his own post liked
-      if (notification.post.user._id === currentUser.id) {
+      if (notification.post.user.id === currentUser.id) {
         return (
           <NotificationBody
             notification={notification}
