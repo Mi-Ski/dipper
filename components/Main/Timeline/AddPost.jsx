@@ -45,7 +45,7 @@ const AddPost = () => {
         actionOwner: {
           name: user.nickname,
           picture: user.picture,
-					id: user.id
+					id: user?.id
         },
         color: "neon-accent2-opaque",
         time: 5000,

@@ -6,7 +6,7 @@ import { useUser } from "../../../context/UserContext";
 const Notification = ({ notification }) => {
   const { setNotifications } = useContext(WebsocketContext);
   const currentUser = useUser();
-  const sameUser = currentUser.id === notification.actionOwner.id;
+  const sameUser = currentUser.id === notification.actionOwner?.id;
 
   const notificationClickHandler = (key) => {
     if (notification.type === "NEW_POST") {
