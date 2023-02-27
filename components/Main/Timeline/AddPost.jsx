@@ -29,7 +29,11 @@ const AddPost = () => {
       console.log(user);
 
       socket.next({
-        message: "pojawił się nowy post",
+				type: "NEW_POST",
+				actionOwner: {
+					name: user.nickname,
+					picture: user.picture,
+				},
         color: "neon-accent2-opaque",
         time: 5000,
         key: Math.random(),

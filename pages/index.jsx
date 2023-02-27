@@ -14,7 +14,8 @@ export default function Home() {
   const setUser = useSetUser();
 
   const { posts, setPosts } = useContext(PostsContext);
-  const { setSocket, setNotifications } = useContext(WebsocketContext);
+  const { setSocket, setNotifications } =
+    useContext(WebsocketContext);
 
   useEffect(() => {
     // fetch user and posts
@@ -42,10 +43,13 @@ export default function Home() {
     setSocket(socket);
 
     socket.subscribe((notificationObject) => {
-      // handle new post notificationObject 
+      // handle new post notificationObject
       // setPosts((prevPosts) => [notificationObject, ...prevPosts]);
       console.log(notificationObject);
-			setNotifications((prev) => [notificationObject, ...prev]);
+			// filter out server interval heartbeat
+      if (notificationObject.type !== "heartbeat") {
+        setNotifications((prev) => [notificationObject, ...prev]);
+      }
     });
 
     fetchPosts();
@@ -57,9 +61,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Main
-        isLoading={loading}
-      />
+      <Main isLoading={loading} />
     </Layout>
   );
 }

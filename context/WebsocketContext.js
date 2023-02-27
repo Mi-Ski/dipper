@@ -11,21 +11,26 @@ export default WebsocketContext;
 
 export function WebsocketProvider({ children }) {
   const [socket, setSocket] = React.useState(null);
+
+
   const [notifications, setNotifications] = React.useState([
     {
+			type: "POST_REMOVED",
       message: "Post usunięty",
-      color: "neon-accent2-opaque",
+      color: "bg-border-dark",
       time: 5000,
-			key: Math.random()
+      key: Math.random(),
+			onClickAction: () => removeNotification(key),
     },
-    {
-      message: "Post dodany",
-      color: "neon-accent-opaque",
-      time: 5000,
-			key: Math.random()
-    },
+    // {
+    //   message: "Pojawił się nowy wpis!",
+		// 	type: "NEW_POST",
+    //   color: "bg-brand-accent",
+    //   time: 5000,
+    //   key: Math.random(),
+		// 	onClickAction: () => removeNotification(key),
+    // },
   ]);
-
 
   return (
     <WebsocketContext.Provider
@@ -33,7 +38,7 @@ export function WebsocketProvider({ children }) {
         socket,
         setSocket,
         notifications,
-				setNotifications
+        setNotifications,
       }}
     >
       {children}
