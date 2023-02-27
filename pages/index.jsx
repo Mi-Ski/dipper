@@ -40,7 +40,8 @@ export default function Home() {
 
     socket.subscribe((message) => {
       // handle new post message
-      setPosts((prevPosts) => [message, ...prevPosts]);
+      // setPosts((prevPosts) => [message, ...prevPosts]);
+			console.log(message);
     });
 
     fetchPosts();
