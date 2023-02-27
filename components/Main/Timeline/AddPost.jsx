@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
   const { setPosts } = useContext(PostsContext);
-  const { socket, setNotifications } = useContext(WebsocketContext);
+  const { socket } = useContext(WebsocketContext);
   const user = useUser();
   const loggedIn = Boolean(user.id);
   const router = useRouter();
@@ -47,7 +47,6 @@ const AddPost = () => {
           picture: user.picture,
 					id: user?.id
         },
-        color: "neon-accent2-opaque",
         time: 5000,
         key: Math.random(),
       });

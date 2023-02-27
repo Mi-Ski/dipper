@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
+import WebsocketContext from "../../../context/WebsocketContext";
 
 import { IconContext } from "react-icons";
 import {
@@ -51,6 +52,7 @@ const Post = ({
   const userContext = useUser();
   const router = useRouter();
   const { posts, setPosts } = useContext(PostsContext);
+  const { socket } = useContext(WebsocketContext);
 
   const [editModalActive, setEditModalActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
@@ -84,7 +86,7 @@ const Post = ({
 
     setLoading(true);
     const action = currentUserLiked ? "$pull" : "$addToSet";
-    console.log("action", action);
+    console.log("LIKE ACTION", action);
 
     await fetch("/api/tweets/like", {
       method: "PUT",
@@ -104,6 +106,25 @@ const Post = ({
       }
       return [...likes, userContext.id];
     });
+
+    if (!currentUser && !currentUserLiked) {
+      socket.next({
+        type: "LIKE_POST",
+        actionOwner: {
+          name: user.nickname,
+          picture: user.picture,
+          id: user?.id,
+        },
+        post: {
+          _id,
+          body,
+          user,
+        },
+        time: 5000,
+        key: Math.random(),
+      });
+    }
+
     setLoading(false);
   };
 
