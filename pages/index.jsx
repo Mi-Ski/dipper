@@ -14,9 +14,8 @@ export default function Home() {
   const setUser = useSetUser();
 
   const { posts, setPosts } = useContext(PostsContext);
-  const { setSocket } = useContext(WebsocketContext);
+  const { setSocket, setNotificationMsg } = useContext(WebsocketContext);
 
-  let socketNotification = null;
   useEffect(() => {
     // fetch user and posts
     const fetchPosts = async () => {
@@ -46,7 +45,7 @@ export default function Home() {
       // handle new post message
       // setPosts((prevPosts) => [message, ...prevPosts]);
       console.log(message);
-      socketNotification = message;
+			setNotificationMsg(message);
     });
 
     fetchPosts();
@@ -59,7 +58,6 @@ export default function Home() {
   return (
     <Layout>
       <Main
-        socketNotification={socketNotification}
         isLoading={loading}
       />
     </Layout>
