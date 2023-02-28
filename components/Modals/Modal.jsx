@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 
-const Modal = ({ message, isOpen, onClose, children }) => {
+const Modal = ({ children }) => {
   return ReactDOM.createPortal(children, document.body);
 };
 
