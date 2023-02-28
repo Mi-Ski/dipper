@@ -257,7 +257,7 @@ const Post = ({
                     } ${
                       !currentUserLiked &&
                       "bg-white/[.1] hover:bg-button-like/[.1] hover:text-button-like"
-                    } flex items-center justify-start   font-semibold hover:text-white p-2    bg-button-like/[.1]  rounded-full max-w-max`}
+                    } flex items-center justify-start   font-semibold  p-2    bg-button-like/[.1]  rounded-full max-w-max`}
                   >
                     <div className="">
                       <IconContext.Provider

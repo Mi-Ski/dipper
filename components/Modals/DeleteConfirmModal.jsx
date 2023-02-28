@@ -13,18 +13,18 @@ const DeleteConfirmModal = ({ setModalActive, deleteHandler }) => {
           onClick={(e) => e.stopPropagation()}
           className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-5 py-4 bg-bgcol-ui-dark rounded-xl shadow-xl z-[50] text-white"
         >
-          <div className="px-10 py-8 border-2 space-y-6 border-brand-accent rounded-xl flex flex-col justify-center items-center">
+          <div className="px-10 pt-6  pb-2 space-y-10  rounded-xl flex flex-col text-lg justify-center items-center">
             <h2>Czy na pewno chcesz usunąć tego posta?</h2>
             <div className="flex space-x-10 ">
               <button
                 onClick={() => setModalActive(false)}
-                className="bg-border-dark hover:bg-border-dark/[.9] rounded-md px-5 py-1"
+                className="bg-brand-accent rounded-md px-5 py-1"
               >
                 Anuluj
               </button>
               <button
                 onClick={() => deleteHandler()}
-                className="bg-border-dark hover:bg-brand-accent rounded-md px-5 py-1 ease-in transition-all"
+                className="bg-border-dark hover:bg-red-500 rounded-md px-5 py-1 ease-in transition-all"
               >
                 OK
               </button>

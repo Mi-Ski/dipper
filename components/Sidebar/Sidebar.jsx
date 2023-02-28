@@ -1,8 +1,8 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import  ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../../context/ThemeContext";
 
 import { IconContext } from "react-icons";
 import { RiToggleFill, RiToggleLine } from "react-icons/ri";
@@ -18,9 +18,9 @@ const Sidebar = () => {
     router.push("/api/auth/logout");
   };
 
-	const themeHandler = () => {
-		toggleDarkContext();
-	};
+  const themeHandler = () => {
+    toggleDarkContext();
+  };
 
   return (
     <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5   bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
@@ -44,7 +44,10 @@ const Sidebar = () => {
         <Search />
       </div>
       <div className="w-full">
-        <div className="w-full p-3 md:p-[5vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
+        <p className="text-center text-text-chill text-sm mb-3">
+          v0.1.80-dev
+        </p>
+        <div className="w-full  md:py-[3vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
           <button className="flex" onClick={themeHandler}>
             <IconContext.Provider
               value={{ color: "white", size: "20px" }}
@@ -54,7 +57,7 @@ const Sidebar = () => {
             <p className="flex-1">Motyw</p>
           </button>
         </div>
-        <div className="w-full md:p-[5vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
+        <div className="w-full md:py-[3vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
           <button className="flex" onClick={logoutHandler}>
             <IconContext.Provider
               value={{ color: "white", size: "20px" }}

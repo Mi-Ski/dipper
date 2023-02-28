@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/PostContext";
+import { IconContext } from "react-icons";
+import { DiGithubAlt } from "react-icons/di";
 import Loading from "../Loading";
 
 const MainRightContent = () => {
@@ -104,8 +106,19 @@ const MainRightContent = () => {
             </h5>
           )}
         </div>
-        <div className="text-text-chill">
-          [github, wersja, &copy;copyright]
+        <div className="text-text-chill flex flex-col text-xs text-center">
+          <a className="flex justify-center items-center border border-b-text-chill/[.2] border-x-0 border-t-0 mb-2 pb-1 mx-2" href="https://github.com/Mi-Ski/dipper">
+            <div>
+              <IconContext.Provider
+                value={{ color: "currentColor", size: `20px` }}
+              >
+                <DiGithubAlt />
+              </IconContext.Provider>
+            </div>
+            <p>Repo Projektu</p>
+          </a>
+          <p>Copyright &copy; 2023 <a href="https://github.com/Mi-Ski">Michał Skiba</a></p>
+          <a href="http://www.apache.org/licenses/">Apache License</a>
         </div>
       </div>
     </>
