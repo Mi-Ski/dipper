@@ -84,7 +84,7 @@ export const NotificationBody = ({
         >
           <div
             className={` relative  overflow-hidden w-14 max-w-[36px] h-9   ${
-              notification.post.picture
+              notification.post.user.picture
                 ? ""
                 : "border-2 border-border-dark rounded-full"
             }`}
@@ -93,8 +93,8 @@ export const NotificationBody = ({
               placeholder="blur"
               blurDataURL="https://via.placeholder.com/150"
               src={
-                notification.post.picture
-                  ? notification.post.picture
+                notification.post.user.picture
+                  ? notification.post.user.picture
                   : "/profilepic-placeholder.png"
               }
               alt="notification.post Avatar"
