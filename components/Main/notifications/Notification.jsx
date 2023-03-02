@@ -47,9 +47,8 @@ const Notification = ({ notification }) => {
       break;
     case "LIKE_POST":
       notification.color = "bg-purple-500";
-      console.log(notification.post._id, currentUser.id);
       // only show notification if current user has his own post liked
-      if (notification.post.user.id === currentUser.id) {
+      if (notification.actionOwner.id === currentUser.id) {
         return (
           <NotificationBody
             notification={notification}
@@ -85,7 +84,7 @@ export const NotificationBody = ({
         >
           <div
             className={` relative  overflow-hidden w-14 max-w-[36px] h-9   ${
-              notification.actionOwner.picture
+              notification.post.picture
                 ? ""
                 : "border-2 border-border-dark"
             }`}
@@ -94,12 +93,12 @@ export const NotificationBody = ({
               placeholder="blur"
               blurDataURL="https://via.placeholder.com/150"
               src={
-                notification.actionOwner.picture
-                  ? notification.actionOwner.picture
+                notification.post.picture
+                  ? notification.post.picture
                   : "/profilepic-placeholder.png"
               }
-              alt="notification.actionOwner Avatar"
-              title={notification.actionOwner.name}
+              alt="notification.post Avatar"
+              title={notification.post.name}
               layout="fill"
               className="rounded-full "
             />
