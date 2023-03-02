@@ -20,6 +20,12 @@ const AddPost = () => {
     router.push("/api/auth/login");
   };
 
+  const inputHandler = (e) => {
+    setInputValue(e.target.value);
+    e.target.style.height = "1px"; // Reset the height to minimum value
+    e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the calculated scroll height
+  };
+
   const onSubmitTweet = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -109,9 +115,9 @@ const AddPost = () => {
       <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-10">
-          <div className="flex items-center h-14">
+          <div className="flex items-start min-h-14 space-x-2">
             <div
-              className={`rounded-full relative  overflow-hidden w-14 min-w-[50px] h-12  ${
+              className={`flex items-center justify-center  rounded-full relative   w-14 min-w-[50px] min-h-12  ${
                 user.picture ? "" : "border-2 border-border-dark"
               }`}
             >
@@ -125,12 +131,25 @@ const AddPost = () => {
                 }
                 alt="User Avatar"
                 title={user.name}
-                layout="fill"
+                width="50"
+                height="50"
                 className="rounded-full object-contain"
               />
             </div>
-            {/* TODO: change input to textarea component from addComment */}
-            <input
+
+            <textarea
+              className="block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts  px-4 py-3 rounded-md flex-1 min-h-[3rem] "
+              placeholder={
+                loggedIn
+                  ? "Co u Ciebie słychać?"
+                  : "Zaloguj się, aby pisać posty."
+              }
+              onInput={inputHandler}
+              value={inputValue}
+              // 1.5rem = line height p-1 = 0.25rem
+              style={{ height: "3rem" }}
+            ></textarea>
+            {/* <input
               type="text"
               value={inputValue}
               disabled={!loggedIn}
@@ -145,7 +164,7 @@ const AddPost = () => {
                   ? "cursor-pointer px-10"
                   : "cursor-default pl-6 pr-4 lg:pl-10 lg:pr-10"
               } w-full h-full ml-2  bg-contrast-posts border-2  border-border-dark rounded-full   text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
-            ></input>
+            ></input> */}
           </div>
           <div className="flex justify-between">
             <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-contrast-posts rounded-md px-4">
@@ -179,7 +198,7 @@ const AddPost = () => {
               className="bg-gradient-to-r min-w-[9em] from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
               {loggedIn && !loading && "Opublikuj"}
-              {loggedIn && loading && <Loading size="24"/>}
+              {loggedIn && loading && <Loading size="24" />}
               {!loggedIn && "Zaloguj się"}
             </button>
           </div>

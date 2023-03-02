@@ -6,12 +6,10 @@ import { IoIosSend } from "react-icons/io";
 
 const AddComment = ({
   user,
-  currentUser,
   addCommentHandler,
   loading,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  // loading = true;
 
 	const submitCommentHanlder = () => {
 		if (inputValue.length === 0) return;
@@ -48,7 +46,7 @@ const AddComment = ({
           />
         </div>
         <textarea
-          className="  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem] active:outline-4"
+          className=" block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem]"
           placeholder={
                "Twój komentarz"
           }
