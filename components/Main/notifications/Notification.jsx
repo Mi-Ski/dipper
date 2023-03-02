@@ -86,7 +86,7 @@ export const NotificationBody = ({
             className={` relative  overflow-hidden w-14 max-w-[36px] h-9   ${
               notification.post.picture
                 ? ""
-                : "border-2 border-border-dark"
+                : "border-2 border-border-dark rounded-full"
             }`}
           >
             <Image
