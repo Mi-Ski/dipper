@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 
-const PostBody = ({user, body, postedAt}) => {
+const PostBody = ({ user, body, postedAt }) => {
   return (
     <div className="flex border md:border px-4  md:px-10 pt-7 border-r-transparent border-l-transparent border-t-transparent  border-b-transparent border-solid">
-      <div className="rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
+      <div className="min-w-max rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
         <Image
           placeholder="blur"
           blurDataURL="https://via.placeholder.com/150"
@@ -26,7 +26,7 @@ const PostBody = ({user, body, postedAt}) => {
             {new Date(+postedAt).toLocaleString()}
           </p>
         </div>
-        <div className="mt-7 mb-5 text-lg leading-8">{body}</div>
+        <div className="mt-7 mb-5 text-lg leading-8 break-all">{body}</div>
       </div>
     </div>
   );
