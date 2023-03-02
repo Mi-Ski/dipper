@@ -25,7 +25,7 @@ const Notification = ({ notification }) => {
         <NotificationBody
           notification={notification}
           notificationMsg="właśnie dodał(a) nowy wpis"
-          selfNofiticationMsg="Pomyślnie dodano nowy post"
+          selfNofiticationMsg="Dodano nowy wpis"
           sameUser={sameUser}
           notificationClickHandler={notificationClickHandler}
         />
@@ -47,8 +47,8 @@ const Notification = ({ notification }) => {
       break;
     case "LIKE_POST":
       notification.color = "bg-purple-500";
-			console.log(notification.post._id, currentUser.id)
-			// only show notification if current user has his own post liked
+      console.log(notification.post._id, currentUser.id);
+      // only show notification if current user has his own post liked
       if (notification.post.user.id === currentUser.id) {
         return (
           <NotificationBody
@@ -80,9 +80,11 @@ export const NotificationBody = ({
   return (
     <div>
       {!sameUser && (
-        <>
+        <div
+          className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-2`}
+        >
           <div
-            className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${
+            className={` relative  overflow-hidden w-14 max-w-[36px] h-9  ${
               notification.actionOwner.picture
                 ? ""
                 : "border-2 border-border-dark"
@@ -103,12 +105,13 @@ export const NotificationBody = ({
             />
           </div>
           <p
-            className={`text-center text-xl px-5 py-2 mb-4 rounded-xl ${notification.color}`}
+            className={`text-center text-xl px-5 py-2  rounded-xl `}
             onClick={() => notificationClickHandler(notification.key)}
           >
-            `${notification.actionOwner.name} ${notificationMsg}`
+            <span className="font-bold">{`${notification.actionOwner.name}`}</span>{" "}
+            {`${notificationMsg}`}
           </p>
-        </>
+        </div>
       )}
       {sameUser && (
         <div>

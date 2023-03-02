@@ -6,7 +6,7 @@ import ThemeContext from "../../context/ThemeContext";
 
 import { IconContext } from "react-icons";
 import { RiToggleFill, RiToggleLine } from "react-icons/ri";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
 
 import Search from "./Search";
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5   bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
       <div>
-        <div className="flex flex-col xl:flex-row py-[10vh]  items-center justify-center mr-7">
+        <div className="flex flex-col xl:flex-row py-[10vh]  items-center justify-center 2xl:mr-7">
           <div className="w-24 2xl:w-fit h-fit ">
             <Image
               placeholder="blur"
@@ -37,34 +37,27 @@ const Sidebar = () => {
               className="drop-shadow-logo"
             />
           </div>
-          <h2 className=" font-bold text-2xl 2xl:text-4xl xl:ml-2 2xl:ml-3">
-            Dipper
+          <h2 className=" font-bold cursor-default text-2xl 2xl:text-4xl xl:ml-2 2xl:ml-3 ">
+            Dipper{" "}
           </h2>
         </div>
         <Search />
       </div>
       <div className="w-full">
-        <p className="text-center text-text-chill text-sm mb-3">
+        <p className="text-center cursor-default text-text-chill text-xs 2lg:text-sm mb-3">
           v0.1.80-dev
         </p>
-        <div className="w-full  md:py-[3vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
-          <button className="flex" onClick={themeHandler}>
+        <div className="md:py-[3vh] justify-start  flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
+          <button
+            className="flex justify-center items-center mx-auto  gap-x-2 hover:bg-border-dark/[.6] rounded-md p-2 px-4"
+            onClick={themeHandler}
+          >
             <IconContext.Provider
-              value={{ color: "white", size: "20px" }}
+              value={{ color: "currentColor", size: "20px" }}
             >
-              <RiToggleFill />
+              <MdLightMode />
             </IconContext.Provider>
-            <p className="flex-1">Motyw</p>
-          </button>
-        </div>
-        <div className="w-full md:py-[3vh] justify-center flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
-          <button className="flex" onClick={logoutHandler}>
-            <IconContext.Provider
-              value={{ color: "white", size: "20px" }}
-            >
-              <MdOutlineLogout />
-            </IconContext.Provider>
-            <p className="flex-1">Wyloguj się</p>
+            <p className="">Motyw</p>
           </button>
         </div>
       </div>

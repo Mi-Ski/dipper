@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <div className="hidden fixed md:block w-4/5 top-0 z-[2]">
-      <div className="flex items-center px-6 py-2 2xl:py-3 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
+      <div className="flex items-center px-6 py-1 2xl:py-3 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
         <div className="flex items-center">
           <div className="w-8 2xl:w-11">
             <IconContext.Provider
@@ -44,7 +44,7 @@ const Header = () => {
           {!loggedIn && (
             <button
               onClick={() => logIn()}
-              className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
+              className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2 my-2 2xl:py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
               Zaloguj się
             </button>
@@ -53,22 +53,30 @@ const Header = () => {
             <>
               <div
                 onClick={() => setProfileMenuOpen((old) => !old)}
-                className="flex items-center hover:bg-border-dark py-2 px-4 rounded-xl cursor-pointer w-[200px] h-[70px]"
+                className="flex items-center hover:bg-border-dark py-0 2xl:py-2 px-4 rounded-xl cursor-pointer w-[200px] h-[70px] text-ellipsis overflow-hidden"
               >
-                <div className="rounded-full overflow-hidden	w-12 h-12">
+                <div
+                  className={`flex items-center relative  overflow-hidden   ${
+                    user.picture ? "" : "border-2 border-border-dark"
+                  }`}
+                >
                   <Image
                     placeholder="blur"
                     blurDataURL="https://via.placeholder.com/150"
-                    src={user.picture}
-                    alt="User Avatar"
+                    src={
+                      user.picture
+                        ? user.picture
+                        : "/profilepic-placeholder.png"
+                    }
+                    alt="user.picture Avatar"
                     title={user.name}
-                    width={50}
-                    height={50}
-                    className="rounded-full"
+										width="50"
+										height="50"
+                    className="rounded-full "
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="font-medium">{user.name}</p>
+                <div className="ml-3 truncate">
+                  <p className="font-medium text-ellipsis overflow-hidden">{user.name}</p>
                   <p className="font-light text-sm">
                     {user.nickname}
                   </p>
@@ -87,7 +95,10 @@ const Header = () => {
                     {" "}
                     &lsaquo;
                   </div>
-                  <button className="flex items-center mr-8 hover:text-red-500 ease-in transition-all " onClick={logOut}>
+                  <button
+                    className="flex items-center mr-8 hover:text-red-500 ease-in transition-all "
+                    onClick={logOut}
+                  >
                     <IconContext.Provider
                       value={{ color: "currentColor", size: "20px" }}
                     >

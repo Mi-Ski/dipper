@@ -20,7 +20,7 @@ const CommentsSection = ({
   }
 
   return (
-    <div className="bg-black/[.2]  py-4 border  border-transparent  border-x-0 border-b-0">
+    <div className={`bg-black/[.2] pb-4  border  border-transparent  border-x-0 border-b-0 ${comments?.length > 0 && "pt-4"} `} >
       <div className="pr-8 pl-8 md:pr-10 md:pl-14">
         {allCommentsShown && (
           <div>
