@@ -26,7 +26,7 @@ const Notification = ({ notification }) => {
           notification={notification}
           notificationMsg="właśnie dodał(a) nowy wpis"
           selfNofiticationMsg="Dodano nowy wpis"
-          sameUser={sameUser}
+          sameUser={false}
           notificationClickHandler={notificationClickHandler}
         />
       );
@@ -77,7 +77,7 @@ export const NotificationBody = ({
   notificationClickHandler,
 }) => {
   return (
-    <div>
+    <div className="cursor-default">
       {!sameUser && (
         <div
           className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-3`}

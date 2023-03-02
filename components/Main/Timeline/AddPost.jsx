@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
+	const [loading, setLoading] = useState(false);
   const { setPosts } = useContext(PostsContext);
   const { socket } = useContext(WebsocketContext);
   const user = useUser();
@@ -20,6 +21,7 @@ const AddPost = () => {
 
   const onSubmitTweet = async (event) => {
     event.preventDefault();
+		setLoading(true);
 
     if (!loggedIn) {
       logIn();
@@ -47,6 +49,9 @@ const AddPost = () => {
           picture: user.picture,
 					id: user?.id
         },
+				post: {
+					user: user,
+				},
         time: 5000,
         key: Math.random(),
       });
@@ -70,6 +75,7 @@ const AddPost = () => {
         ...oldState,
       ]);
       setInputValue("");
+			setLoading(false);
     }
   };
 
@@ -171,7 +177,9 @@ const AddPost = () => {
               type="submit"
               className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
-              {loggedIn ? "Opublikuj" : "Zaloguj się"}
+              {loggedIn && !loading && "Opublikuj"}
+              {loggedIn && loading && "..."}
+							{!loggedIn && "Zaloguj się"}
             </button>
           </div>
         </div>
