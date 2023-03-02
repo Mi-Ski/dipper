@@ -58,6 +58,7 @@ const Post = ({
   const [confirmModalActive, setConfirmModalActive] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [loading, setLoading] = useState(false);
+	const [deleteLoading, setDeleteLoading] = useState(false);
   const [addCommentLoading, setAddCommentLoading] = useState(false);
   const [likesState, setLikesState] = useState(likes);
 
@@ -187,6 +188,7 @@ const Post = ({
   };
 
   const deleteHandler = async () => {
+		setDeleteLoading(true);
     const response = await fetch(`/api/tweets/`, {
       method: "DELETE",
       headers: {
@@ -198,6 +200,7 @@ const Post = ({
     });
     const responseJson = await response.json();
     setDeleted(true);
+		setDeleteLoading(false);
   };
 
   const editHandler = async (updateObject) => {
@@ -348,6 +351,7 @@ const Post = ({
             <DeleteConfirmModal
               setModalActive={setConfirmModalActive}
               deleteHandler={deleteHandler}
+							loading={deleteLoading}
             />
           )}
         </div>

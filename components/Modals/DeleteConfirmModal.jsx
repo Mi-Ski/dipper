@@ -1,7 +1,9 @@
 import React from "react";
 import Modal from "./Modal";
+import Loading from "../Loading";
 
-const DeleteConfirmModal = ({ setModalActive, deleteHandler }) => {
+const DeleteConfirmModal = ({ setModalActive, deleteHandler,  loading }) => {
+
   return (
     <Modal>
       <div
@@ -24,9 +26,9 @@ const DeleteConfirmModal = ({ setModalActive, deleteHandler }) => {
               </button>
               <button
                 onClick={() => deleteHandler()}
-                className="bg-border-dark hover:bg-red-500 rounded-md px-5 py-1 ease-in transition-all"
+                className="bg-border-dark min-w-[5em] hover:bg-red-500 rounded-md px-5 py-1 ease-in transition-all"
               >
-                OK
+								{loading ? <Loading size="20"/> : "Usuń"}
               </button>
             </div>
           </div>

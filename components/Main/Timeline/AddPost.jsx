@@ -3,12 +3,13 @@ import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
 import Image from "next/image";
 import WebsocketContext from "../../../context/WebsocketContext";
+import Loading from "../../Loading";
 
 import { useRouter } from "next/router";
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
-	const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { setPosts } = useContext(PostsContext);
   const { socket } = useContext(WebsocketContext);
   const user = useUser();
@@ -21,7 +22,7 @@ const AddPost = () => {
 
   const onSubmitTweet = async (event) => {
     event.preventDefault();
-		setLoading(true);
+    setLoading(true);
 
     if (!loggedIn) {
       logIn();
@@ -47,11 +48,11 @@ const AddPost = () => {
         actionOwner: {
           name: user.nickname,
           picture: user.picture,
-					id: user?.id
+          id: user?.id,
         },
-				post: {
-					user: user,
-				},
+        post: {
+          user: user,
+        },
         time: 5000,
         key: Math.random(),
       });
@@ -75,7 +76,7 @@ const AddPost = () => {
         ...oldState,
       ]);
       setInputValue("");
-			setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -175,11 +176,11 @@ const AddPost = () => {
             </div>
             <button
               type="submit"
-              className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
+              className="bg-gradient-to-r min-w-[9em] from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
             >
               {loggedIn && !loading && "Opublikuj"}
-              {loggedIn && loading && "..."}
-							{!loggedIn && "Zaloguj się"}
+              {loggedIn && loading && <Loading size="24"/>}
+              {!loggedIn && "Zaloguj się"}
             </button>
           </div>
         </div>
