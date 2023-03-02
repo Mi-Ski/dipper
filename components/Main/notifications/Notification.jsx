@@ -81,10 +81,10 @@ export const NotificationBody = ({
     <div>
       {!sameUser && (
         <div
-          className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-2`}
+          className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-3`}
         >
           <div
-            className={` relative  overflow-hidden w-14 max-w-[36px] h-9  ${
+            className={` relative  overflow-hidden w-14 max-w-[36px] h-9   ${
               notification.actionOwner.picture
                 ? ""
                 : "border-2 border-border-dark"
@@ -105,10 +105,10 @@ export const NotificationBody = ({
             />
           </div>
           <p
-            className={`text-center text-xl px-5 py-2  rounded-xl `}
+            className={`ml-3 text-center text-base  py-2  rounded-xl `}
             onClick={() => notificationClickHandler(notification.key)}
           >
-            <span className="font-bold">{`${notification.actionOwner.name}`}</span>{" "}
+            <span className="font-bold text-lg">{`${notification.post.user.name}`}</span>{" "}
             {`${notificationMsg}`}
           </p>
         </div>
