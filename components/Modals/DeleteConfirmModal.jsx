@@ -4,6 +4,7 @@ import Loading from "../Loading";
 
 const DeleteConfirmModal = ({ setModalActive, deleteHandler,  loading }) => {
 
+
   return (
     <Modal>
       <div
@@ -16,7 +17,7 @@ const DeleteConfirmModal = ({ setModalActive, deleteHandler,  loading }) => {
           className="flex flex-col justify-center items-center fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-5 py-4 bg-bgcol-ui-dark rounded-xl shadow-xl z-[50] text-white"
         >
           <div className="px-10 pt-6  pb-2 space-y-10  rounded-xl flex flex-col text-lg justify-center items-center">
-            <h2>Czy na pewno chcesz usunąć tego posta?</h2>
+            <h1 className="text-lg font-semibold">Czy na pewno chcesz usunąć tego posta?</h1>
             <div className="flex space-x-10 ">
               <button
                 onClick={() => setModalActive(false)}

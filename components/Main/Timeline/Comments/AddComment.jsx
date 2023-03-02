@@ -46,7 +46,7 @@ const AddComment = ({
           />
         </div>
         <textarea
-          className=" block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem]"
+          className="transition-all duration-100 ease-in-out block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem] outline-[1px] outline-border-dark "
           placeholder={
                "Twój komentarz"
           }

@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 const AddPost = () => {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [inputLength, setInputLength] = useState(0);
   const { setPosts } = useContext(PostsContext);
   const { socket } = useContext(WebsocketContext);
   const user = useUser();
@@ -22,6 +23,7 @@ const AddPost = () => {
 
   const inputHandler = (e) => {
     setInputValue(e.target.value);
+    setInputLength(e.target.value.length);
     e.target.style.height = "1px"; // Reset the height to minimum value
     e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the calculated scroll height
   };
@@ -114,10 +116,11 @@ const AddPost = () => {
     <div className="w-full flex flex-col px-2 mb-10 pt-10 pb-4 md:px-4 2xl:px-10 bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark relative overflow-hidden">
       <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
-        <div className="flex flex-col space-y-10">
-          <div className="flex items-start min-h-14 space-x-2">
+        <div className="flex flex-col space-y-5">
+					<div className="flex flex-col">
+					<div className="flex items-start min-h-14 space-x-2">
             <div
-              className={`flex items-center justify-center  rounded-full relative   w-14 min-w-[50px] min-h-12  ${
+              className={`flex items-center justify-ter  rounded-full relative   w-14 min-w-[50px] min-h-12  ${
                 user.picture ? "" : "border-2 border-border-dark"
               }`}
             >
@@ -138,7 +141,7 @@ const AddPost = () => {
             </div>
 
             <textarea
-              className="block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts  px-4 py-3 rounded-md flex-1 min-h-[3rem] "
+              className="transition-all duration-100 ease-in-out block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts  px-4 py-3 rounded-md flex-1 min-h-[3rem] font-bold outline-[2px] outline-border-dark px-4"
               placeholder={
                 loggedIn
                   ? "Co u Ciebie słychać?"
@@ -146,26 +149,13 @@ const AddPost = () => {
               }
               onInput={inputHandler}
               value={inputValue}
+              maxLength={280}
               // 1.5rem = line height p-1 = 0.25rem
               style={{ height: "3rem" }}
             ></textarea>
-            {/* <input
-              type="text"
-              value={inputValue}
-              disabled={!loggedIn}
-              placeholder={
-                loggedIn
-                  ? "Co u Ciebie słychać?"
-                  : "Zaloguj się, aby pisać posty."
-              }
-              onChange={(e) => setInputValue(e.target.value)}
-              className={`${
-                loggedIn
-                  ? "cursor-pointer px-10"
-                  : "cursor-default pl-6 pr-4 lg:pl-10 lg:pr-10"
-              } w-full h-full ml-2  bg-contrast-posts border-2  border-border-dark rounded-full   text-white font-semibold placeholder:text-text-chill placeholder:font-normal   focus:outline-none focus:border-brand-accent`}
-            ></input> */}
           </div>
+          <p className={`place-self-end py-2 pr-1 text-textcol-main-dark ${inputLength < 280 ? "text-textcol-main-dark font-normal" : "text-red-500 font-semibold"}`}>{inputLength} / 280</p>
+					</div>
           <div className="flex justify-between">
             <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-contrast-posts rounded-md px-4">
               <button

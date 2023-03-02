@@ -59,6 +59,7 @@ const Post = ({
   const [deleted, setDeleted] = useState(false);
   const [loading, setLoading] = useState(false);
 	const [deleteLoading, setDeleteLoading] = useState(false);
+	const [editLoading, setEditLoading] = useState(false);
   const [addCommentLoading, setAddCommentLoading] = useState(false);
   const [likesState, setLikesState] = useState(likes);
 
@@ -204,6 +205,7 @@ const Post = ({
   };
 
   const editHandler = async (updateObject) => {
+		setEditLoading(true);
     const response = await fetch("/api/tweets", {
       method: "PUT",
       headers: {
@@ -235,6 +237,8 @@ const Post = ({
         return post;
       })
     );
+
+		setEditLoading(false);
   };
 
   return (
@@ -345,6 +349,7 @@ const Post = ({
               initialValue={body}
               setModalActive={setEditModalActive}
               editHandler={editHandler}
+							loading={editLoading}
             />
           )}
           {confirmModalActive && (
