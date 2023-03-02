@@ -118,7 +118,7 @@ const Post = ({
         post: {
           _id,
           body,
-          user: currentUser,
+          user: userContext,
         },
         time: 5000,
         key: Math.random(),
