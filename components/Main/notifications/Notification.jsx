@@ -26,7 +26,7 @@ const Notification = ({ notification }) => {
           notification={notification}
           notificationMsg="właśnie dodał(a) nowy wpis"
           selfNofiticationMsg="Dodano nowy wpis"
-          sameUser={false}
+          sameUser={sameUser}
           notificationClickHandler={notificationClickHandler}
         />
       );
