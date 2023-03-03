@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { MdHomeFilled, MdOutlineLogout } from "react-icons/md";
+import { BsDot } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import Image from "next/image";
+import Link from "next/link";
 
 import { useRouter } from "next/router";
 
 import { useUser } from "../../context/UserContext";
 
-const Header = () => {
+const Header = ({ routed }) => {
   const router = useRouter();
+  const pathname = router.pathname;
+  console.log(pathname);
+
   const user = useUser();
   const loggedIn = Boolean(user.id);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -21,23 +26,41 @@ const Header = () => {
     router.push("/api/auth/logout");
   };
 
-  // TODO: navigationContext to change Home > TechStack or Home > Timeline
-  // Home = route to the top of page
-
   return (
-    <div className="hidden fixed md:block w-4/5 top-0 z-[2]">
+    <div
+      className={`hidden fixed md:block w-4/5 top-0  z-[2] ${
+        pathname === "/techstack" && "right-0"
+      }`}
+    >
       <div className="flex items-center px-6 py-1 2xl:py-3 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
         <div className="flex items-center">
-          <div className="w-8 2xl:w-11">
-            <IconContext.Provider
-              value={{ color: "white", size: "100%" }}
-            >
-              <MdHomeFilled />
-            </IconContext.Provider>
-          </div>
-          <h1 className="font-semibold text-xl 2xl:text-2xl ml-3">
-            Home
-          </h1>
+          <Link href="/">
+            <div className="flex items-center cursor-pointer">
+              <div className="w-8 2xl:w-11">
+                <IconContext.Provider
+                  value={{ color: "white", size: "100%" }}
+                >
+                  <MdHomeFilled />
+                </IconContext.Provider>
+              </div>
+              <h1 className="font-semibold text-xl 2xl:text-2xl ml-3 ">
+                Home
+              </h1>
+            </div>
+          </Link>
+          {routed && (
+            <div className="text-text-chill flex">
+              <div className="w-5 mx-2">
+                <IconContext.Provider
+                  value={{ color: "currentColor", size: "100%" }}
+                >
+                  <BsDot />
+                </IconContext.Provider>
+              </div>
+
+              <h2 className="font-semibold">techstack</h2>
+            </div>
+          )}
         </div>
 
         <div className="relative mr-16">
@@ -61,8 +84,6 @@ const Header = () => {
                   }`}
                 >
                   <Image
-                    placeholder="blur"
-                    blurDataURL="https://via.placeholder.com/150"
                     src={
                       user.picture
                         ? user.picture
@@ -70,13 +91,15 @@ const Header = () => {
                     }
                     alt="user.picture Avatar"
                     title={user.name}
-										width="50"
-										height="50"
+                    width="50"
+                    height="50"
                     className="rounded-full "
                   />
                 </div>
                 <div className="ml-3 truncate">
-                  <p className="font-medium text-ellipsis overflow-hidden">{user.name}</p>
+                  <p className="font-medium text-ellipsis overflow-hidden">
+                    {user.name}
+                  </p>
                   <p className="font-light text-sm">
                     {user.nickname}
                   </p>

@@ -125,8 +125,6 @@ const AddPost = () => {
               }`}
             >
               <Image
-                placeholder="blur"
-                blurDataURL="https://via.placeholder.com/150"
                 src={
                   user.picture
                     ? user.picture

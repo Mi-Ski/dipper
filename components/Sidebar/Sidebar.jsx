@@ -10,7 +10,7 @@ import { MdLightMode } from "react-icons/md";
 
 import Search from "./Search";
 
-const Sidebar = () => {
+const Sidebar = ({routed}) => {
   const router = useRouter();
   const { toggleDarkContext } = useContext(ThemeContext);
 
@@ -41,7 +41,7 @@ const Sidebar = () => {
             Dipper{" "}
           </h2>
         </div>
-        <Search />
+        {!routed && <Search />}
       </div>
       <div className="w-full">
         <p className="text-center cursor-default text-text-chill text-xs 2lg:text-sm mb-3">

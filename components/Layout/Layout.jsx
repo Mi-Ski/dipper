@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import ThemeContext from '../../context/ThemeContext'
 
-const Layout = ({children}) => {
+const Layout = ({children, routed}) => {
 	const {darkContext} = useContext(ThemeContext)
 
 	return (
@@ -21,8 +21,8 @@ const Layout = ({children}) => {
             );
           }
         `}</style>
-        <Sidebar />
-        <div className="hidden md:block md:w-1/5"></div>
+        <Sidebar routed={routed} />
+        <div className={`hidden md:block ${routed ? "md:w-2/5" : "md:w-1/5"}`} ></div>
 				{children}
       </div>
     </div>
