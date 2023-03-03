@@ -4,18 +4,14 @@ import Image from "next/image";
 import { IconContext } from "react-icons";
 import { IoIosSend } from "react-icons/io";
 
-const AddComment = ({
-  user,
-  addCommentHandler,
-  loading,
-}) => {
+const AddComment = ({ user, addCommentHandler, loading }) => {
   const [inputValue, setInputValue] = useState("");
 
-	const submitCommentHanlder = () => {
-		if (inputValue.length === 0) return;
-		setInputValue("");
-		addCommentHandler(inputValue);
-	};
+  const submitCommentHanlder = () => {
+    if (inputValue.length === 0) return;
+    setInputValue("");
+    addCommentHandler(inputValue);
+  };
 
   const inputHandler = (e) => {
     setInputValue(e.target.value);
@@ -28,7 +24,7 @@ const AddComment = ({
       <div className="flex gap-x-3 items-center">
         <div
           className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${
-            user.picture ? "" : "border-2 border-border-dark"
+            user.picture ? "" : "border-[1px] md:border-2 border-border-dark"
           }`}
         >
           <Image
@@ -46,10 +42,14 @@ const AddComment = ({
           />
         </div>
         <textarea
-          className="transition-all duration-100 ease-in-out block outline-none  focus:outline-2   focus:outline-neon-accent-opaque  bg-contrast-posts px-4 py-3 rounded-md flex-1 min-h-[3rem] outline-[1px] outline-border-dark "
-          placeholder={
-               "Twój komentarz"
-          }
+          className="overflow-y-hidden transition-all duration-100 ease-in-out block rounded-md flex-1 bg-contrast-posts px-4 py-3  min-h-[3rem] 
+					
+								// OUTLINE STYLES
+								  outline-none md:outline-[1px]    md:outline-border-dark focus:outline-none  md:focus:outline-[1px]   md:focus:outline-neon-accent-opaque 
+								
+								// BORDER STYLES
+								border-[1px] border-border-dark focus:border-neon-accent-opaque  md:border-none"
+          placeholder={"Twój komentarz"}
           onInput={inputHandler}
           value={inputValue}
           // 1.5rem = line height p-1 = 0.25rem

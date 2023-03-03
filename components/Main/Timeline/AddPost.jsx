@@ -121,7 +121,9 @@ const AddPost = () => {
             <div className="flex items-start min-h-14 space-x-4">
               <div
                 className={`flex items-center justify-center select-none rounded-full relative   w-14 max-w-[50px] min-h-12  ${
-                  user.picture ? "" : "border-2 border-border-dark"
+                  user.picture
+                    ? ""
+                    : "border-[1px] md:border-2 border-border-dark"
                 }`}
               >
                 <Image
@@ -139,9 +141,17 @@ const AddPost = () => {
               </div>
 
               <textarea
-                className={`transition-all duration-100 ease-in-out block outline-none  focus:outline-2  border-1 border-transparent focus:outline-neon-accent-opaque  bg-contrast-posts  px-4 py-3 rounded-md flex-1 min-h-[3rem]  outline-[2px] outline-border-dark px-4 ${
+                className={`
+								flex-1 min-h-[3rem] overflow-y-hidden px-4 transition-all duration-100 ease-in-out block bg-contrast-posts  px-4 py-3 ${
                   inputLength > 0 ? "font-bold" : "font-normal"
-                }`}
+                } rounded-md 
+
+								// OUTLINE STYLES
+								  outline-none     md:outline-border-dark focus:outline-none  md:focus:outline-2   md:focus:outline-neon-accent-opaque 
+								
+								// BORDER STYLES
+								border-[1px] border-border-dark focus:border-neon-accent-opaque  md:border-none
+								 `}
                 placeholder={
                   loggedIn
                     ? "Co u Ciebie słychać?"
@@ -150,19 +160,22 @@ const AddPost = () => {
                 onInput={inputHandler}
                 value={inputValue}
                 maxLength={280}
+                disabled={!loggedIn}
                 // 1.5rem = line height p-1 = 0.25rem
                 style={{ height: "3rem" }}
               ></textarea>
             </div>
-            <p
-              className={`place-self-end py-2 pr-1 text-textcol-main-dark ${
-                inputLength < 280
-                  ? "text-textcol-main-dark font-normal"
-                  : "text-red-500 font-semibold"
-              }`}
-            >
-              {inputLength} / 280
-            </p>
+            {loggedIn && (
+              <p
+                className={`place-self-end py-2 pr-1 text-textcol-main-dark ${
+                  inputLength < 280
+                    ? "text-textcol-main-dark font-normal"
+                    : "text-red-500 font-semibold"
+                }`}
+              >
+                {inputLength} / 280
+              </p>
+            )}
           </div>
           <div className="flex justify-between">
             <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-contrast-posts rounded-md px-4">

@@ -4,7 +4,7 @@ import Image from "next/image";
 const PostBody = ({ user, body, postedAt }) => {
   return (
     <div className="flex border md:border px-4  md:px-10 pt-7 border-r-transparent border-l-transparent border-t-transparent  border-b-transparent border-solid">
-      <div className="min-w-max rounded-full overflow-hidden drop-shadow-[0px_10px_10px_#000]">
+      <div className="min-w-max rounded-full overflow-hidden md:drop-shadow-[0px_10px_10px_#000]">
         <Image
           placeholder="blur"
           blurDataURL="https://via.placeholder.com/150"
@@ -22,7 +22,7 @@ const PostBody = ({ user, body, postedAt }) => {
             <p className="font-medium">{user.nickname}</p>
             <p className="text-text-chill text-xs">{user.name}</p>
           </div>
-          <p className="text-text-chill text-xs font-medium">
+          <p className="text-text-chill text-xs font-medium text-right max-w-[7em] md:max-w-none">
             {new Date(+postedAt).toLocaleString()}
           </p>
         </div>
