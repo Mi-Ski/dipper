@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdHomeFilled, MdOutlineLogout } from "react-icons/md";
 import { BsDot } from "react-icons/bs";
 import { IconContext } from "react-icons";
@@ -6,8 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
-
 import { useUser } from "../../context/UserContext";
+
+// TODO: onscroll offset calculator to show/hide timeline nav
 
 const Header = ({ routed }) => {
   const router = useRouter();
@@ -17,6 +18,26 @@ const Header = ({ routed }) => {
   const user = useUser();
   const loggedIn = Boolean(user.id);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [timelineNavShown, setTimelineNavShown] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      if (position > 200) {
+        setTimelineNavShown(true);
+      } else {
+        setTimelineNavShown(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const logIn = async () => {
     router.push("/api/auth/login");
@@ -48,8 +69,29 @@ const Header = ({ routed }) => {
               </h1>
             </div>
           </Link>
+          {!routed && (
+            <div
+              className={`flex text-text-chill  transition-all ease-in-out duration-200 ${
+                timelineNavShown ? " opacity-100" : "opacity-0"
+              }`}
+            >
+              <div className="w-5 mx-2">
+                <IconContext.Provider
+                  value={{ color: "currentColor", size: "100%" }}
+                >
+                  <BsDot />
+                </IconContext.Provider>
+              </div>
+
+              <h2 className="font-semibold">oś czasu</h2>
+            </div>
+          )}
           {routed && (
-            <div className="text-text-chill flex">
+            <div
+              className={`flex text-text-chill transition-all ease-in-out duration-200 ${
+                routed ? " opacity-100" : "opacity-0"
+              }`}
+            >
               <div className="w-5 mx-2">
                 <IconContext.Provider
                   value={{ color: "currentColor", size: "100%" }}

@@ -29,7 +29,7 @@ const MobileOverlay = ({ techStackPageActive }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollPosition]);
+  }, []);
 
   return (
     <div className="pointer-events-none md:hidden fixed flex flex-col h-full justify-between w-screen items-end z-[90]">
