@@ -51,20 +51,6 @@ const AddPost = () => {
         },
       };
 
-      socket.next({
-        type: "NEW_POST",
-        actionOwner: {
-          name: user.nickname,
-          picture: user.picture,
-          id: user?.id,
-        },
-        post: {
-          user: user,
-        },
-        time: 5000,
-        key: Math.random(),
-      });
-
       const response = await fetch("/api/tweets", {
         method: "POST",
         headers: {
@@ -84,6 +70,19 @@ const AddPost = () => {
         ...oldState,
       ]);
       setInputValue("");
+      socket.next({
+        type: "NEW_POST",
+        actionOwner: {
+          name: user.nickname,
+          picture: user.picture,
+          id: user?.id,
+        },
+        post: {
+          user: user,
+        },
+        time: 5000,
+        key: Math.random(),
+      });
       setLoading(false);
     }
   };
@@ -113,10 +112,10 @@ const AddPost = () => {
   };
 
   return (
-    <div className="w-full flex flex-col px-2 mb-10 pt-10 pb-4 md:px-4 2xl:px-10 bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] md:border-2 md:border-border-dark relative overflow-hidden">
+    <div className="w-full flex flex-col px-2 pt-10 pb-6  md:px-4 2xl:px-10 mb-10  bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] border-[1px] border-x-0 border-t-0 md:border-2 border-border-dark relative overflow-hidden">
       <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col space-y-7 md:space-y-5">
           <div className="flex flex-col">
             <div className="flex items-start min-h-14 space-x-4">
               <div

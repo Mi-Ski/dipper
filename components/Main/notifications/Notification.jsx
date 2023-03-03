@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import WebsocketContext from "../../../context/WebsocketContext";
 import Image from "next/image";
 import { useUser } from "../../../context/UserContext";
@@ -7,6 +7,16 @@ const Notification = ({ notification }) => {
   const { setNotifications } = useContext(WebsocketContext);
   const currentUser = useUser();
   const sameUser = currentUser.id === notification.actionOwner?.id;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setNotifications((prev) =>
+        prev.filter((el) => el.key !== notification.key)
+      );
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  });
 
   const notificationClickHandler = (key) => {
     if (notification.type === "NEW_POST" && !sameUser) {

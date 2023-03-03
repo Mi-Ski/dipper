@@ -48,13 +48,12 @@ const MainRightContent = () => {
             <Image
               placeholder="blur"
               blurDataURL="https://via.placeholder.com/150"
-              src={"/icon-pictureasset.png"}
+              src={"/techstack.png"}
               alt="User Avatar"
               layout="fill"
-              className=" object-cover opacity-25"
+              className=" object-cover "
             />
           </div>
-          <h2 className="text-center">W trakcie: podstrona 2</h2>
         </div>
         <div className="w-full bg-white dark:bg-contrast-posts mb-10 border-2 border-border-dark border-solid rounded py-3">
           {featuredUsers.length > 0 && (

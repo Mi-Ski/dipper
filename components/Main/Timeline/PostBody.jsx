@@ -16,7 +16,7 @@ const PostBody = ({ user, body, postedAt }) => {
           className="rounded-full "
         />
       </div>
-      <div className="flex flex-1 flex-col ml-3">
+      <div className="flex flex-1  flex-col ml-3">
         <div className="flex justify-between pt-1.5">
           <div className="flex flex-col ">
             <p className="font-medium">{user.nickname}</p>
@@ -26,7 +26,7 @@ const PostBody = ({ user, body, postedAt }) => {
             {new Date(+postedAt).toLocaleString()}
           </p>
         </div>
-        <div className="mt-7 mb-5 text-lg leading-8 break-all">{body}</div>
+        <div className="mt-7 mb-5 text-lg leading-8 break-all ">{body}</div>
       </div>
     </div>
   );

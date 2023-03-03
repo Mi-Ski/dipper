@@ -12,25 +12,7 @@ export default WebsocketContext;
 export function WebsocketProvider({ children }) {
   const [socket, setSocket] = React.useState(null);
 
-
-  const [notifications, setNotifications] = React.useState([
-    {
-			type: "POST_REMOVED",
-      message: "Post usunięty",
-      color: "bg-border-dark",
-      time: 5000,
-      key: Math.random(),
-			onClickAction: () => removeNotification(key),
-    },
-    // {
-    //   message: "Pojawił się nowy wpis!",
-		// 	type: "NEW_POST",
-    //   color: "bg-brand-accent",
-    //   time: 5000,
-    //   key: Math.random(),
-		// 	onClickAction: () => removeNotification(key),
-    // },
-  ]);
+  const [notifications, setNotifications] = React.useState([]);
 
   return (
     <WebsocketContext.Provider
