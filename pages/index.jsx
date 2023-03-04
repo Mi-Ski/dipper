@@ -45,7 +45,7 @@ export default function Home() {
     socket.subscribe((notificationObject) => {
       // handle new post notificationObject
       // setPosts((prevPosts) => [notificationObject, ...prevPosts]);
-      console.log(notificationObject);
+      // console.log(notificationObject);
 			// filter out server interval heartbeat
       if (notificationObject.type !== "heartbeat") {
         setNotifications((prev) => [notificationObject, ...prev]);

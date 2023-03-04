@@ -1,31 +1,41 @@
 import React, { useContext } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 import ThemeContext from "../../context/ThemeContext";
 import { IconContext } from "react-icons";
 
-import { RiToggleFill, RiToggleLine } from "react-icons/ri";
 import { MdLightMode } from "react-icons/md";
 import Search from "./Search";
+import ParticleBackground from "./ParticleBackground";
 
 // TODO: particles.js background
 
-const Sidebar = ({routed}) => {
-  const router = useRouter();
+const Sidebar = ({ routed }) => {
   const { toggleDarkContext } = useContext(ThemeContext);
-
-  const logoutHandler = () => {
-    router.push("/api/auth/logout");
-  };
 
   const themeHandler = () => {
     toggleDarkContext();
   };
 
   return (
-    <div className="hidden md:flex  flex-col justify-between items-center fixed  h-full w-1/5   bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
-      <div>
+    <div className="hidden md:flex   flex-col justify-between items-center fixed  h-full w-1/5   bg-slate-100 border-t-0 border-l-0 border-b-0 border-r-2  border-r-border-dark border-solid  dark:bg-bgcol-ui-dark">
+      {/* overused particle background that I shamelessly copied from stackoverflow :) */}
+      <div className="particles mt-[5vh]">
+        <ParticleBackground />
+      </div>
+      <style jsx>{`
+        div .particles {
+          mask-image: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 36%,
+            rgba(0, 0, 0, 1) 56%,
+            rgba(0, 0, 0, 0) 100%
+          );
+          mask-mode: alpha;
+        }
+      `}</style>
+      <div className="absolute z-30">
         <div className="flex flex-col xl:flex-row py-[10vh]  items-center justify-center 2xl:mr-7">
           <div className="w-24 2xl:w-fit h-fit select-none">
             <Image

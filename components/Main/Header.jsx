@@ -13,7 +13,7 @@ import { useUser } from "../../context/UserContext";
 const Header = ({ routed }) => {
   const router = useRouter();
   const pathname = router.pathname;
-  console.log(pathname);
+  // console.log(pathname);
 
   const user = useUser();
   const loggedIn = Boolean(user.id);
