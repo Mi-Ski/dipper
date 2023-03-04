@@ -205,7 +205,7 @@ const AddPost = () => {
             </div>
             <button
               type="submit"
-              className="bg-gradient-to-r min-w-[9em] from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100 select-none"
+              className="min-w-[9em] bg-gradient-to-r  from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100 select-none"
             >
               {loggedIn && !loading && "Opublikuj"}
               {loggedIn && loading && <Loading size="24" />}

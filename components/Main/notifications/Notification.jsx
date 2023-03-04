@@ -1,23 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import WebsocketContext from "../../../context/WebsocketContext";
 import Image from "next/image";
+import { IconContext } from "react-icons";
+import { AiFillCloseSquare } from "react-icons/ai";
 import { useUser } from "../../../context/UserContext";
 
 const Notification = ({ notification }) => {
   const { setNotifications } = useContext(WebsocketContext);
   const currentUser = useUser();
   const sameUser = currentUser.id === notification.actionOwner?.id;
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setNotifications((prev) =>
-        prev.filter((el) => el.key !== notification.key)
-      );
-    }, 2000);
-
-    return () => clearTimeout(timeout);
-  });
-
   const notificationClickHandler = (key) => {
     if (notification.type === "NEW_POST" && !sameUser) {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,7 +47,8 @@ const Notification = ({ notification }) => {
       notification.color = "bg-purple-500";
       break;
     case "LIKE_POST":
-      notification.color = "bg-purple-500";
+      notification.color =
+        "bg-gradient-to-r  from-neon-accent-opaque to-brand-accent px-5 py-2";
       // only show notification if current user has his own post liked
       if (notification.actionOwner.id === currentUser.id) {
         return (
@@ -86,11 +78,30 @@ export const NotificationBody = ({
   sameUser,
   notificationClickHandler,
 }) => {
+  const [barWidth, setBarWidth] = useState(100);
+  const { setNotifications } = useContext(WebsocketContext);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (barWidth <= 0) {
+        setNotifications((prev) =>
+          prev.filter((el) => el.key !== notification.key)
+        );
+        console.log("koncowa watosc ", barWidth);
+        return clearInterval(interval);
+      }
+      setBarWidth((prev) => prev - 1);
+      console.log(barWidth);
+    }, 20);
+
+    return () => clearInterval(interval);
+  }, [barWidth]);
+
   return (
-    <div className="cursor-default">
+    <div className="cursor-pointer ">
       {!sameUser && (
         <div
-          className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-3`}
+          className={`ease-in-out flex items-center mb-4 ${notification.color} rounded-xl px-3 relative overflow-hidden`}
         >
           <div
             className={` relative  overflow-hidden w-14 max-w-[36px] h-9   ${
@@ -120,6 +131,19 @@ export const NotificationBody = ({
             <span className="font-bold text-lg">{`${notification.post.user.name}`}</span>{" "}
             {`${notificationMsg}`}
           </p>
+
+          <div className="ml-4">
+            <IconContext.Provider
+              value={{ color: "white", size: `26px` }}
+            >
+              <AiFillCloseSquare />
+            </IconContext.Provider>
+          </div>
+
+          <div
+					style={{ width: `${barWidth}%` }}
+            className={`absolute bottom-0 left-0  h-1 bg-neon-accent2-opaque `}
+          />
         </div>
       )}
       {sameUser && (

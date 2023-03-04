@@ -68,6 +68,10 @@ module.exports = {
 			"neon-accent2-opaque": "rgba(62, 252, 247, 1)",
 			"button-like": "#e24d5d",
 			"brand-accent": "#5d2ff6",
+
+
+			"notification-success": "#34c15d",
+			// "notification-info": "#",
 		},
 		fontFamily: {
 			"sans": ["Montserrat", "ui-sans-serif"],
