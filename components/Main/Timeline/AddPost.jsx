@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import PostsContext from "../../../context/PostContext";
 import Image from "next/image";
@@ -8,8 +8,10 @@ import Loading from "../../Loading";
 import { useRouter } from "next/router";
 
 const AddPost = () => {
+  const textareaRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [initialHeight, setInitialHeight] = useState(true);
   const [inputLength, setInputLength] = useState(0);
   const { setPosts } = useContext(PostsContext);
   const { socket } = useContext(WebsocketContext);
@@ -26,10 +28,14 @@ const AddPost = () => {
     setInputLength(e.target.value.length);
     e.target.style.height = "1px"; // Reset the height to minimum value
     e.target.style.height = `${e.target.scrollHeight}px`; // Set the height to the calculated scroll height
+    if (e.target.value === "") {
+      e.target.style.height = "1.5rem";
+    }
   };
 
   const onSubmitTweet = async (event) => {
     event.preventDefault();
+    // setInitialHeight(true);
 
     if (!loggedIn) {
       logIn();
@@ -69,7 +75,12 @@ const AddPost = () => {
         },
         ...oldState,
       ]);
+
+			// Textarea reset
       setInputValue("");
+      textareaRef.current.style.height = "1.5rem";
+
+			// Send notification
       socket.next({
         type: "NEW_POST",
         actionOwner: {
@@ -140,6 +151,7 @@ const AddPost = () => {
               </div>
 
               <textarea
+                ref={textareaRef}
                 className={`
 								flex-1 min-h-[3rem] overflow-y-hidden px-4 transition-all duration-100 ease-in-out block bg-contrast-posts  px-4 py-3 ${
                   inputLength > 0 ? "font-bold" : "font-normal"
@@ -161,7 +173,7 @@ const AddPost = () => {
                 maxLength={280}
                 disabled={!loggedIn}
                 // 1.5rem = line height p-1 = 0.25rem
-                style={{ height: "3rem" }}
+                style={{ height: `${initialHeight ? "3rem" : ""}` }}
               ></textarea>
             </div>
             {loggedIn && (

@@ -81,6 +81,7 @@ export const NotificationBody = ({
   const [barWidth, setBarWidth] = useState(100);
   const { setNotifications } = useContext(WebsocketContext);
 
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (barWidth <= 0) {
@@ -109,6 +110,7 @@ export const NotificationBody = ({
                 ? ""
                 : "border-2 border-border-dark rounded-full"
             }`}
+						
           >
             <Image
               placeholder="blur"
@@ -147,13 +149,25 @@ export const NotificationBody = ({
         </div>
       )}
       {sameUser && (
-        <div>
+        <div className={`flex relative  px-5 py-2 mb-4 rounded-xl bg-green-500 overflow-hidden`}>
           <p
-            className={`text-center text-xl px-5 py-2 mb-4 rounded-xl bg-green-500`}
+            className={`text-center text-xl `}
             onClick={() => notificationClickHandler(notification.key)}
           >
             {selfNofiticationMsg}
           </p>
+          <div className="ml-4">
+            <IconContext.Provider
+              value={{ color: "white", size: `26px` }}
+            >
+              <AiFillCloseSquare />
+            </IconContext.Provider>
+          </div>
+
+          <div
+					style={{ width: `${barWidth}%` }}
+            className={`absolute bottom-0 left-0  h-1 bg-neon-accent2-opaque `}
+          />
         </div>
       )}
     </div>
