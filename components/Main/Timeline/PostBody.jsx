@@ -3,7 +3,22 @@ import Image from "next/image";
 
 const PostBody = ({ user, body, postedAt }) => {
   // wrap each word starting with # in a link redirecting to twitter search
-  const formattedBody = body.replace(
+  function splitLongWords(str) {
+    const words = str.split(" ");
+    const newWords = words.map((word) => {
+      if (word.length > 25) {
+        const firstChunk = word.slice(0, 25);
+        const rest = word.slice(25);
+        return `${firstChunk} ${splitLongWords(rest)}`;
+      } else {
+        return word;
+      }
+    });
+    return newWords.join(" ");
+  }
+	const newWords = splitLongWords(body);
+
+  const formattedBody = newWords.replace(
     /#[a-zA-Z0-9]+/g,
     (match) =>
       `<a style="color: #4444ff; font-weight: 800;" href="https://twitter.com/search?q=%23${match.slice(
@@ -37,7 +52,7 @@ const PostBody = ({ user, body, postedAt }) => {
           </p>
         </div>
         <div
-          className="mt-7 mb-5 text-lg rich-text leading-8 break-all"
+          className="mt-7 mb-5 text-lg rich-text leading-8 break-words"
           dangerouslySetInnerHTML={{ __html: formattedBody }}
         ></div>
       </div>
