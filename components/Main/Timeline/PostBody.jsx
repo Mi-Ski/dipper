@@ -1,30 +1,35 @@
 import React from "react";
 import Image from "next/image";
 
-const PostBody = ({ user, body, postedAt }) => {
-  // wrap each word starting with # in a link redirecting to twitter search
-  function splitLongWords(str) {
-    const words = str.split(" ");
-    const newWords = words.map((word) => {
-      if (word.length > 25) {
-        const firstChunk = word.slice(0, 25);
-        const rest = word.slice(25);
-        return `${firstChunk} ${splitLongWords(rest)}`;
-      } else {
-        return word;
-      }
-    });
-    return newWords.join(" ");
-  }
-	const newWords = splitLongWords(body);
+// split abnormally long words (like links) into chunks of 25 characters
+function splitLongWords(str) {
+  const words = str.split(" ");
+  const newWords = words.map((word) => {
+    if (word.length > 22) {
+      const firstChunk = word.slice(0, 22);
+      const rest = word.slice(22);
+      return `${firstChunk} ${splitLongWords(rest)}`;
+    } else {
+      return word;
+    }
+  });
+  return newWords.join(" ");
+}
 
-  const formattedBody = newWords.replace(
+// style="color: #4444ff; font-weight: 800;"
+
+const PostBody = ({ user, body, postedAt }) => {
+  const chunkedBody = splitLongWords(body);
+
+  // wrap each word starting with # in a link redirecting to twitter search
+  const formattedBody = chunkedBody.replace(
     /#[a-zA-Z0-9]+/g,
     (match) =>
-      `<a style="color: #4444ff; font-weight: 800;" href="https://twitter.com/search?q=%23${match.slice(
-        1,
-        match.length
-      )}">${match}</a>`
+      `<span class="px-[2px] py-1 hover:bg-gradient-to-b from-transparent to-border-dark/[.5] 
+ rounded-md"><a class="font-bold bg-gradient-to-br from-neon-accent2-opaque  to-neon-accent-opaque bg-clip-text text-transparent" href="https://twitter.com/search?q=%23${match.slice(
+   1,
+   match.length
+ )}">${match}</a></span>`
   );
 
   return (

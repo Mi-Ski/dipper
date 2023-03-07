@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     collection: "tweets",
   };
   const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
+	const {skip, limit} = req.query;
 
   try {
     switch (req.method) {
@@ -23,6 +24,8 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             ...fetchBody,
             sort: { postedAt: -1 },
+						skip: parseInt(skip),
+						limit: parseInt(limit)
           }),
         });
         const readDataJson = await readData.json();

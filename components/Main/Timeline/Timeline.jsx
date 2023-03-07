@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import PostsContext from "../../../context/PostContext";
-import WebsocketContext from "../../../context/WebsocketContext";
+import Loading from "../../Loading";
 
 import AddPost from "./AddPost";
 import Post from "./Post";
 import SkeletonLoad from "../../SkeletonLoad";
 
-const Timeline = ({ postsLoading }) => {
+const Timeline = ({ postsLoading, newChunkLoading }) => {
   const { posts } = React.useContext(PostsContext);
   // _id, user[], body, postedAt, likes[]
   // userid, name, nickname, picture
   // postsLoading = true;
-  // const { notificationMsg } = useContext(WebsocketContext);
 
   return (
     <div className="w-screen lg:w-3/4 overflow-y-auto">
@@ -34,6 +33,9 @@ const Timeline = ({ postsLoading }) => {
                   postObj={post}
                 />
               ))}
+							<div className="py-10">
+						{newChunkLoading && <Loading size="20"/>}
+						</div>
             {Boolean(!posts) && (
               <p className="text-center text-white text-xl py-20">
                 Błąd w ładowaniu postów 😿

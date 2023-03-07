@@ -7,7 +7,7 @@ import { DiGithubAlt } from "react-icons/di";
 import Loading from "../Loading";
 
 const MainRightContent = () => {
-  const { posts } = useContext(PostsContext);
+  const { topPosts: posts } = useContext(PostsContext);
   const router = useRouter();
 
   const redirectHandler = () => {

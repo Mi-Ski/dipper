@@ -4,7 +4,7 @@ import Header from "./Header";
 import MobileOverlay from "../Mobile/MobileOverlay";
 import Notifications from "./notifications/Notifications";
 
-const Main = ({ isLoading }) => {
+const Main = ({ isLoading, newChunkLoading}) => {
 
   return (
     <div className="w-full md:w-4/5 z-10	">
@@ -12,7 +12,7 @@ const Main = ({ isLoading }) => {
       <MobileOverlay />
       <Header />
       <div className="flex mt-0 md:mt-32 relative">
-        <Timeline postsLoading={isLoading} />
+        <Timeline postsLoading={isLoading} newChunkLoading={newChunkLoading} />
         <MainRightContent />
       </div>
     </div>

@@ -4,6 +4,8 @@ import ThemeContext from '../../context/ThemeContext'
 
 const Layout = ({children, routed}) => {
 	const {darkContext} = useContext(ThemeContext)
+	const gradientColLight = darkContext ? "rgba(7, 7, 10, 1)" : "rgba(255, 255, 255, 1)"
+	const gradientColDark = darkContext ? "rgba(6, 8, 15, 1)" : "rgba(255, 255, 255, 1)"
 
 	return (
     <div className={`h-screen ${darkContext ? "dark" : ""} `}>
@@ -13,11 +15,11 @@ const Layout = ({children, routed}) => {
           div {
             background: linear-gradient(
               45deg,
-              rgba(7, 7, 10, 1) 0%,
-              rgba(7, 7, 10, 1) 44%,
-              rgba(6, 8, 15, 1) 61%,
-              rgba(7, 7, 10, 1) 76%,
-              rgba(7, 7, 10, 1) 100%
+              ${gradientColLight} 0%,
+              ${gradientColLight} 44%,
+              ${gradientColDark} 61%,
+              ${gradientColLight} 76%,
+              ${gradientColLight} 100%
             );
           }
         `}</style>

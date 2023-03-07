@@ -52,10 +52,12 @@ module.exports = {
 			...colors,
 			"bgcol-main-dark": "#07070A",
 			"bgcol-ui-dark": "#0C0D11",
+			"bgcol-ui-light": "#ffffff",
 			"contrast-posts": "#040406",
 			"post-input-bg": "#292C35",
 
 			"border-dark": "#33333A",
+			"border-light": "#aaaaaa",
 			"border-neon": "rgba(60, 252, 249, .7)",
 
 			"textcol-main-dark": "#EFEFEF",
