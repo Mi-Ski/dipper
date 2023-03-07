@@ -12,7 +12,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [newChunkLoading, setNewChunkLoading] = useState(false);
   const [accumulator, setAccumulator] = useState(8);
-	const [accumulatorChanged, setAccumulatorChanged] = useState(false);
+  const [accumulatorChanged, setAccumulatorChanged] = useState(false);
 
   console.log(accumulator, "accumulator");
   const setUser = useSetUser();
@@ -78,7 +78,7 @@ export default function Home() {
         const tweetsjson = await tweets.json();
         setPosts((prev) => prev.concat(tweetsjson.documents));
         setNewChunkLoading(false);
-				setAccumulatorChanged(false);
+        setAccumulatorChanged(false);
       };
 
       fetchPosts();
@@ -103,8 +103,8 @@ export default function Home() {
       const windowBottom = windowHeight + window.pageYOffset;
 
       if (windowBottom >= docHeight - 200 && !accumulatorChanged) {
-				setAccumulator((prev) => prev + 8);
-				setAccumulatorChanged(true);
+        setAccumulator((prev) => prev + 8);
+        setAccumulatorChanged(true);
       }
     };
 

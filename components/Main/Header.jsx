@@ -56,52 +56,54 @@ const Header = ({ routed }) => {
       <div className="flex items-center px-6 py-1 2xl:py-3 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
         <div className="flex items-center">
           <Link href="/">
-            <div className="flex items-center cursor-pointer">
-              <div className="w-8 2xl:w-11">
-                <IconContext.Provider
-                  value={{ color: "white", size: "100%" }}
-                >
-                  <MdHomeFilled />
-                </IconContext.Provider>
+            <>
+              <div className="flex items-center cursor-pointer">
+                <div className="w-8 2xl:w-11">
+                  <IconContext.Provider
+                    value={{ color: "white", size: "100%" }}
+                  >
+                    <MdHomeFilled />
+                  </IconContext.Provider>
+                </div>
+                <h1 className="font-semibold text-xl 2xl:text-2xl ml-3 ">
+                  Home
+                </h1>
               </div>
-              <h1 className="font-semibold text-xl 2xl:text-2xl ml-3 ">
-                Home
-              </h1>
-            </div>
-          {!routed && (
-            <div
-              className={`flex text-text-chill  transition-all ease-in-out duration-200 ${
-                timelineNavShown ? " opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="w-5 mx-2">
-                <IconContext.Provider
-                  value={{ color: "currentColor", size: "100%" }}
+              {!routed && (
+                <div
+                  className={`flex text-text-chill  transition-all ease-in-out duration-200 ${
+                    timelineNavShown ? " opacity-100" : "opacity-0"
+                  }`}
                 >
-                  <BsDot />
-                </IconContext.Provider>
-              </div>
+                  <div className="w-5 mx-2">
+                    <IconContext.Provider
+                      value={{ color: "currentColor", size: "100%" }}
+                    >
+                      <BsDot />
+                    </IconContext.Provider>
+                  </div>
 
-              <h2 className="font-semibold">oś czasu</h2>
-            </div>
-          )}
-          {routed && (
-            <div
-              className={`flex text-text-chill transition-all ease-in-out duration-200 ${
-                routed ? " opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="w-5 mx-2">
-                <IconContext.Provider
-                  value={{ color: "currentColor", size: "100%" }}
+                  <h2 className="font-semibold">oś czasu</h2>
+                </div>
+              )}
+              {routed && (
+                <div
+                  className={`flex text-text-chill transition-all ease-in-out duration-200 ${
+                    routed ? " opacity-100" : "opacity-0"
+                  }`}
                 >
-                  <BsDot />
-                </IconContext.Provider>
-              </div>
+                  <div className="w-5 mx-2">
+                    <IconContext.Provider
+                      value={{ color: "currentColor", size: "100%" }}
+                    >
+                      <BsDot />
+                    </IconContext.Provider>
+                  </div>
 
-              <h2 className="font-semibold">techstack</h2>
-            </div>
-          )}
+                  <h2 className="font-semibold">techstack</h2>
+                </div>
+              )}
+            </>
           </Link>
         </div>
 
