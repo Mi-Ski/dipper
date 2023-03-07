@@ -68,7 +68,6 @@ const Header = ({ routed }) => {
                 Home
               </h1>
             </div>
-          </Link>
           {!routed && (
             <div
               className={`flex text-text-chill  transition-all ease-in-out duration-200 ${
@@ -103,6 +102,7 @@ const Header = ({ routed }) => {
               <h2 className="font-semibold">techstack</h2>
             </div>
           )}
+          </Link>
         </div>
 
         <div className="relative mr-16">
