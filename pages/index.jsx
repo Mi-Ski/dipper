@@ -102,7 +102,8 @@ export default function Home() {
       );
       const windowBottom = windowHeight + window.pageYOffset;
 
-      if (windowBottom >= docHeight - 200 && !accumulatorChanged) {
+			console.log(posts.length, topPosts.length);
+      if (windowBottom >= docHeight - 200 && !accumulatorChanged && posts.length + 8 < topPosts.length) {
         setAccumulator((prev) => prev + 8);
         setAccumulatorChanged(true);
       }
@@ -110,7 +111,7 @@ export default function Home() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [accumulator, newChunkLoading, setPosts, setNewChunkLoading]);
+  }, [accumulator, posts, topPosts, newChunkLoading, setPosts, setNewChunkLoading]);
 
   return (
     <Layout>
