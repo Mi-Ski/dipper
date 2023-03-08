@@ -247,7 +247,7 @@ const Post = ({
         <div id={_id}>
           <Card
             classes={[
-              "flex flex-col shadow-lg shadow-black/[.55] border md:border-2 ",
+              "flex flex-col shadow-lg  dark:shadow-black/[.55] border md:border-2 ",
             ]}
           >
             <PostBody body={body} user={user} postedAt={postedAt} />

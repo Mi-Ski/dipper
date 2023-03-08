@@ -34,7 +34,7 @@ const PostBody = ({ user, body, postedAt }) => {
 
   return (
     <div className="flex border md:border px-4  md:px-10 pt-7 border-r-transparent border-l-transparent border-t-transparent  border-b-transparent border-solid">
-      <div className="min-w-max rounded-full overflow-hidden md:drop-shadow-[0px_10px_10px_#000]">
+      <div className="min-w-max rounded-full overflow-hidden md:drop-shadow-[0px_10px_10px_#aaa] dark:md:drop-shadow-[0px_10px_10px_#000]">
         <Image
           placeholder="blur"
           blurDataURL="https://via.placeholder.com/150"

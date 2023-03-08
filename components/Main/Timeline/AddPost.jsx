@@ -123,7 +123,7 @@ const AddPost = () => {
   };
 
   return (
-    <div className="w-full flex flex-col px-2 pt-10 pb-6  md:px-4 2xl:px-10 mb-10  bg-slate-300  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] border-[1px] border-x-0 border-t-0 md:border-2 border-border-dark relative overflow-hidden">
+    <div className="w-full flex flex-col px-2 pt-10 pb-6  md:px-4 2xl:px-10 mb-10  bg-bgcol-ui-light  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] border-[1px] border-x-0 border-t-0 md:border-2 border-border-dark relative overflow-hidden">
       <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-7 md:space-y-5">
@@ -217,7 +217,7 @@ const AddPost = () => {
             </div>
             <button
               type="submit"
-              className="min-w-[9em] bg-gradient-to-r  from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100 select-none"
+              className="min-w-[9em] bg-gradient-to-r  from-neon-accent-opaque to-brand-accent px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100 select-none text-white"
             >
               {loggedIn && !loading && "Opublikuj"}
               {loggedIn && loading && <Loading size="24" />}
