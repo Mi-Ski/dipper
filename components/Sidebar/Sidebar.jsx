@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 
 import ThemeContext from "../../context/ThemeContext";
@@ -11,10 +11,10 @@ import ParticleBackground from "./ParticleBackground";
 // TODO: particles.js background
 
 const Sidebar = ({ routed }) => {
-  const { toggleDarkContext } = useContext(ThemeContext);
+  const { toggleThemeHandler } = useContext(ThemeContext);
 
   const themeHandler = () => {
-    toggleDarkContext();
+    toggleThemeHandler();
   };
 
   return (
