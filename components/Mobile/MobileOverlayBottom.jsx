@@ -13,7 +13,7 @@ import { FaHome } from "react-icons/fa";
 
 const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
   const [searchVisible, setSearchVisible] = useState(false);
-  const { darkContext, toggleDarkContext } = useContext(ThemeContext);
+  const { isDarkTheme,  toggleThemeHandler } = useContext(ThemeContext);
   const user = useUser();
   const router = useRouter();
 
@@ -38,10 +38,10 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
       ) : (
         <div className="flex justify-between text-center align-center">
           <BottomDrawerIcon
-            onClickAction={toggleDarkContext}
+            onClickAction={toggleThemeHandler}
             description="Motyw"
           >
-            {darkContext ? <MdLightMode /> : <MdDarkMode />}
+            {isDarkTheme ? <MdLightMode /> : <MdDarkMode />}
           </BottomDrawerIcon>
           <BottomDrawerIcon
             onClickAction={() =>
