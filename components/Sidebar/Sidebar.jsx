@@ -60,7 +60,7 @@ const Sidebar = ({ routed }) => {
         </p>
         <div className="md:py-[3vh] justify-start  flex border-t-2 border-l-0 border-b-0 border-r-0  border-t-border-dark border-solid">
           <button
-            className="flex justify-center items-center mx-auto  gap-x-2 hover:bg-border-dark/[.6] rounded-md p-2 px-4"
+            className="flex justify-center items-center mx-auto  gap-x-2 hover:bg-border-dark/[.2]  dark:hover:bg-border-dark/[.6] rounded-md p-2 px-4"
             onClick={themeHandler}
           >
             <IconContext.Provider

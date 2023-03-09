@@ -14,7 +14,7 @@ export default function Home() {
   const [accumulator, setAccumulator] = useState(8);
   const [accumulatorChanged, setAccumulatorChanged] = useState(false);
 
-  console.log(accumulator, "accumulator");
+  // console.log(accumulator, "accumulator");
   const setUser = useSetUser();
 
   const { posts, topPosts, setPosts, setTopPosts } =
@@ -102,7 +102,7 @@ export default function Home() {
       );
       const windowBottom = windowHeight + window.pageYOffset;
 
-			console.log(posts.length, topPosts.length);
+			// console.log(posts.length, topPosts.length);
       if (windowBottom >= docHeight - 200 && !accumulatorChanged && posts.length + 8 < topPosts.length) {
         setAccumulator((prev) => prev + 8);
         setAccumulatorChanged(true);

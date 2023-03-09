@@ -20,7 +20,7 @@ const CommentsSection = ({
   }
 
   return (
-    <div className={`bg-black/[.2] pb-4  border  border-transparent  border-x-0 border-b-0 ${comments?.length > 0 && "pt-4"} `} >
+    <div className={`bg-border-dark/[.1] dark:bg-black/[.2] pb-4 ${comments?.length > 0 && "pt-4"} `} >
       <div className="pr-8 pl-8 md:pr-10 md:pl-14">
         {allCommentsShown && (
           <div>
@@ -42,7 +42,7 @@ const CommentsSection = ({
         {comments && comments.length > 2 && (
           <div className="flex justify-center">
             <button
-              className=" flex text-primary font-medium text-sm bg-border-dark/[.5] rounded-md px-2 py-1 mb-2"
+              className=" flex text-primary font-medium text-sm bg-border-dark/[.1] dark:bg-border-dark/[.5] rounded-md px-2 py-1 mb-2"
               onClick={() => setAllCommentsShown(!allCommentsShown)}
             >
               {allCommentsShown && `Ukryj komentarze`}

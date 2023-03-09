@@ -25,8 +25,8 @@ const PostBody = ({ user, body, postedAt }) => {
   const formattedBody = chunkedBody.replace(
     /#[a-zA-Z0-9]+/g,
     (match) =>
-      `<span class="px-[2px] py-1 hover:bg-gradient-to-b from-transparent to-border-dark/[.5] 
- rounded-md"><a class="font-bold bg-gradient-to-br from-neon-accent2-opaque  to-neon-accent-opaque bg-clip-text text-transparent" href="https://twitter.com/search?q=%23${match.slice(
+      `<span class="px-[2px] py-1 hover:bg-gradient-to-b from-transparent to-border-dark/[.2] dark:to-border-dark/[.5] 
+ rounded-md"><a target="_blank" class="font-bold bg-gradient-to-br from-neon-accent2-opaque  to-neon-accent-opaque bg-clip-text text-transparent" href="https://twitter.com/search?q=%23${match.slice(
    1,
    match.length
  )}">${match}</a></span>`

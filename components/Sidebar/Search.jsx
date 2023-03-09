@@ -26,16 +26,16 @@ const Search = () => {
     <div
       className={`${
         inputActive && "drop-shadow-input ring-2 ring-border-neon"
-      } flex rounded-md overflow-hidden  bg-bgcol-ui-dark border-2  border-border-dark border-solid lg:max-w-[80%] mx-auto 2xl:max-w-[100%]`}
+      } flex rounded-md overflow-hidden  dark:bg-bgcol-ui-dark border-2  border-border-dark border-solid lg:max-w-[92%] mx-auto 2xl:max-w-[100%]`}
     >
       <div className="hidden lg:grid place-items-center bg-border-dark  2xl:py-5 px-3">
         <IconContext.Provider
           value={{ color: "white", size: "20px" }}
-        >
+>
           <BsSearch />
         </IconContext.Provider>
       </div>
-      <div className="bg-contrast-posts flex-1 ">
+      <div className=" flex-1 ">
         <input
           onFocus={() => {
             setInputActive(true);
@@ -45,7 +45,7 @@ const Search = () => {
           placeholder="Szukaj wpisów..."
 					value={searchValue}
 					onChange={handleSearch}
-          className="bg-transparent w-full h-full text-white py-3 px-2 2xl:py-5 2xl:px-5 focus:outline-none text-xs lg:text-sm 2xl:text-base "
+          className="bg-transparent w-full h-full font-semibold dark:font-normal dark:text-white py-3 px-2 2xl:py-5 2xl:px-5 focus:outline-none text-xs lg:text-sm 2xl:text-base "
         />
       </div>
     </div>

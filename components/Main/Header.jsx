@@ -8,12 +8,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useUser } from "../../context/UserContext";
 
-// TODO: onscroll offset calculator to show/hide timeline nav
 
 const Header = ({ routed }) => {
   const router = useRouter();
   const pathname = router.pathname;
-  // console.log(pathname);
 
   const user = useUser();
   const loggedIn = Boolean(user.id);
@@ -55,12 +53,11 @@ const Header = ({ routed }) => {
     >
       <div className="flex items-center px-6 py-1 2xl:py-3 justify-between bg-white dark:bg-bgcol-ui-dark  border-t-0 border-l-0 border-b-2 border-r-0 border border-b-border-dark border-solid">
         <div className="flex items-center">
-          <Link href="/">
-            <>
+            <div onClick={() => router.push("/")} className="flex items-center ">
               <div className="flex items-center cursor-pointer">
                 <div className="w-8 2xl:w-11">
                   <IconContext.Provider
-                    value={{ color: "white", size: "100%" }}
+                    value={{ color: "currentColor", size: "100%" }}
                   >
                     <MdHomeFilled />
                   </IconContext.Provider>
@@ -103,15 +100,14 @@ const Header = ({ routed }) => {
                   <h2 className="font-semibold">techstack</h2>
                 </div>
               )}
-            </>
-          </Link>
+            </div>
         </div>
 
         <div className="relative mr-16">
           {!loggedIn && (
             <button
               onClick={() => logIn()}
-              className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2 my-2 2xl:py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100"
+              className="bg-gradient-to-r from-neon-accent-opaque to-brand-accent px-5 py-2 my-2 2xl:py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100 text-white"
             >
               Zaloguj się
             </button>
@@ -120,7 +116,7 @@ const Header = ({ routed }) => {
             <>
               <div
                 onClick={() => setProfileMenuOpen((old) => !old)}
-                className="flex items-center hover:bg-border-dark py-0 2xl:py-2 px-4 rounded-xl cursor-pointer w-[200px] h-[70px] text-ellipsis overflow-hidden"
+                className="flex items-center hover:bg-border-dark/[.2] dark:hover:bg-border-dark py-0 2xl:py-2 px-4 rounded-xl cursor-pointer w-[200px] h-[70px] text-ellipsis overflow-hidden"
               >
                 <div
                   className={`flex items-center relative  overflow-hidden   ${
@@ -153,11 +149,11 @@ const Header = ({ routed }) => {
           )}
           {loggedIn && profileMenuOpen && (
             <>
-              <div className="flex items-center  bg-border-dark/[.5]  rounded-xl  w-[200px] h-[70px] overflow-hidden">
+              <div className="flex items-center bg-border-dark/[.2] dark:bg-border-dark/[.5]  rounded-xl  w-[200px] h-[70px] overflow-hidden">
                 <div className="flex w-full justify-between items-center h-full">
                   <div
                     onClick={() => setProfileMenuOpen((old) => !old)}
-                    className="flex items-center font-black text-2lg h-full mr-2 px-4 h-full bg-border-dark cursor-pointer "
+                    className="flex items-center font-black text-2lg h-full mr-2 px-4 h-full bg-border-dark/[.1] dark:bg-border-dark cursor-pointer "
                   >
                     {" "}
                     &lsaquo;

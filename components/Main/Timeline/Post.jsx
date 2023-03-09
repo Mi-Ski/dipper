@@ -252,7 +252,7 @@ const Post = ({
           >
             <PostBody body={body} user={user} postedAt={postedAt} />
 
-            <div className=" flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark">
+            <div className=" flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 dark:border-b-border-dark">
               <div className="flex items-end lg:items-center">
                 <div className="flex   items-center ">
                   <button

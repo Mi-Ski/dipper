@@ -7,7 +7,7 @@ const Loading = ({classes, size}) => {
     <div className={"h-full grid place-content-center ".concat(classes)}>
       <div className="inline-block animate-spin">
         <IconContext.Provider
-          value={{ color: "white", size: `${size}px` }}
+          value={{ color: "currentColor", size: `${size}px` }}
         >
           <AiOutlineLoading3Quarters />
         </IconContext.Provider>

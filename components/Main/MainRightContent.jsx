@@ -67,7 +67,7 @@ const MainRightContent = () => {
           {featuredUsers.length > 0 &&
             featuredUsers.map((user) => (
               <div
-                className="flex items-center bg-white/[.01] w-[90%] mx-auto mb-2 p-2 rounded-md"
+                className="flex items-center bg-contrast-posts/[.1] dark:bg-white/[.01] w-[90%] mx-auto mb-2 p-2 rounded-md"
                 key={user.id}
               >
                 <div
@@ -93,7 +93,7 @@ const MainRightContent = () => {
                   <h2 className="text-center text-sm">
                     {user.nickname}
                   </h2>
-                  <h2 className="text-center rounded-full bg-brand-accent w-min mx-auto px-2 my-1">
+                  <h2 className="text-center text-white  rounded-full bg-brand-accent w-min mx-auto px-2 my-1">
                     {user.posts}
                   </h2>
                 </div>

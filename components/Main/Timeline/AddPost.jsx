@@ -153,7 +153,7 @@ const AddPost = () => {
               <textarea
                 ref={textareaRef}
                 className={`
-								flex-1 min-h-[3rem] overflow-y-hidden px-4 transition-all duration-100 ease-in-out block bg-contrast-posts  px-4 py-3 ${
+								flex-1 min-h-[3rem] overflow-y-hidden px-4 transition-all duration-100 ease-in-out block dark:bg-contrast-posts  px-4 py-3 ${
                   inputLength > 0 ? "font-bold" : "font-normal"
                 } rounded-md 
 
@@ -189,7 +189,7 @@ const AddPost = () => {
             )}
           </div>
           <div className="flex justify-between">
-            <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-contrast-posts rounded-md px-4">
+            <div className="flex space-x-[1px] text-2xl ease-in duration-100 bg-contrast-posts/[.1] dark:bg-contrast-posts rounded-md px-4">
               <button
                 className="hover:scale-[1.07]  ease-in duration-100"
                 onClick={() => addEmojiToInput(event, 1)}

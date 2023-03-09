@@ -50,7 +50,7 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
         </div>
         <textarea
 					ref={textareaRef}
-          className="overflow-y-hidden transition-all duration-100 ease-in-out block rounded-md flex-1 bg-contrast-posts px-4 py-3  min-h-[3rem] 
+          className="overflow-y-hidden transition-all duration-100 ease-in-out block rounded-md flex-1 dark:bg-contrast-posts px-4 py-3  min-h-[3rem] 
 					
 								// OUTLINE STYLES
 								  outline-none md:outline-[1px]    md:outline-border-dark focus:outline-none  md:focus:outline-[1px]   md:focus:outline-neon-accent-opaque 
@@ -67,7 +67,7 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
           className={`${
             inputValue.length > 0
               ? "bg-brand-accent"
-              : "bg-border-dark"
+              : "bg-border-dark/[.4] dark:bg-border-dark"
           }  px-5 py-2  rounded-md font-semibold hover:bg-brand-accent/[.85] ease-in duration-100  inline-block`}
           onClick={() => submitCommentHanlder()}
         >
