@@ -38,7 +38,8 @@ const Header = ({ routed }) => {
   }, []);
 
   const logIn = async () => {
-    router.push("/api/auth/login");
+		const win = window.open("https://www.dipper.pl/api/auth/login", "_blank");
+		win.focus();
   };
 
   const logOut = async () => {
