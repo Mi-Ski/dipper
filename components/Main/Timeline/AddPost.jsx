@@ -180,7 +180,7 @@ const AddPost = () => {
               <p
                 className={`place-self-end py-2 pr-1 text-textcol-main-dark ${
                   inputLength < 280
-                    ? "text-textcol-main-dark font-normal"
+                    ? "text-black dark:text-textcol-main-dark font-normal"
                     : "text-red-500 font-semibold"
                 }`}
               >
