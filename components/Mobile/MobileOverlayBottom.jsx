@@ -29,7 +29,7 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
         <div className="flex items-center">
           <Search />
           <button
-            className="w-10 h-10 bg-border-dark rounded-xl"
+            className="w-10 h-10 ml-4  bg-brand-accent text-white dark:bg-border-dark rounded-xl"
             onClick={() => setSearchVisible(false)}
           >
             x

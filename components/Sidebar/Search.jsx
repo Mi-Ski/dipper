@@ -25,8 +25,8 @@ const Search = () => {
   return (
     <div
       className={`${
-        inputActive && "drop-shadow-input ring-2 ring-border-neon"
-      } flex rounded-md overflow-hidden  dark:bg-bgcol-ui-dark border-2  border-border-dark border-solid lg:max-w-[92%] mx-auto 2xl:max-w-[100%]`}
+        inputActive && "md:drop-shadow-input md:ring-2 ring-border-neon"
+      } flex rounded-md overflow-hidden bg-white  dark:bg-bgcol-ui-dark border-2  border-border-dark border-solid w-[92%] mx-auto 2xl:max-w-[100%]`}
     >
       <div className="hidden lg:grid place-items-center bg-border-dark  2xl:py-5 px-3">
         <IconContext.Provider
