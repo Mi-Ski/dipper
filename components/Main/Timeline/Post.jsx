@@ -247,14 +247,14 @@ const Post = ({
         <div id={_id}>
           <Card
             classes={[
-              "flex flex-col shadow-lg  dark:shadow-black/[.55] border md:border-2 ",
+              "flex overflow-hidden flex-col shadow-lg  dark:shadow-black/[.55] border md:border-2 ",
             ]}
           >
             <PostBody body={body} user={user} postedAt={postedAt} />
 
-            <div className=" flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 dark:border-b-border-dark">
+            <div className=" flex items-end justify-between w-full px-4 lg:px-10 py-3 lg:py-5 drop-shadow border border-x-0 border-t-0 border-b-border-dark/[.1]   dark:border-b-border-dark">
               <div className="flex items-end lg:items-center">
-                <div className="flex   items-center ">
+                <div className="flex   items-center  ">
                   <button
                     disabled={loading}
                     onClick={likeHandler}
@@ -263,8 +263,8 @@ const Post = ({
                       " bg-button-like/[.1] text-button-like"
                     } ${
                       !currentUserLiked &&
-                      "bg-white/[.1] hover:bg-button-like/[.1] hover:text-button-like"
-                    } flex items-center justify-start   font-semibold  p-2    bg-button-like/[.1]  rounded-full max-w-max`}
+                      "bg-button-like/[.17] dark:bg-white/[.1]  hover:bg-button-like/[.1] hover:text-button-like"
+                    } flex items-center justify-start   font-semibold  p-2    bg-button-like/[.1]  rounded-full max-w-max transition-all ease-in duration-75`}
                   >
                     <div className="">
                       <IconContext.Provider

@@ -25,13 +25,13 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
   };
 
   return (
-    <div className="mt-6 px-4 flex flex-col gap-x-4">
+    <div className="mt-6 px-4 flex flex-col gap-x-4 overflow-hidden">
       <div className="flex gap-x-3 items-center">
         <div
           className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${
             user.picture
               ? ""
-              : "border-[1px] md:border-2 border-border-dark"
+              : "border-[1px] md:border-2 border-border-dark/[.4] dark:border-border-dark"
           }`}
         >
           <Image
@@ -56,7 +56,7 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
 								  outline-none md:outline-[1px]    md:outline-border-dark focus:outline-none  md:focus:outline-[1px]   md:focus:outline-neon-accent-opaque 
 								
 								// BORDER STYLES
-								border-[1px] border-border-dark focus:border-neon-accent-opaque  md:border-none"
+								border-[1px] border-border-dark/[.4] dark:border-border-dark focus:border-neon-accent-opaque  md:border-none"
           placeholder={"Twój komentarz"}
           onInput={inputHandler}
           value={inputValue}

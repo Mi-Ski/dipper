@@ -16,7 +16,6 @@ function splitLongWords(str) {
   return newWords.join(" ");
 }
 
-// style="color: #4444ff; font-weight: 800;"
 
 const PostBody = ({ user, body, postedAt }) => {
   const chunkedBody = splitLongWords(body);
@@ -57,7 +56,7 @@ const PostBody = ({ user, body, postedAt }) => {
           </p>
         </div>
         <div
-          className="mt-7 mb-5 text-lg rich-text leading-8 break-words"
+          className="mt-7 mb-5 text-lg leading-8 break-words"
           dangerouslySetInnerHTML={{ __html: formattedBody }}
         ></div>
       </div>

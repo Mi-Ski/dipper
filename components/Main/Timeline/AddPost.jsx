@@ -123,7 +123,7 @@ const AddPost = () => {
   };
 
   return (
-    <div className="w-full flex flex-col px-2 pt-10 pb-6  md:px-4 2xl:px-10 mb-10  bg-bgcol-ui-light  dark:bg-bgcol-ui-dark md:rounded shadow-lg shadow-black/[.55] border-[1px] border-x-0 border-t-0 md:border-2 border-border-dark relative overflow-hidden">
+    <div className="w-full flex flex-col px-2 pt-10 pb-6  md:px-4 2xl:px-10 mb-10  bg-bgcol-ui-light  dark:bg-bgcol-ui-dark md:rounded shadow-lg dark:shadow-black/[.5] dark:shadow-black/[.55] border-[1px] border-x-0 border-t-0 md:border-2 dark:border-border-dark relative overflow-hidden">
       <div className="h-1 bg-gradient-to-r from-neon-accent2-opaque to-brand-accent absolute w-full top-0 left-0"></div>
       <form onSubmit={onSubmitTweet} className="w-full">
         <div className="flex flex-col space-y-7 md:space-y-5">
@@ -133,7 +133,7 @@ const AddPost = () => {
                 className={`flex items-center justify-center select-none rounded-full relative   w-14 max-w-[50px] min-h-12  ${
                   user.picture
                     ? ""
-                    : "border-[1px] md:border-2 border-border-dark"
+                    : "border-[1px] md:border-2 border-border-dark/[.5] dark:border-border-dark"
                 }`}
               >
                 <Image
@@ -154,7 +154,7 @@ const AddPost = () => {
                 ref={textareaRef}
                 className={`
 								flex-1 min-h-[3rem] overflow-y-hidden px-4 transition-all duration-100 ease-in-out block dark:bg-contrast-posts  px-4 py-3 ${
-                  inputLength > 0 ? "font-bold" : "font-normal"
+                  inputLength > 0 ? "font-bold" : "font-semibold dark:font-normal"
                 } rounded-md 
 
 								// OUTLINE STYLES
