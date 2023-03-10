@@ -1,14 +1,14 @@
-import React  from "react";
+import React from "react";
 import Image from "next/image";
 import { useUser } from "../../context/UserContext";
 
-const MobileOverlayTop = ({clickHandler, pingClicked}) => {
+const MobileOverlayTop = ({ clickHandler, pingClicked }) => {
   const user = useUser();
 
   return (
     <div
       onClick={clickHandler}
-      className="relative pointer-events-auto p-1  m-4 bg-brand-accent shadow-md shadow-shadow/[.1] w-min rounded-full active:scale-[0.9] transition-all"
+      className="relative pointer-events-auto p-1  m-4   w-min rounded-full active:scale-[0.9] transition-all"
     >
       {!pingClicked && (
         <div className="absolute z-100 ">
