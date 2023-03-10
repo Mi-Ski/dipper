@@ -21,7 +21,7 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
 
   return (
     <div
-      className={`relative transition-[top] flex flex-col bg-contrast-posts pointer-events-auto w-screen p-7  ${
+      className={`relative transition-[top] flex flex-col bg-white/[.8] dark:bg-contrast-posts/[.8] pointer-events-auto w-screen p-7  ${
         expanded ? "top-0" : "top-full"
       }`}
     >
@@ -36,7 +36,7 @@ const MobileOverlayBottom = ({ expanded, techStackPageActive }) => {
           </button>
         </div>
       ) : (
-        <div className="flex justify-between text-center align-center">
+        <div className="flex gap-x-2 justify-between text-center align-center">
           <BottomDrawerIcon
             onClickAction={toggleThemeHandler}
             description="Motyw"

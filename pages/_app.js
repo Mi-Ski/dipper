@@ -5,6 +5,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 import { WebsocketProvider } from "../context/WebsocketContext";
 import "../styles/globals.css";
 import { PostsProvider } from "../context/PostContext";
+import { RouteProvider } from "../context/RouteContext";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }) {
             <PostsProvider>
               <UserProvider>
                 <WebsocketProvider>
-                  <Component {...pageProps} />
+                  <RouteProvider>
+                    <Component {...pageProps} />
+                  </RouteProvider>
                 </WebsocketProvider>
               </UserProvider>
             </PostsProvider>

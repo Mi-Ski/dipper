@@ -25,7 +25,7 @@ const AddComment = ({ user, addCommentHandler, loading }) => {
   };
 
   return (
-    <div className="mt-6 px-4 flex flex-col gap-x-4 overflow-hidden">
+    <div className="mt-6 px-4 flex flex-col gap-x-4 ">
       <div className="flex gap-x-3 items-center">
         <div
           className={`rounded-full relative  overflow-hidden w-14 max-w-[36px] h-9  ${

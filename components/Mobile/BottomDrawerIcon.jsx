@@ -9,7 +9,7 @@ const BottomDrawerIcon = ({
   return (
     <div
       onClick={onClickAction}
-      className="flex flex-col items-center justify-between align-center p-4 space-y-3 bg-black/[.2] rounded-md"
+      className="flex-1 flex-col items-center justify-between align-center p-4 space-y-3 bg-gradient-to-r from-neon-accent-opaque to-brand-accent dark:bg-black/[.2] rounded-md"
     >
       <button>
         <IconContext.Provider
@@ -18,7 +18,7 @@ const BottomDrawerIcon = ({
 					{children}
         </IconContext.Provider>
       </button>
-      <p className="text-xs text-textcol-main-dark h-[2em] text-[10px] text-text-chill">{description}</p>
+      <p className="text-xs text-textcol-main-dark min-h-[2em] text-[10px] text-text-chill">{description}</p>
     </div>
   );
 };

@@ -2,20 +2,21 @@
 import React from "react";
 
 const RouteContext = React.createContext({
-  currentRoute: null,
-  setCurrentRoute: () => {},
+  pingClicked: false,
+  setPingClicked: () => {},
 });
 
 export default RouteContext;
 
 export function RouteProvider(props) {
-  const [currentRoute, setCurrentRoute] = React.useState(null);
+  const [pingClicked, setPingClicked] = React.useState(false);
+
 
   return (
     <RouteContext.Provider
       value={{
-        currentRoute,
-        setCurrentRoute,
+        pingClicked,
+        setPingClicked,
       }}
     >
       {props.children}

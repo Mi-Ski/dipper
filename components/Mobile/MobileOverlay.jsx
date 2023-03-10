@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import MobileOverlayTop from "./MobileOverlayTop";
 import MobileOverlayBottom from "./MobileOverlayBottom";
+import RouteContext from "../../context/RouteContext";
 
 const MobileOverlay = ({ techStackPageActive }) => {
   const [topBlobShown, setTopBlobShown] = useState(false);
   const [expandMenus, setExpandMenus] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+	const { pingClicked, setPingClicked } = useContext(RouteContext);
 
   const clickHanlder = () => {
+		setPingClicked(true);
     setExpandMenus(!expandMenus);
   };
 
@@ -33,10 +36,11 @@ const MobileOverlay = ({ techStackPageActive }) => {
 
   return (
     <div className="pointer-events-none md:hidden fixed flex flex-col h-full justify-between w-screen items-end z-[90]">
-      {topBlobShown || expandMenus ? (
+      {topBlobShown || expandMenus || techStackPageActive ? (
         <MobileOverlayTop
           clickHandler={clickHanlder}
-          expanded={expandMenus}
+          pingClicked={pingClicked}
+					techstackActive={techStackPageActive}
         />
       ) : (
         <div></div>

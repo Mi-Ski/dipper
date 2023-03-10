@@ -1,19 +1,25 @@
-import React from "react";
+import React  from "react";
 import Image from "next/image";
 import { useUser } from "../../context/UserContext";
 
-const MobileOverlayTop = ({ clickHandler, expanded }) => {
+const MobileOverlayTop = ({clickHandler, pingClicked}) => {
   const user = useUser();
 
   return (
     <div
       onClick={clickHandler}
-      className="pointer-events-auto p-2 m-4  border-2 border-brand-accent  bg-contrast-posts  inline w-min rounded-full active:scale-[0.9] transition-all"
+      className="relative pointer-events-auto p-1  m-4 bg-brand-accent shadow-md shadow-shadow/[.1] w-min rounded-full active:scale-[0.9] transition-all"
     >
+      {!pingClicked && (
+        <div className="absolute z-100 ">
+          <div className="relative">
+            <span className="absolute h-4 w-4 rounded-full bg-red-500 "></span>
+            <span className="absolute animate-ping opacity-50   rounded-full h-4 w-4 bg-red-500"></span>
+          </div>
+        </div>
+      )}
       <div
-        className={`rounded-full relative  overflow-hidden w-14 min-w-[50px] h-14 ${
-          user.picture ? "" : "border-2 border-contrast-posts"
-        }`}
+        className={`rounded-full relative overflow-hidden w-14 min-w-[50px] h-14`}
       >
         <Image
           placeholder="blur"
@@ -26,7 +32,7 @@ const MobileOverlayTop = ({ clickHandler, expanded }) => {
           alt="User Avatar"
           title={user.name}
           layout="fill"
-          className="rounded-full object-contain"
+          className="rounded-full object-contain bg-white"
         />
       </div>
     </div>
