@@ -16,7 +16,7 @@ const techstack = () => {
             <p className="text-xl mt-10">
               React, Next.js, MongoDB, WebSockets, RxJS, Tailwind CSS,
               Vercel, GitHub, OVHcloud, Stable Diffusion,
-              DigitalOcean, Google Cloud Storage (??)
+              DigitalOcean
             </p>
           </div>
       </Layout>
